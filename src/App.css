@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  padding: 20px;
 }
 
 .App-logo {
@@ -35,4 +36,14 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+.container {
+  display: flex;
+  justify-content: space-between; /* Adjust as needed */
+}
+
+#ParameterForm {
+  width: 45%;
 }
