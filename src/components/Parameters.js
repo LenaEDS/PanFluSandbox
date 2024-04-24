@@ -9,7 +9,16 @@ class Parameters extends React.Component {
         R0: '', // Reproduction Number
         latencyPeriod: '', // Latency Period
         asymptomaticPeriod: '', // Asymptomatic Period
-        infectiousPeriod: '' // Infectious Period 
+        infectiousPeriod: '', // Infectious Period 
+        caseFatalityRate: '',
+        antiviralEffectiveness: '',
+        antiviralAdherence: '',
+        antiviralCapacity: '',
+        vaccineEffectiveness: '',
+        vaccineEffectivenessLag: '',
+        vaccineAdherence: '',
+        vaccineCapacity: '',
+
         // Add more parameters here
       }
     };
