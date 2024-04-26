@@ -17,7 +17,7 @@ class Parameters extends React.Component {
         vaccineEffectiveness: '',
         vaccineEffectivenessLag: '',
         vaccineAdherence: '',
-        vaccineCapacity: '',
+        vaccineCapacity: ''
 
         // Add more parameters here
       }
@@ -45,28 +45,30 @@ class Parameters extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <label>
-          Reproduction Number, R0:
-          <input type="text" name="R0" value={this.state.parameters.R0} onChange={this.handleChange} />
-        </label>
-        <br />
-        <label>
-          Latency Period:
-          <input type="text" name="latencyPeriod" value={this.state.parameters.latencyPeriod} onChange={this.handleChange} />
-        </label>
-        <br />
-        <label>
-          Asymptomatic Period:
-          <input type="text" name="asymptomaticPeriod" value={this.state.parameters.asymptomaticPeriod} onChange={this.handleChange} />
-        </label>
-        
-        {/* Add more parameter inputs */}
-        <br />
-        <label>
-          Infectious Period:
-          <input type="text" name="infectiousPeriod" value={this.state.parameters.infectiousPeriod} onChange={this.handleChange} />
-        </label>
-        <input type="submit" value="Submit" />
+        <div className="form-container">        
+          <label>
+            Reproduction Number, R0:
+            <input type="text" name="R0" value={this.state.parameters.R0} onChange={this.handleChange} />
+          </label>
+          <br />
+          <label>
+            Latency Period:
+            <input type="text" name="latencyPeriod" value={this.state.parameters.latencyPeriod} onChange={this.handleChange} />
+          </label>
+          <br />
+          <label>
+            Asymptomatic Period:
+            <input type="text" name="asymptomaticPeriod" value={this.state.parameters.asymptomaticPeriod} onChange={this.handleChange} />
+          </label>
+          
+          {/* Add more parameter inputs */}
+          <br />
+          <label>
+            Infectious Period:
+            <input type="text" name="infectiousPeriod" value={this.state.parameters.infectiousPeriod} onChange={this.handleChange} />
+          </label>
+          <input type="submit" value="Submit" />
+        </div>  
       </form>
     );
   }

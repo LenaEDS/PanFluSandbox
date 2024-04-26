@@ -39,11 +39,31 @@
 }
 
 
-.container {
+.form-container {
   display: flex;
-  justify-content: space-between; /* Adjust as needed */
 }
 
-#ParameterForm {
-  width: 45%;
+.form-container label {
+  margin-left: auto;
+  text-align: center;
+  width: 45%; /* Adjust as needed */
+}
+
+.form-container input {
+  width: 45%; /* Adjust as needed */
+}
+
+.Parameters {
+  width: 300px; /* Adjust width as needed */
+  text-align: center;
+  margin-left: 20px; /* Add spacing between components */
+}
+
+.TexasMap {
+  flex: 1;
+}
+
+
+* {
+  font-family: Georgia;
 }
