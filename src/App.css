@@ -1,6 +1,24 @@
 .App {
-  text-align: center;
-  padding: 20px;
+  display: flex;
+  flex-direction: column; /* Arrange children horizontally */
+  align-items: center;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+}
+
+header {
+  margin-bottom: 20px;
+}
+
+.parametersContainer {
+  width: 200px; /* Adjust width as needed */
+  padding: 10px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  margin-left: 10px; /* Add space between map and parameters */
 }
 
 .App-logo {
@@ -49,20 +67,22 @@
   width: 45%; /* Adjust as needed */
 }
 
-.form-container input {
-  width: 45%; /* Adjust as needed */
+.form-container {
+  display: flex;
+  flex-direction: column; /* Display children in a column */
 }
 
-.Parameters {
-  width: 300px; /* Adjust width as needed */
-  text-align: center;
-  margin-left: 20px; /* Add spacing between components */
+.parameter {
+  margin-bottom: 10px; /* Add space between parameter inputs */
+}
+
+.parameter label {
+  display: block; /* Each label on a new line */
 }
 
 .TexasMap {
   flex: 1;
 }
-
 
 * {
   font-family:'Helvetica';
