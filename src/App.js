@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import Simulator from './Simulator';
 import TexasMap from './components/TexasMap';
 import Parameters from './components/Parameters';
 import IncrementDecrement from './components/IncrementDecrement';
@@ -18,6 +17,8 @@ function App() {
       <Panel>
           <Parameters />
       </Panel>
+      <h2> Parameters </h2>
+      <IncrementDecrement />
       </div>
     </div>
   </div>
