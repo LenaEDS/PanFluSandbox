@@ -65,6 +65,7 @@ class Parameters extends React.Component {
           <input type="text" name="infectiousPeriod" value={this.state.parameters.infectiousPeriod} onChange={this.handleChange} />
         </label>
         <br />
+        <br />
         <input type="submit" value="Submit" />
       </form>
     );
