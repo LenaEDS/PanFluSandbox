@@ -87,3 +87,12 @@ header {
 * {
   font-family:'Helvetica';
 }
+
+.labelContainer {
+  display: flex;
+  align-items: center;
+}
+
+.labelContainer span {
+  margin-right: 10px; /* Adjust margin as needed */
+}
