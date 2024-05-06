@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './App.css';
 import TexasMap from './components/TexasMap';
 import Parameters from './components/Parameters';
-import IncrementDecrement from './components/IncrementDecrement';
 import Panel from './components/Panel';
 import texasCounties from './components/counties'
 import CountyDropdown from './components/CountyDropdown';
