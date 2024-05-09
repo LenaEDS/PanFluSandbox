@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './App.css';
-import TexasMap from './components/TexasMap';
 import Parameters from './components/Parameters';
 import Panel from './components/Panel';
 import texasCounties from './components/counties'
@@ -32,8 +31,11 @@ const App = () => {
           <Parameters />
       </Panel>
       <CaseFatalityRate />
-      <CountyInfectedTable />  
       </div>
+      <div className="parametersContainer">
+      <CountyInfectedTable />
+      </div>
+
     </div>
   </div>  
   );

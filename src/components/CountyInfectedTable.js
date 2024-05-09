@@ -7,12 +7,12 @@ import '../App.css'; // Import the CSS file
 function CountyInfectedTable() {
   return (
     <div className="table-container">
-      <h2>County Infected Table</h2>
+      <h3>Infected Count </h3>
       <table>
         <thead>
           <tr>
             <th>County</th>
-            <th>Infected Count</th>
+            <th>Infected</th>
           </tr>
         </thead>
         <tbody>
