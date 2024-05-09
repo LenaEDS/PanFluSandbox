@@ -1,14 +1,19 @@
-// TexasChoroplethjs
 import React from 'react';
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import texasOutline from './texasOutline.json'; // Texas outline JSON data from City of Denton (https://data.cityofdenton.com/en/dataset/texas-counties-polygon/resource/be1b384f-3b2e-4238-88a8-4410cb36f7fc)
+import texasOutline from './texasOutline.json';
 
 class TexasChoropleth extends React.Component {
+  onEachCounty = (county, layer) => {
+    const name = county.properties.name; // Assuming county names are stored in the "name" property
+    if (name) {
+      layer.bindTooltip(name, { permanent: false, direction: 'auto' });
+    }
+  };
+
   render() {
     return (
-      <MapContainer center={[31.0, -100.0]} zoom={6} style={{ height: '500px', width: '800px' }}
-      >
+      <MapContainer center={[31.0, -100.0]} zoom={6} style={{ height: '500px', width: '800px' }}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -21,6 +26,7 @@ class TexasChoropleth extends React.Component {
             color: 'white',
             fillOpacity: 0.7
           })}
+          onEachFeature={this.onEachCounty}
         />
       </MapContainer>
     );
