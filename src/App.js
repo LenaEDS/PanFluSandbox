@@ -7,6 +7,7 @@ import texasCounties from './components/counties'
 import CountyDropdown from './components/CountyDropdown';
 import CaseFatalityRate from './components/CaseFatalityRate';
 import TexasChoropleth from './components/TexasChoropleth';
+import CountyInfectedTable from './components/CountyInfectedTable';
 
 const App = () => {
   // State variable to store the selected county
@@ -21,7 +22,7 @@ const App = () => {
   return (
     <div className="App">
       <header>
-        <h1>Flu Simulator</h1>        
+        <h1>Flu Simulator</h1>      
         <CountyDropdown counties={texasCounties} onSelect={handleCountySelect} />
       </header>
       <div className="content">
@@ -31,6 +32,7 @@ const App = () => {
           <Parameters />
       </Panel>
       <CaseFatalityRate />
+      <CountyInfectedTable />  
       </div>
     </div>
   </div>  

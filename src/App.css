@@ -100,3 +100,27 @@ header {
 .labelContainer span {
   margin-right: 10px; /* Adjust margin as needed */
 }
+
+.table-container {
+  margin-top: 20px;
+}
+
+.table-container h2 {
+  margin-bottom: 10px;
+}
+
+.table-container table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table-container th,
+.table-container td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.table-container th {
+  font-weight: bold;
+}
