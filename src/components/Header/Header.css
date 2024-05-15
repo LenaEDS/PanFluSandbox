@@ -1,0 +1,26 @@
+/* Header.css */
+
+.header {
+  background-color: #102c41; /* Dark blue color */
+  color: white;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%; /* Ensure the header spans the entire width */
+}
+
+.logo-container {
+  display: flex;
+}
+
+.logo {
+  width: 90px; /* Adjust the size as needed */
+  height: 90px; /* Adjust the size as needed */
+  margin-right: 5px; /* Adjust spacing between logos */
+}
+
+.text-container {
+  flex-grow: 1;
+  text-align: center;
+}

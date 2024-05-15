@@ -13,7 +13,7 @@ const CountyDropdown = ({ counties, onSelect }) => {
     <div>
       <label htmlFor="county">Select a County: </label>
       <select id="county" value={selectedCounty} onChange={handleChange}>
-        <option value="">Select County</option>
+        <option value="">Texas County</option>
         {counties.map(county => (
           <option key={county} value={county}>
             {county}

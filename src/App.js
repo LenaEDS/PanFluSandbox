@@ -7,6 +7,7 @@ import CountyDropdown from './components/CountyDropdown';
 import CaseFatalityRate from './components/CaseFatalityRate';
 import TexasChoropleth from './components/TexasChoropleth';
 import CountyInfectedTable from './components/CountyInfectedTable';
+import Header from './components/Header/Header'
 import "./index.css"
 
 const App = () => {
@@ -21,10 +22,10 @@ const App = () => {
 
   return (
     <div className="App">
-      <header>
-        <h1>Flu Simulator</h1>      
-        <CountyDropdown counties={texasCounties} onSelect={handleCountySelect} />
-      </header>
+      <Header />  
+      <h3> </h3>  
+      <CountyDropdown counties={texasCounties} onSelect={handleCountySelect} />
+      <h3> </h3>
       <div className="content">
       <TexasChoropleth />
       <div className="parametersContainer">
