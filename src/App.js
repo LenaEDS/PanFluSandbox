@@ -9,6 +9,7 @@ import TexasChoropleth from './components/TexasChoropleth';
 import CountyInfectedTable from './components/CountyInfectedTable';
 import Header from './components/Header/Header'
 import "./index.css"
+import countyInfectedData from './components/countyInfectedData';
 
 const App = () => {
   // State variable to store the selected county
@@ -27,7 +28,7 @@ const App = () => {
       <CountyDropdown counties={texasCounties} onSelect={handleCountySelect} />
       <h3> </h3>
       <div className="content">
-      <TexasChoropleth />
+      <TexasChoropleth countyData={countyInfectedData}/>
       <div className="parametersContainer">
       <Panel>
           <Parameters />
