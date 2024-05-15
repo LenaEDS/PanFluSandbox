@@ -7,6 +7,7 @@ import CountyDropdown from './components/CountyDropdown';
 import CaseFatalityRate from './components/CaseFatalityRate';
 import TexasChoropleth from './components/TexasChoropleth';
 import CountyInfectedTable from './components/CountyInfectedTable';
+import "./index.css"
 
 const App = () => {
   // State variable to store the selected county
