@@ -38,7 +38,7 @@ const App = () => {
       <div>
       <h1></h1>
       <button onClick={toggleFormVisibility}>
-        {showForm ? 'Hide Add Initial Cases' : 'Add Initial Cases'}
+        {showForm ? 'Hide Initial Cases' : 'Add Initial Cases'}
       </button>
       {showForm && (
         <AddInitialCases counties={texasCounties} onSubmit={handleAddCases} />

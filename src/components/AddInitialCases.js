@@ -3,7 +3,7 @@ import Select from 'react-select';
 import './AddInitialCases.css'; // Import the CSS file for styling
 
 const AddInitialCases = ({ counties, onSubmit }) => {
-  const [numberOfCases, setNumberOfCases] = useState('');
+  const [numberOfCases, setNumberOfCases] = useState(10000);
   const [selectedCounty, setSelectedCounty] = useState(null);
   const [selectedAgeGroup, setSelectedAgeGroup] = useState(null);
   const [selectedRiskGroup, setSelectedRiskGroup] = useState(null);
