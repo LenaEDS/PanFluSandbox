@@ -14,7 +14,7 @@ header {
 }
 
 .parametersContainer {
-  width: 200px; /* Adjust width as needed */
+  width: 250px; /* Adjust width as needed */
   padding: 10px;
   background-color: #ffffff;
   border: 1px solid #ccc;
@@ -101,35 +101,67 @@ header {
   margin-right: 10px; /* Adjust margin as needed */
 }
 
-.table-container {
-  margin-top: 30px;
-}
+/* App.css */
 
-.table-container h2 {
-  margin-bottom: 10px;
+.table-container {
+  width: 100%;
+  max-width: 400px; /* Adjust as needed for your design */
+  margin: 0 auto; /* Center the container */
+  padding: 20px; /* Add padding for better spacing */
+  box-sizing: border-box; /* Ensure padding is included in the width */
+  height: 80vh; /* Make the container tall enough to show the full table */
+  overflow: auto; /* Allow scrolling if content overflows */
+  border: 2px solid #ccc; /* Add a border around the container */
+  border-radius: 8px; /* Optional: Add rounded corners */
 }
 
 .table-scroll {
-  max-height: 400px; /* Adjust the max height as needed */
-  overflow: auto;
+  max-height: 100%; /* Use full height of the container */
+  overflow-y: auto; /* Allow vertical scrolling if needed */
 }
 
-.table-container table {
-  border-collapse: collapse;
+table {
   width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ccc; /* Add border around the table */
 }
 
-.table-container th,
-.table-container td {
-  border: 1px solid #ddd;
-  padding: 7px;
+th, td {
+  padding: 8px 12px;
+  border: 1px solid #ddd; /* Add borders between cells */
   text-align: left;
+  white-space: nowrap; /* Prevent wrapping */
 }
 
-.table-container th {
-  font-weight: bold;
+th {
+  position: relative;
 }
 
 .sort-button {
-  margin-left: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0;
+  margin-left: 8px;
+  color: inherit; /* Inherit color to match text */
+  position: absolute;
+  right: 8px;
+}
+
+.sort-button:focus {
+  outline: none; /* Remove focus outline */
+}
+
+.button-container {
+  display: flex;
+  gap: 10px; /* Space between buttons */
+}
+
+button {
+  margin-bottom: 20px;
+}
+
+.parameters-form {
+  margin-top: 20px;
 }

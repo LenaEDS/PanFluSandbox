@@ -1,4 +1,4 @@
-.add-initial-cases-form {
+.parameters-form {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -19,11 +19,9 @@
     margin-bottom: 5px;
   }
   
-  .form-group input,
-  .form-group .county-select {
+  .form-group input {
     padding: 8px;
     font-size: 16px;
-    z-index: 1000; /* High z-index to ensure it's on top */
   }
   
   button {

@@ -33,6 +33,24 @@ const App = () => {
     setShowForm(prevState => !prevState); // Use setShowForm to toggle form visibility
   };
 
+  const [showParameters, setShowParameters] = useState(false);
+
+  const handleToggleParameters = () => {
+    setShowParameters(!showParameters);
+  };
+
+  const handleParametersSubmit = (parameters) => {
+    console.log('Submitted Parameters:', parameters);
+    // Here, you can add any logic to handle the submitted parameters
+    // For example, you could save them to a state, send them to an API, etc.
+    setShowParameters(false); // Hide the form after submission
+  };
+
+  const handleExitParameters = () => {
+    setShowParameters(false);
+  };
+
+
   const [selectedDay, setSelectedDay] = useState(0); // Start from day 0
   const totalDays = 30; // Total number of days
 
@@ -47,13 +65,18 @@ const App = () => {
       <Header />  
       <div>
       <h1></h1>
+      <div className="button-container">
       <button onClick={toggleFormVisibility}>
         {showForm ? 'Hide Initial Cases' : 'Add Initial Cases'}
       </button>
       {showForm && (
         <AddInitialCases counties={texasCounties} onSubmit={handleAddCases} />
       )}
-      <h1></h1>
+      <button onClick={handleToggleParameters}>
+        {showParameters ? 'Close Parameters' : 'Add Parameters'}
+      </button>
+      {showParameters && <Parameters onSubmit={handleParametersSubmit} />} 
+      </div>
       </div>
 
       <div className="content">
@@ -64,9 +87,7 @@ const App = () => {
       </Panel>
       <CaseFatalityRate />
       </div>
-      <div className="parametersContainer">
       <CountyInfectedTable />
-      </div>
     </div>
 
     <h1></h1>

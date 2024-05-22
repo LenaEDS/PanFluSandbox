@@ -9,7 +9,7 @@ function CountyInfectedTable() {
     infected: 'asc',
   });
 
-  // Function to handle sorting by county name
+  // Function to handle sorting by county name or infected count
   const sortData = (key) => {
     const sorted = [...sortedData];
     sorted.sort((a, b) => {
@@ -24,7 +24,10 @@ function CountyInfectedTable() {
       return 0;
     });
     setSortedData(sorted);
-    setSortDirection({ ...sortDirection, [key]: sortDirection[key] === 'asc' ? 'desc' : 'asc' });
+    setSortDirection({
+      ...sortDirection,
+      [key]: sortDirection[key] === 'asc' ? 'desc' : 'asc',
+    });
   };
 
   return (

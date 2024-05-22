@@ -1,77 +1,76 @@
-// Parameters.js
-import React from 'react';
+import React, { useState } from 'react';
+import './Parameters.css'; // Import the CSS file for styling
 
-class Parameters extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      parameters: {
-        R0: '', // Reproduction Number
-        latencyPeriod: '', // Latency Period
-        asymptomaticPeriod: '', // Asymptomatic Period
-        infectiousPeriod: '', // Infectious Period 
-        caseFatalityRate: '',
-        antiviralEffectiveness: '',
-        antiviralAdherence: '',
-        antiviralCapacity: '',
-        vaccineEffectiveness: '',
-        vaccineEffectivenessLag: '',
-        vaccineAdherence: '',
-        vaccineCapacity: ''
-        // Add more parameters here
-      }
-    };
+const Parameters = ({ onSubmit }) => {
+  const [reproductionNumber, setReproductionNumber] = useState(2.5);
+  const [latencyPeriod, setLatencyPeriod] = useState(5); // Default in days
+  const [asymptomaticPeriod, setAsymptomaticPeriod] = useState(2); // Default in days
+  const [infectiousPeriod, setInfectiousPeriod] = useState(7); // Default in days
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(event) {
-    const { name, value } = event.target;
-    this.setState(prevState => ({
-      parameters: {
-        ...prevState.parameters,
-        [name]: value
-      }
-    }));
-  }
-
-  handleSubmit(event) {
-    alert('Parameters submitted: ' + JSON.stringify(this.state.parameters));
+  const handleSubmit = event => {
     event.preventDefault();
-  }
+    onSubmit({
+      reproductionNumber,
+      latencyPeriod,
+      asymptomaticPeriod,
+      infectiousPeriod,
+    });
+  };
 
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Reproduction Number, R0:
-          <input type="text" name="R0" value={this.state.parameters.R0} onChange={this.handleChange} />
-        </label>
-        <br />
-        <label>
-          Latency Period:
-          <input type="text" name="latencyPeriod" value={this.state.parameters.latencyPeriod} onChange={this.handleChange} />
-        </label>
-        <br />
-        <label>
-          Asymptomatic Period:
-          <input type="text" name="asymptomaticPeriod" value={this.state.parameters.asymptomaticPeriod} onChange={this.handleChange} />
-        </label>
-        {/* Add more parameter inputs */}
-        <br />
-        <label>
-          Infectious Period:
-          <input type="text" name="infectiousPeriod" value={this.state.parameters.infectiousPeriod} onChange={this.handleChange} />
-        </label>
-        <br />
-        <br />
-        <input type="submit" value="Submit" />
-      </form>
-    );
-  }
+  return (
+    <form className="parameters-form" onSubmit={handleSubmit}>
+      <div className="form-group">
+        <label htmlFor="reproductionNumber">Reproduction Number (R0):</label>
+        <input
+          type="number"
+          id="reproductionNumber"
+          value={reproductionNumber}
+          onChange={e => setReproductionNumber(parseFloat(e.target.value))}
+          step="0.1"
+          min="0"
+          required
+        />
+      </div>
 
-  
-}
+      <div className="form-group">
+        <label htmlFor="latencyPeriod">Latency Period (days):</label>
+        <input
+          type="number"
+          id="latencyPeriod"
+          value={latencyPeriod}
+          onChange={e => setLatencyPeriod(parseInt(e.target.value, 10))}
+          min="0"
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="asymptomaticPeriod">Asymptomatic Period (days):</label>
+        <input
+          type="number"
+          id="asymptomaticPeriod"
+          value={asymptomaticPeriod}
+          onChange={e => setAsymptomaticPeriod(parseInt(e.target.value, 10))}
+          min="0"
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="infectiousPeriod">Infectious Period (days):</label>
+        <input
+          type="number"
+          id="infectiousPeriod"
+          value={infectiousPeriod}
+          onChange={e => setInfectiousPeriod(parseInt(e.target.value, 10))}
+          min="0"
+          required
+        />
+      </div>
+
+      <button type="submit">Submit Parameters</button>
+    </form>
+  );
+};
 
 export default Parameters;
