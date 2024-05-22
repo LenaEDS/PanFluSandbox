@@ -1,0 +1,32 @@
+.timeline-slider {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow-x: auto;
+    padding: 20px 0;
+  }
+  
+  .timeline-item {
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .timeline-item:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .timeline-item.active {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .timeline-date {
+    font-weight: bold;
+  }
+  
+  .timeline-event {
+    margin-top: 5px;
+  }
+  

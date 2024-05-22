@@ -11,13 +11,14 @@ import Header from './components/Header/Header'
 import "./index.css"
 import countyInfectedData from './components/countyInfectedData';
 import AddInitialCases from './components/AddInitialCases';
+import TimelineSlider from './components/TimelineSlider'; // Import the TimelineSlider component
 
 const App = () => {
   // State variable to store the selected county
   // eslint-disable-next-line no-unused-vars
   const [selectedCounty, setSelectedCounty] = useState('');
   const [showForm, setShowForm] = useState(false); // Ensure useState is imported
-
+  
   // Function to handle county selection
   const handleCountySelect = county => {
     setSelectedCounty(county);
@@ -31,6 +32,15 @@ const App = () => {
   const toggleFormVisibility = () => {
     setShowForm(prevState => !prevState); // Use setShowForm to toggle form visibility
   };
+
+  const [selectedDay, setSelectedDay] = useState(0); // Start from day 0
+  const totalDays = 30; // Total number of days
+
+  const handleDayChange = (newDay) => {
+    setSelectedDay(newDay);
+  };
+
+  
 
   return (
     <div className="App">
@@ -57,8 +67,11 @@ const App = () => {
       <div className="parametersContainer">
       <CountyInfectedTable />
       </div>
-
     </div>
+
+    <h1></h1>
+      <TimelineSlider totalDays={totalDays} selectedDay={selectedDay} onDayChange={handleDayChange} />
+
   </div>  
   );
 };
