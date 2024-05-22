@@ -10,6 +10,7 @@ import CountyInfectedTable from './components/CountyInfectedTable';
 import Header from './components/Header/Header'
 import "./index.css"
 import countyInfectedData from './components/countyInfectedData';
+import AddInitialCases from './components/AddInitialCases';
 
 const App = () => {
   // State variable to store the selected county
@@ -21,12 +22,16 @@ const App = () => {
     setSelectedCounty(county);
   };
 
+  const handleAddCases = data => {
+    console.log('Initial Cases Data:', data);
+    // Process the data or send it to the server
+  };
+
   return (
     <div className="App">
       <Header />  
-      <h3> </h3>  
-      <CountyDropdown counties={texasCounties} onSelect={handleCountySelect} />
-      <h3> </h3>
+      <h1>Add Initial Cases</h1>
+      <AddInitialCases counties={texasCounties} onSubmit={handleAddCases} />
       <div className="content">
       <TexasChoropleth countyData={countyInfectedData}/>
       <div className="parametersContainer">
