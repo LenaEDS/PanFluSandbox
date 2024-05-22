@@ -46,16 +46,16 @@ const App = () => {
       </div>
 
       <div className="content">
-      <TexasChoropleth countyData={countyInfectedData}/>
       <Collapsible title="Initial Cases">
         <AddInitialCases counties={texasCounties} />
       </Collapsible>
       <Collapsible title="Parameters">
         <Parameters />
       </Collapsible>
-      <div className="parametersContainer">
-      <CaseFatalityRate />
-      </div>
+      <Collapsible title="Case Fatality Rate">
+        <CaseFatalityRate />
+      </Collapsible>
+      <TexasChoropleth countyData={countyInfectedData}/>
       <CountyInfectedTable />
     </div>
 
