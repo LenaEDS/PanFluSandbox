@@ -16,6 +16,7 @@ const App = () => {
   // State variable to store the selected county
   // eslint-disable-next-line no-unused-vars
   const [selectedCounty, setSelectedCounty] = useState('');
+  const [showForm, setShowForm] = useState(false); // Ensure useState is imported
 
   // Function to handle county selection
   const handleCountySelect = county => {
@@ -27,11 +28,24 @@ const App = () => {
     // Process the data or send it to the server
   };
 
+  const toggleFormVisibility = () => {
+    setShowForm(prevState => !prevState); // Use setShowForm to toggle form visibility
+  };
+
   return (
     <div className="App">
       <Header />  
-      <h1>Add Initial Cases</h1>
-      <AddInitialCases counties={texasCounties} onSubmit={handleAddCases} />
+      <div>
+      <h1></h1>
+      <button onClick={toggleFormVisibility}>
+        {showForm ? 'Hide Add Initial Cases' : 'Add Initial Cases'}
+      </button>
+      {showForm && (
+        <AddInitialCases counties={texasCounties} onSubmit={handleAddCases} />
+      )}
+      <h1></h1>
+      </div>
+
       <div className="content">
       <TexasChoropleth countyData={countyInfectedData}/>
       <div className="parametersContainer">
