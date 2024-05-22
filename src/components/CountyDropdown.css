@@ -1,13 +1,15 @@
 .dropdown-container {
-    display: flex;
-    align-items: center;
-  }
-  
-  .dropdown-container label {
-    margin-right: 10px; /* Space between label and dropdown */
-  }
-  
-  .county-select {
-    min-width: 200px; /* Adjust width as needed */
-  }
-  
+  display: flex;
+  align-items: center;
+  position: relative; /* Ensure the container is positioned */
+}
+
+.dropdown-container label {
+  margin-right: 10px; /* Space between label and dropdown */
+}
+
+.county-select {
+  min-width: 200px; /* Adjust width as needed */
+  z-index: 1000; /* High z-index to ensure it's on top */
+  position: relative; /* Ensure the dropdown respects z-index */
+}
