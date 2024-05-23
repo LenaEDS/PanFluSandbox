@@ -1,33 +1,35 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
 import './CountyDropdown.css'; // Import the CSS file for styling
+import texasCounties from './counties'; // Import texasCounties
 
-const CountyDropdown = ({ counties, onSelect }) => {
+const CountyDropdown = ({ onCountyChange }) => {
   const [selectedCounty, setSelectedCounty] = useState(null);
 
-  const handleChange = selectedOption => {
-    setSelectedCounty(selectedOption);
-    onSelect(selectedOption ? selectedOption.value : '');
-  };
-
-  // Prepare options in the format react-select expects
-  const options = counties.map(county => ({
+  // Convert the list of counties to options format expected by react-select
+  const countyOptions = texasCounties.map(county => ({
     value: county,
     label: county
   }));
 
+  // Handler function to update the selected county
+  const handleCountyChange = selectedOption => {
+    setSelectedCounty(selectedOption);
+    onCountyChange(selectedOption); // Notify parent component about the selected county
+  };
+
   return (
-    <div className="dropdown-container">
-      <label htmlFor="county">Select a County: </label>
+    <div className="county-dropdown">
+      <label htmlFor="county">Select a County:</label>
       <Select
         id="county"
         value={selectedCounty}
-        onChange={handleChange}
-        options={options}
-        placeholder="Texas County"
+        onChange={handleCountyChange}
+        options={countyOptions}
+        placeholder="Select a County"
         isClearable
         isSearchable
-        className="county-select"
+        className="county-select" // Apply custom className
       />
     </div>
   );

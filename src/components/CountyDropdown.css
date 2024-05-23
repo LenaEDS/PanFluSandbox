@@ -1,15 +1,33 @@
-.dropdown-container {
-  display: flex;
-  align-items: center;
-  position: relative; /* Ensure the container is positioned */
+/* Styles for the dropdown container */
+.county-dropdown {
+  margin-bottom: 20px; /* Add margin to the bottom for spacing */
 }
 
-.dropdown-container label {
-  margin-right: 10px; /* Space between label and dropdown */
+/* Styles for the label */
+.county-dropdown label {
+  display: block;
+  margin-bottom: 5px; /* Add margin to the bottom for spacing */
+  font-weight: bold;
 }
 
-.county-select {
-  min-width: 200px; /* Adjust width as needed */
-  z-index: 1000; /* High z-index to ensure it's on top */
-  position: relative; /* Ensure the dropdown respects z-index */
+/* Styles for the select component */
+.county-select .react-select__control {
+  border: 1px solid #ccc; /* Add border */
+  border-radius: 4px; /* Add border-radius for rounded corners */
+}
+
+/* Styles for the select menu options */
+.county-select .react-select__menu-list .react-select__option {
+  color: #333; /* Set text color */
+}
+
+/* Styles for the selected option */
+.county-select .react-select__menu-list .react-select__option--is-selected {
+  background-color: #007bff; /* Set background color for selected option */
+  color: #fff; /* Set text color for selected option */
+}
+
+/* Styles for the selected option on hover */
+.county-select .react-select__menu-list .react-select__option--is-selected:hover {
+  background-color: #0056b3; /* Set background color for selected option on hover */
 }
