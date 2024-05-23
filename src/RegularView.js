@@ -15,35 +15,23 @@ import TimelineSlider from './components/TimelineSlider'; // Import the Timeline
 import Collapsible from './components/Collapsible';
 import Tabs from './Tabs';
 
-const App = () => {
-  const [showInitialCases, setShowInitialCases] = useState(true);
-  const [showParameters, setShowParameters] = useState(false);
-
-  const handleToggleInitialCases = () => {
-    setShowInitialCases(true);
-    setShowParameters(false);
-  };
-
-  const handleToggleParameters = () => {
-    setShowInitialCases(false);
-    setShowParameters(true);
-  };
-
-  const [selectedDay, setSelectedDay] = useState(0); // Start from day 0
-  const totalDays = 30; // Total number of days
-
-  const handleDayChange = (newDay) => {
-    setSelectedDay(newDay);
-  };
-
+const RegularView = () => {
   return (
-    <div className="App">
-    <Header />
-    <Tabs />
-    <TimelineSlider totalDays={totalDays} selectedDay={selectedDay} onDayChange={handleDayChange} />
-    </div>  
+    <div className="content">
+    <Collapsible title="Initial Cases">
+      <AddInitialCases counties={texasCounties} />
+    </Collapsible>
+    <Collapsible title="Parameters">
+      <Parameters />
+    </Collapsible>
+    <Collapsible title="Case Fatality Rate">
+      <CaseFatalityRate />
+    </Collapsible>
+    <TexasChoropleth countyData={countyInfectedData}/>
+    <CountyInfectedTable />
+  </div>
 
   );
 };
 
-export default App;
+export default RegularView;
