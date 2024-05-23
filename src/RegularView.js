@@ -14,6 +14,8 @@ import AddInitialCases from './components/AddInitialCases';
 import TimelineSlider from './components/TimelineSlider'; // Import the TimelineSlider component
 import Collapsible from './components/Collapsible';
 import Tabs from './Tabs';
+import Antivirals from './components/Antivirals';
+import Vaccine from './components/Vaccine';
 
 const RegularView = () => {
   return (
@@ -26,6 +28,10 @@ const RegularView = () => {
     </Collapsible>
     <Collapsible title="Case Fatality Rate">
       <CaseFatalityRate />
+    </Collapsible>
+    <Collapsible title = "Interventions">
+        <Antivirals />
+        <Vaccine />
     </Collapsible>
     <TexasChoropleth countyData={countyInfectedData}/>
     <CountyInfectedTable />
