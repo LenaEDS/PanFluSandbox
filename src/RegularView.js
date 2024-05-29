@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './App.css';
 import Parameters from './components/Parameters';
 import Panel from './components/Panel';
 import texasCounties from './components/counties'

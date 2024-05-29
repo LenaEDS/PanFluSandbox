@@ -158,9 +158,6 @@ th {
   gap: 10px; /* Space between buttons */
 }
 
-button {
-  margin-bottom: 20px;
-}
 
 .parameters-form {
   margin-top: 20px;
@@ -194,32 +191,4 @@ button {
 
 .section {
   width: 100%;
-}
-
-.tabs {
-  display: flex;
-  justify-content: center;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-.tab-button {
-  padding: 10px 20px;
-  cursor: pointer;
-  border: none;
-  background: #6a6a6a;
-  outline: none;
-  transition: background-color 0.3s;
-}
-
-.tab-button.active {
-  border-bottom: 2px solid #007bff;
-  font-weight: bold;
-  color: white;
-  background-color: #007bff;
-}
-
-.tab-content {
-  padding: 20px;
 }
