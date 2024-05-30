@@ -39,7 +39,6 @@ const App = () => {
   return (
     <div className="App">
     <Header />
-    <Tabs />
     <TimelineSlider totalDays={totalDays} selectedDay={selectedDay} onDayChange={handleDayChange} />
     </div>  
 
