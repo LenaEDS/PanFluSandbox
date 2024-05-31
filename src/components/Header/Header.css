@@ -34,6 +34,7 @@
 .text-container {
   flex-grow: 1;
   text-align: center;
+  font-size: large;
 }
 
 .tabs {
@@ -51,7 +52,7 @@
   transition: background-color 0.3s;
   color: white; /* Ensure the text color is visible on the dark background */
   margin: 0 5px; /* Adjust margin as needed */
-  font-size: 16px;
+  font-size: x-large;
 }
 
 .tab-button.active {
