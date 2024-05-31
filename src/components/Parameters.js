@@ -11,6 +11,7 @@ const Parameters = () => {
   const [tau, setTau] = useState(0.83333333);
   const [kappa, setKappa] = useState(0.52631579);
   const [chi, setChi] = useState('1.0');
+  const [gamma, setGamma] = useState(0.24390244)
   const [nu_high, setNuHigh] = useState('no');
   const [vaccine_wastage_factor, setVaccineWastageFactor] = useState(60);
   const [antiviral_effectiveness, setAntiviralEffectiveness] = useState(0.8);
@@ -137,6 +138,19 @@ const Parameters = () => {
           id="chi"
           value={chi}
           onChange={e => setChi(parseInt(e.target.value, 10))}
+          min="0"
+          required
+        />
+      </div>
+
+
+      <div className="form-group">
+        <label htmlFor="gamma">Gamma</label>
+        <input
+          type="number"
+          id="gamma"
+          value={gamma}
+          onChange={e => setGamma(parseInt(e.target.value, 10))}
           min="0"
           required
         />
