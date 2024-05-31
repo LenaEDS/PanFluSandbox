@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Header.css';
-import epiengage_logo from './epiengage_logo.jpg';
+import epiengage_logo_darkblue from './epiengage_logo_darkblue.jpg';
 import RegularView from '../../RegularView';
 import DashboardView from '../../DashboardView';
 import GalleryView from '../GalleryView';
@@ -28,7 +28,7 @@ const Header = () => {
     <div className="container">
       <div className="header">
         <div className="logo-container">
-          <img src={epiengage_logo} alt="EpiEngage Logo" className="logo" />
+          <img src={epiengage_logo_darkblue} alt="EpiEngage Logo" className="logo" />
         </div>
         <div className="text-container">
           <h1>epiENGAGE</h1>
