@@ -200,3 +200,8 @@ th {
 .odd-row {
   background-color: #ffffff; /* Set the background color for odd rows */
 }
+
+.search-input {
+  float: right;
+  margin-left: 10px; /* Adjust the margin as needed */
+}

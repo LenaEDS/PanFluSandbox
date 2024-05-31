@@ -4,6 +4,7 @@ import '../App.css'; // Import the CSS file
 
 function CountyInfectedTable() {
   const [sortedData, setSortedData] = useState(countyInfectedData);
+  const [searchTerm, setSearchTerm] = useState('');
   const [sortDirection, setSortDirection] = useState({
     county: 'asc',
     infected: 'asc',
@@ -30,9 +31,23 @@ function CountyInfectedTable() {
     });
   };
 
+  // Function to filter data based on search term
+  const filteredData = sortedData.filter((county) =>
+    county.county.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="table-container">
-      <h2>Infected Count</h2>
+      <h2>
+        Infected Count
+        <input
+          type="text"
+          className="search-input"
+          placeholder="Search County..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </h2>
       <div className="table-scroll">
         <table>
           <thead>
@@ -52,8 +67,8 @@ function CountyInfectedTable() {
             </tr>
           </thead>
           <tbody>
-            {sortedData.map((county, index) => (
-              <tr key={index} className={index % 2 === 0 ? 'even-row' : 'odd-row'}>
+            {filteredData.map((county, index) => (
+              <tr key={index}>
                 <td>{county.county}</td>
                 <td>{county.infected}</td>
               </tr>
