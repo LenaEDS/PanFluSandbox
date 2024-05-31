@@ -68,7 +68,7 @@ function CountyInfectedTable() {
           </thead>
           <tbody>
             {filteredData.map((county, index) => (
-              <tr key={index}>
+              <tr key={index} className={index % 2 === 0 ? 'even-row' : 'odd-row'}>
                 <td>{county.county}</td>
                 <td>{county.infected}</td>
               </tr>
