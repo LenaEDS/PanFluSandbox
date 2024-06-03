@@ -16,6 +16,7 @@ import Tabs from './Tabs';
 import Antivirals from './components/Antivirals';
 import Vaccine from './components/Vaccine';
 import MapView from './components/Views/MapView';
+import CountyPopulationTable from './components/CountyPopulationTable';
 
 const RegularView = () => {
   return (
@@ -35,6 +36,7 @@ const RegularView = () => {
     </Collapsible>
     <MapView />
     <CountyInfectedTable />
+    <CountyPopulationTable />
   </div>
 
   );
