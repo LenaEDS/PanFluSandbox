@@ -6,6 +6,7 @@ import InfectedView from './InfectedView';
 import AntiviralsView from './AntiviralsView';
 import VaccineView from './VaccineView';
 import countyInfectedData from '../countyInfectedData';
+import TexasChoropleth from '../TexasChoropleth';
 import './MapView.css';
 
 const MapView = () => {

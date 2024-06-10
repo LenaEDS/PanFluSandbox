@@ -11,7 +11,7 @@ const Parameters = () => {
   const [tau, setTau] = useState(0.83333333);
   const [kappa, setKappa] = useState(0.52631579);
   const [chi, setChi] = useState('1.0');
-  const [gamma, setGamma] = useState(0.24390244)
+  const [gamma, setGamma] = useState(0.24390244);
   const [nu_high, setNuHigh] = useState('no');
   const [vaccine_wastage_factor, setVaccineWastageFactor] = useState(60);
   const [antiviral_effectiveness, setAntiviralEffectiveness] = useState(0.8);
@@ -58,7 +58,11 @@ const Parameters = () => {
       </div>
 
       <div className="form-group">
-        <label htmlFor="latencyPeriod">Latency Period (days):</label>
+        <label htmlFor="latencyPeriod">Latency Period (days):
+          <span className="tooltip">?
+              <span className="tooltip-text"> Average latency period, in days, which corresponds to Tau in the model.</span>
+            </span>
+        </label>
         <input
           type="number"
           id="latencyPeriod"
@@ -70,7 +74,12 @@ const Parameters = () => {
       </div>
 
       <div className="form-group">
-        <label htmlFor="asymptomaticPeriod">Asymptomatic Period (days):</label>
+        <label htmlFor="asymptomaticPeriod">
+          Asymptomatic Period (days):
+          <span className="tooltip">?
+            <span className="tooltip-text">The time period during which an infected individual shows no symptoms but can still spread the infection, which corresponds to Kappa in the model.</span>
+          </span>
+        </label>
         <input
           type="number"
           id="asymptomaticPeriod"
@@ -132,7 +141,7 @@ const Parameters = () => {
       </div>
 
       <div className="form-group">
-        <label htmlFor="chi">Chi</label>
+        <label htmlFor="chi">Chi:</label>
         <input
           type="number"
           id="chi"
@@ -143,9 +152,8 @@ const Parameters = () => {
         />
       </div>
 
-
       <div className="form-group">
-        <label htmlFor="gamma">Gamma</label>
+        <label htmlFor="gamma">Gamma:</label>
         <input
           type="number"
           id="gamma"

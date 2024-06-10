@@ -69,7 +69,7 @@ function CountyPopulationTable() {
   return (
     <div className="table-container">
       <h2>
-        Population by County
+        Population
         <input
           type="text"
           className="search-input"

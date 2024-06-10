@@ -38,7 +38,7 @@ const Header = () => {
             className={`tab-button ${activeTab === 'regular' ? 'active' : ''}`}
             onClick={() => setActiveTab('regular')}
           >
-            Home
+            Map View
           </button>
           <button
             className={`tab-button ${activeTab === 'dashboard' ? 'active' : ''}`}

@@ -39,7 +39,7 @@ function CountyInfectedTable() {
   return (
     <div className="table-container">
       <h2>
-        Infected Count
+        Infected
         <input
           type="text"
           className="search-input"
