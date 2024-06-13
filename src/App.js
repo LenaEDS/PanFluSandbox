@@ -14,6 +14,7 @@ import AddInitialCases from './components/AddInitialCases';
 import TimelineSlider from './components/TimelineSlider'; // Import the TimelineSlider component
 import Collapsible from './components/Collapsible';
 import Tabs from './Tabs';
+import TimeSeriesChart from './components/TimeSeriesChart';
 
 const App = () => {
   const [showInitialCases, setShowInitialCases] = useState(true);
@@ -38,6 +39,7 @@ const App = () => {
 
   return (
     <div className="App">
+    <TimeSeriesChart />
     <Header />
     <TimelineSlider totalDays={totalDays} selectedDay={selectedDay} onDayChange={handleDayChange} />
     </div>  

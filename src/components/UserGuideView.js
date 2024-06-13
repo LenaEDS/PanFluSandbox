@@ -1,10 +1,11 @@
 import React from 'react';
+import TimeSeriesChart from './TimeSeriesChart';
 
 const UserGuideView = () => {
   return (
     <div>
       <h2>User Guide View</h2>
-      {/* Add your user guide content here */}
+    <TimeSeriesChart />
     </div>
   );
 };
