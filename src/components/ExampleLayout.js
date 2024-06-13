@@ -1,6 +1,6 @@
-// ExampleLayout.js
 import React from 'react';
 import ShowcaseLayout from './ShowcaseLayout'; // adjust the path as necessary
+import './ExampleLayout.css'; // Import custom CSS for styling
 
 class ExampleLayout extends React.Component {
   constructor(props) {
@@ -25,7 +25,7 @@ class ExampleLayout extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="exampleLayoutContainer">
         <div className="layoutJSON">
           Displayed as <code>[x, y, w, h]</code>:
           <div className="columns">{this.stringifyLayout()}</div>

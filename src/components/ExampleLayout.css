@@ -1,0 +1,24 @@
+.exampleLayoutContainer {
+    width: 100%;
+    max-width: 1200px; /* Optionally, set a maximum width for the content */
+    margin: 0 auto; /* Center the content horizontally */
+    padding: 20px; /* Add padding inside the container */
+    box-sizing: border-box; /* Ensure padding is included in the width */
+  }
+  
+  .layoutJSON {
+    margin-bottom: 20px;
+  }
+  
+  .columns {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .layoutItem {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+  

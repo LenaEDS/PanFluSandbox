@@ -1,11 +1,11 @@
 import React from 'react';
-import TimeSeriesChart from './TimeSeriesChart';
+import InitialMap from './InitialMap';
 
 const UserGuideView = () => {
   return (
     <div>
       <h2>User Guide View</h2>
-    <TimeSeriesChart />
+      <InitialMap />
     </div>
   );
 };

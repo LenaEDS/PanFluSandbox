@@ -1,12 +1,12 @@
 import React from 'react';
-import ReactGridLayout from 'react-grid-layout';
-import ExampleLayout from './ExampleLayout'
+import ExampleLayout from './ExampleLayout'; // Adjust the path as necessary
+import './GalleryView.css'; // Import custom CSS for styling
 
 const GalleryView = () => {
   return (
-    <div>
+    <div className="galleryViewContainer">
       <h2>Gallery View</h2>
-     <ExampleLayout />
+      <ExampleLayout />
     </div>
   );
 };
