@@ -5,6 +5,7 @@ import RegularView from '../../RegularView';
 import DashboardView from '../../DashboardView';
 import GalleryView from '../GalleryView';
 import UserGuideView from '../UserGuideView';
+import ScreenshotView from '../ScreenshotView';
 
 const Header = () => {
   const [activeTab, setActiveTab] = useState('regular');
@@ -19,6 +20,8 @@ const Header = () => {
         return <GalleryView />;
       case 'userguide':
         return <UserGuideView />;
+      case 'screenshot':
+        return <ScreenshotView />;
       default:
         return <RegularView />;
     }
@@ -50,6 +53,13 @@ const Header = () => {
             className={`tab-button ${activeTab === 'gallery' ? 'active' : ''}`}
             onClick={() => setActiveTab('gallery')}
           >
+            Screenshot
+          </button>
+          <button
+            className={`tab-button ${activeTab === 'screenshot' ? 'active' : ''}`}
+            onClick={() => setActiveTab('screenshot')}
+          >
+
             Gallery
           </button>
           <button
