@@ -2,9 +2,8 @@ import React from 'react';
 import { Responsive, WidthProvider } from 'react-grid-layout';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
-import ShowcaseLayout from './ShowcaseLayout'; // Adjust path as necessary
-import './ExampleLayout.css'; // Import custom CSS for styling
 import TexasChoropleth from './TexasChoropleth'; // Import TexasChoropleth component
+import './ExampleLayout.css'; // Import custom CSS for styling
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -13,7 +12,10 @@ class ExampleLayout extends React.Component {
     super(props);
     this.state = {
       layout: [
-        { i: 'map', x: 0, y: 0, w: 4, h: 4 } // Initial layout for TexasChoropleth
+        { i: 'map', x: 0, y: 0, w: 6, h: 6 }, // Layout for TexasChoropleth
+        { i: 'cell1', x: 6, y: 0, w: 6, h: 6 }, // Additional cell 1
+        { i: 'cell2', x: 0, y: 6, w: 6, h: 6 }, // Additional cell 2
+        { i: 'cell3', x: 6, y: 6, w: 6, h: 6 }, // Additional cell 3
       ],
       countyData: [] // Initialize county data state
     };
@@ -41,39 +43,26 @@ class ExampleLayout extends React.Component {
 
     return (
       <div className="exampleLayoutContainer">
-        <div className="layoutJSON">
-          Displayed as <code>[x, y, w, h]</code>:
-          <div className="columns">
-            {this.state.layout.map((l) => (
-              <div className="layoutItem" key={l.i}>
-                <b>{l.i}</b>: [{l.x}, {l.y}, {l.w}, {l.h}]
-              </div>
-            ))}
-          </div>
-        </div>
-        <ShowcaseLayout onLayoutChange={this.onLayoutChange} />
         <ResponsiveGridLayout
           className="layout"
           layouts={{ lg: this.state.layout }}
           breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-          cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
-          rowHeight={30}
-          width={1200}
-          draggableHandle=".dragHandle" // Specify a draggable handle if needed
+          cols={{ lg: 12, md: 12, sm: 12, xs: 12, xxs: 12 }}
+          rowHeight={window.innerHeight / 12}
+          width={window.innerWidth}
           onLayoutChange={this.onLayoutChange}
         >
           {this.state.layout.map((item) => (
-            <div key={item.i}>
-              {item.i === 'map' ? (
-                <div className="layoutItem" key={item.i}>
-                  <TexasChoropleth
-                    countyData={countyData}
-                    key={item.i}
-                    data-grid={{ x: item.x, y: item.y, w: item.w, h: item.h }}
-                  />
+            <div key={item.i} data-grid={item} className="layoutItem">
+              {item.i === 'map' && (
+                <div className="mapContainer">
+                  <TexasChoropleth countyData={countyData} />
                 </div>
-              ) : (
-                <div className="placeholder" />
+              )}
+              {item.i !== 'map' && (
+                <div className="placeholder">
+                  <h3>{`Cell ${item.i}`}</h3>
+                </div>
               )}
             </div>
           ))}

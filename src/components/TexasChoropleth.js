@@ -1,5 +1,3 @@
-// TexasChoropleth.js
-
 import React from 'react';
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -44,6 +42,8 @@ class TexasChoropleth extends React.Component {
   };
 
   render() {
+    const { countyData } = this.state;
+
     return (
       <MapContainer center={[31.0, -100.0]} zoom={6} style={{ height: '500px', width: '800px' }}>
         <TileLayer
@@ -53,7 +53,7 @@ class TexasChoropleth extends React.Component {
         <GeoJSON
           data={texasOutline}
           style={(feature) => ({
-            fillColor: this.getColor(this.state.countyData.find(item => item.county === feature.properties.name)?.infected || 0),
+            fillColor: this.getColor(countyData.find(item => item.county === feature.properties.name)?.infected || 0),
             weight: 1,
             color: 'white',
             fillOpacity: 0.7

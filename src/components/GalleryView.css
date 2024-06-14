@@ -1,9 +1,16 @@
+/* GalleryView.css */
 .galleryViewContainer {
     width: 100%;
-    /* Optionally, you can set a max-width to constrain the layout if needed */
-    max-width: 1200px; 
-    margin: 0 auto; /* Centers the content horizontally */
-    padding: 20px; /* Adds padding inside the container */
-    box-sizing: border-box; /* Ensures padding is included in the width */
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  h2 {
+    margin-bottom: 20px;
+    text-align: center;
   }
   
