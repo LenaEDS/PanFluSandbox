@@ -1,5 +1,5 @@
 import React from 'react';
-import ExampleLayout from './ExampleLayout'; // Adjust the path as necessary
+import ExampleLayout from './ExampleLayout'; // Adjust path as necessary
 import './GalleryView.css'; // Import custom CSS for styling
 
 const GalleryView = () => {
