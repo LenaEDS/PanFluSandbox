@@ -41,7 +41,6 @@ const App = () => {
     <Header />
     <TimelineSlider totalDays={totalDays} selectedDay={selectedDay} onDayChange={handleDayChange} />
     </div>  
-
   );
 };
 

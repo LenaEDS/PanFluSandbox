@@ -202,7 +202,24 @@ th {
   background-color: #ffffff; /* Set the background color for odd rows */
 }
 
+.search-container {
+  position: relative;
+  display: inline-block; /* Adjust as needed */
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px; /* Adjust spacing from left */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px; /* Adjust size as needed */
+  height: 16px; /* Adjust size as needed */
+}
+
 .search-input {
-  float: right;
-  margin-left: 10px; /* Adjust the margin as needed */
+  padding-left: 30px; /* Adjust to make room for the icon */
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
 }

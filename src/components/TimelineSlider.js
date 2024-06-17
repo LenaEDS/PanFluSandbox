@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import './TimelineSlider.css';
+import play_button from './play_button.png';
+import pause from './pause.png';
 
 const TimelineSlider = ({ totalDays, selectedDay, onDayChange }) => {
   const [isRunning, setIsRunning] = useState(false);
@@ -59,8 +61,14 @@ const TimelineSlider = ({ totalDays, selectedDay, onDayChange }) => {
   return (
     <div className="timeline-slider-wrapper">
       <div className="button-container">
-        <button className="scenario-button" onClick={handleRunScenario}>Run Scenario</button>
-        <button className="scenario-button" onClick={handlePause}>Pause</button>
+        <button className="scenario-button" onClick={handleRunScenario}>
+          <img src={play_button} alt="Play" className="icon" />
+          Run Scenario
+        </button>
+        <button className="pause-button" onClick={handlePause}>
+          <img src={pause} alt="Pause" className="icon" />
+          Pause
+        </button>
       </div>
       <div className="timeline-container">
         <Slider

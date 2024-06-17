@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import countyInfectedData from './countyInfectedData';
 import '../App.css'; // Import the CSS file
+import search from './search.png';
 
 function CountyInfectedTable() {
   const [sortedData, setSortedData] = useState(countyInfectedData);
@@ -39,14 +40,15 @@ function CountyInfectedTable() {
   return (
     <div className="table-container">
       <h2>
+      <img src={search} alt="Search" className="search-icon" />
         Infected
-        <input
-          type="text"
-          className="search-input"
-          placeholder="Search County..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
+          <input
+            type="text"
+            className="search-input"
+            placeholder="Search County..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
       </h2>
       <div className="table-scroll">
         <table>
