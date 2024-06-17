@@ -40,15 +40,17 @@ function CountyInfectedTable() {
   return (
     <div className="table-container">
       <h2>
-      <img src={search} alt="Search" className="search-icon" />
-        Infected
+      Infected
+        <div className="search-container">
+          <img src={search} alt="Search" className="search-icon" />
           <input
             type="text"
             className="search-input"
-            placeholder="Search County..."
+            placeholder="     Search County..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
+        </div>
       </h2>
       <div className="table-scroll">
         <table>

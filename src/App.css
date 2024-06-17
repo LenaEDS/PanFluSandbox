@@ -203,23 +203,20 @@ th {
 }
 
 .search-container {
-  position: relative;
-  display: inline-block; /* Adjust as needed */
+  display: flex;
+  align-items: center;
 }
 
 .search-icon {
-  position: absolute;
-  left: 10px; /* Adjust spacing from left */
-  top: 50%;
-  transform: translateY(-50%);
-  width: 16px; /* Adjust size as needed */
-  height: 16px; /* Adjust size as needed */
+  width: 20px; /* Adjust size as needed */
+  height: 20px; /* Adjust size as needed */
+  margin-right: 8px; /* Space between icon and input */
 }
 
 .search-input {
-  padding-left: 30px; /* Adjust to make room for the icon */
   padding: 8px 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 14px;
+  flex: 1; /* Take remaining space */
 }
