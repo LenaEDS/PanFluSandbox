@@ -17,6 +17,7 @@ import Antivirals from './components/Antivirals';
 import Vaccine from './components/Vaccine';
 import MapView from './components/Views/MapView';
 import CountyPopulationTable from './components/CountyPopulationTable';
+import ChartSettings from './components/ChartSettings';
 
 const RegularView = () => {
   return (
@@ -36,7 +37,9 @@ const RegularView = () => {
     </Collapsible>
     <MapView />
     <CountyInfectedTable />
-    <CountyPopulationTable />
+    <Collapsible title = "Stratify">
+        <ChartSettings counties={texasCounties}/>
+    </Collapsible>
   </div>
 
   );

@@ -46,7 +46,7 @@ function CountyInfectedTable() {
           <input
             type="text"
             className="search-input"
-            placeholder="     Search County..."
+            placeholder="Search County..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
