@@ -68,8 +68,3 @@
   margin-top: 110px; /* Adjust based on header height */
   background-color: white; /* Ensure content area is visually distinct */
 }
-
-.header {
-  position: relative;
-  z-index: 9999; /* Example z-index */
-}
