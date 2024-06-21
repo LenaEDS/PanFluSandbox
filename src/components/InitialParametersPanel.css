@@ -1,48 +1,9 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
-@font-face {
-  font-family: "GilroyRegular";
-  src: local("GilroyRegular"),
-    url("./fonts/Gilroy-Regular.ttf") format("truetype");
-  font-weight: normal;
-}
-
-@font-face {
-  font-family: "GilroyBold";
-  src: local("GilroyBold"),
-    url("./fonts/Gilroy-Bold.ttf") format("truetype");
-  font-weight: normal;
-}
-
-.content {
-  display: flex;
-  flex-direction: column; /* Ensure elements are stacked vertically */
-  padding: 20px;
-}
-
 .panel-container {
   display: flex;
   flex-direction: column;
-  width: 100%; /* Ensure the panel container spans the full width */
+  width: 100%; /* Make sure it spans the full width */
+  padding: 10px;
   margin-bottom: 20px; /* Ensure spacing below the panel */
-}
-
-.collapsible-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
 }
 
 .orange-button {
