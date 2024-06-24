@@ -53,13 +53,6 @@ const Header = () => {
             className={`tab-button ${activeTab === 'gallery' ? 'active' : ''}`}
             onClick={() => setActiveTab('gallery')}
           >
-            Screenshot
-          </button>
-          <button
-            className={`tab-button ${activeTab === 'screenshot' ? 'active' : ''}`}
-            onClick={() => setActiveTab('screenshot')}
-          >
-
             Gallery
           </button>
           <button

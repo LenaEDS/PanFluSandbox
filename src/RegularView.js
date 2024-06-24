@@ -13,9 +13,14 @@ import InitialParametersPanel from './components/InitialParametersPanel';
 import './RegularView.css';
 
 const RegularView = () => {
+  const handleInitialParamsSubmit = (data) => {
+    console.log('Initial Parameters Submitted:', data);
+    // Handle the submitted data here
+  };
+  
   return (
     <div className="regular-view-content">
-      <InitialParametersPanel />
+     <InitialParametersPanel counties={texasCounties} onSubmit={handleInitialParamsSubmit} />
       <div className="regular-view-collapsible-container">
         <Collapsible title="Initial Cases">
           <AddInitialCases counties={texasCounties} />
