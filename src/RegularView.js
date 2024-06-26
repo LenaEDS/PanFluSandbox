@@ -11,34 +11,35 @@ import MapView from './components/Views/MapView';
 import ChartSettings from './components/ChartSettings';
 import InitialParametersPanel from './components/InitialParametersPanel';
 import SetParametersDropdown from './SetParametersDropdown';
+import EventMonitor from './components/EventMonitor';
+import InfectedChart from './components/InfectedChart';
 import './RegularView.css';
+import CountyPopulationTable from './components/CountyPopulationTable';
 
 const RegularView = () => {
-  const handleInitialParamsSubmit = (data) => {
-    console.log('Initial Parameters Submitted:', data);
-    // Handle the submitted data here
-  };
-  
   return (
     <div className="regular-view-content">
-     <SetParametersDropdown counties={texasCounties} />
-     <InitialParametersPanel counties={texasCounties} onSubmit={handleInitialParamsSubmit} /> 
+      <SetParametersDropdown counties={texasCounties} />
       <div className="regular-view-collapsible-container">
-        <Collapsible title="Initial Cases">
-          <AddInitialCases counties={texasCounties} />
-        </Collapsible>
-        <Collapsible title="Parameters">
-          <Parameters />
-        </Collapsible>
-        <Collapsible title="Case Fatality Rate">
-          <CaseFatalityRate />
-        </Collapsible>
         <Collapsible title="Interventions">
           <Antivirals />
           <Vaccine />
         </Collapsible>
-        <CountyInfectedTable />
-        <MapView />
+        <div className="map-and-charts-container">
+          <div className="map-and-table-container">
+            <CountyInfectedTable className="infected-table" />
+            <div className="divider"></div>
+            <MapView />
+          </div>
+          <div className="charts-container">
+            <div className="chart-wrapper">
+              <InfectedChart />
+            </div>
+            <div className="chart-wrapper">
+              <EventMonitor />
+            </div>
+          </div>
+        </div>
         <Collapsible title="Stratify">
           <ChartSettings counties={texasCounties} />
         </Collapsible>
