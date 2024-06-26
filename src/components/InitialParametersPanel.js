@@ -51,7 +51,7 @@ const InitialParametersPanel = ({ counties, onSubmit }) => {
   return (
     <div>
       <div className="panel-container">
-        <button className="orange-button" onClick={openInitialParams}>Add Initial Parameters</button>
+        <button className="orange-button" onClick={openInitialParams}>Set Initial Parameters</button>
         <button className="orange-button" onClick={openInterventions}>Add Interventions</button>
       </div>
 

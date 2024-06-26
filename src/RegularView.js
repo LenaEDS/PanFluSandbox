@@ -10,6 +10,7 @@ import Vaccine from './components/Vaccine';
 import MapView from './components/Views/MapView';
 import ChartSettings from './components/ChartSettings';
 import InitialParametersPanel from './components/InitialParametersPanel';
+import SetParametersDropdown from './SetParametersDropdown';
 import './RegularView.css';
 
 const RegularView = () => {
@@ -20,7 +21,8 @@ const RegularView = () => {
   
   return (
     <div className="regular-view-content">
-     <InitialParametersPanel counties={texasCounties} onSubmit={handleInitialParamsSubmit} />
+     <SetParametersDropdown counties={texasCounties} />
+     <InitialParametersPanel counties={texasCounties} onSubmit={handleInitialParamsSubmit} /> 
       <div className="regular-view-collapsible-container">
         <Collapsible title="Initial Cases">
           <AddInitialCases counties={texasCounties} />
@@ -35,8 +37,8 @@ const RegularView = () => {
           <Antivirals />
           <Vaccine />
         </Collapsible>
-        <MapView />
         <CountyInfectedTable />
+        <MapView />
         <Collapsible title="Stratify">
           <ChartSettings counties={texasCounties} />
         </Collapsible>
