@@ -22,11 +22,11 @@ const RegularView = () => {
     <div className="regular-view-content">
       <SetParametersDropdown counties={texasCounties} />
       <Interventions />
+      <div className="divider"></div> {/* Added divider here */}
       <div className="regular-view-collapsible-container">
         <div className="map-and-charts-container">
           <div className="map-and-table-container">
             <CountyInfectedTable className="infected-table" />
-            <div className="divider"></div>
             <MapView />
           </div>
           <div className="charts-container">

@@ -75,10 +75,7 @@
   }
   
   .regular-view-content {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    padding: 20px;
+    position: relative;
   }
   
   .regular-view-collapsible-container {
@@ -118,5 +115,10 @@
     margin-bottom: 20px; /* Adjust margin as needed */
   }
   
-  /* Styles for SetParametersDropdown, Collapsible, Antivirals, Vaccine, ChartSettings */
-  
+  .divider {
+    height: 2px; /* Adjust the height as needed */
+    background-color: black;
+    width: 100%;
+    margin: 20px 0; /* Add margin to separate from other components */
+    z-index: 1; /* Ensure it is above other components */
+  }
