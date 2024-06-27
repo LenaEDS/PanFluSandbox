@@ -15,16 +15,14 @@ import EventMonitor from './components/EventMonitor';
 import InfectedChart from './components/InfectedChart';
 import './RegularView.css';
 import CountyPopulationTable from './components/CountyPopulationTable';
+import Interventions from './Interventions';
 
 const RegularView = () => {
   return (
     <div className="regular-view-content">
       <SetParametersDropdown counties={texasCounties} />
+      <Interventions />
       <div className="regular-view-collapsible-container">
-        <Collapsible title="Interventions">
-          <Antivirals />
-          <Vaccine />
-        </Collapsible>
         <div className="map-and-charts-container">
           <div className="map-and-table-container">
             <CountyInfectedTable className="infected-table" />
@@ -40,9 +38,6 @@ const RegularView = () => {
             </div>
           </div>
         </div>
-        <Collapsible title="Stratify">
-          <ChartSettings counties={texasCounties} />
-        </Collapsible>
       </div>
     </div>
   );
