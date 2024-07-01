@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import texasOutline from './texasOutline.json';
-import OUTPUT_day0 from './OUTPUT_day0.json';
 import './styles.css'; // Import your CSS file
 
 const getColor = (susceptibleCount) => {
@@ -46,14 +45,14 @@ const parseData = (jsonData, texasCounties) => {
   });
 };
 
-const InitialMap = () => {
+const InitialMap = ({ outputData }) => {
   const [countyData, setCountyData] = useState([]);
 
   useEffect(() => {
     const texasCounties = parseTexasOutline(texasOutline);
-    const data = parseData(OUTPUT_day0, texasCounties);
+    const data = parseData(outputData, texasCounties);
     setCountyData(data);
-  }, []);
+  }, [outputData]);
 
   const onEachCounty = (feature, layer) => {
     const name = feature.properties.name;

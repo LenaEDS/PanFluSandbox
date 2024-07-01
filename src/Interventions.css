@@ -17,7 +17,7 @@
   }
 
   .grey-button {
-    background-color: #f1f1f1;
+    background-color: #f1f1;
     border: none;
     color: black;
     padding: 10px 20px;
@@ -29,11 +29,16 @@
   } 
   
   .dropdown-arrow {
-    margin-left: 10px;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    font-size: 12px;
+    transition: transform 0.3s ease;
   }
   
   .dropdown-arrow.open {
-    transform: rotate(180deg);
+    transform: translateY(-50%) rotate(180deg);
   }
   
   .dropdown-menu {
