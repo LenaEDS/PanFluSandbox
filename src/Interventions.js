@@ -29,8 +29,8 @@ const Interventions = () => {
 
   return (
     <div className="dropdown-container">
-      <button className="orange-button" onClick={toggleDropdown}>
-        <span className="dropdown-text">Add Interventions</span>
+      <button className="grey-button" onClick={toggleDropdown}>
+        <span className="dropdown-text"> + Add Interventions</span>
         <span className={`dropdown-arrow ${showDropdown ? 'open' : ''}`}>&#x25BE;</span>
       </button>
       {showDropdown && (

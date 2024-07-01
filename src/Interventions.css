@@ -15,6 +15,18 @@
     align-items: center;
     justify-content: space-between;
   }
+
+  .grey-button {
+    background-color: #f1f1f1;
+    border: none;
+    color: black;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  } 
   
   .dropdown-arrow {
     margin-left: 10px;
