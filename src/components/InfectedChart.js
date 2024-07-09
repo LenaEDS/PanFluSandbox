@@ -4,6 +4,8 @@ import 'leaflet/dist/leaflet.css';
 import countiesData from './countiesData.json';
 import texasOutline from './texasOutline.json';
 import './InfectedChart.css'; // Import your CSS file for styling
+import ChartParameters from './ChartParameters';
+import texasCounties from './counties';
 
 const InfectedChart = () => {
   const getColor = (density) => {
@@ -37,13 +39,14 @@ const InfectedChart = () => {
 
   return (
     <div className="infected-chart-container">
-      <div className="infections-text">_________ infections in _______ Counties </div>
-      <div className="infections-text">Stratified by ______ Filtered by ______</div>
+    <ChartParameters counties={texasCounties} />
+    <div className="map-container">
       <MapContainer center={[31.0, -100.0]} zoom={6} style={{ height: '500px', width: '800px' }}>
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <GeoJSON data={countiesData} style={style} />
       </MapContainer>
     </div>
+  </div>
   );
 };
 

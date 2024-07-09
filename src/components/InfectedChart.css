@@ -9,5 +9,12 @@
   
   .infected-chart-container {
     text-align: center; /* Center align the contents */
+    position: relative; /* Ensure relative positioning */
+    z-index: 1; /* Ensure it appears above other elements */
+  }
+  
+  .map-container {
+    position: relative; /* Ensure relative positioning */
+    z-index: 0; /* Lower z-index to keep it below ChartParameters */
   }
   

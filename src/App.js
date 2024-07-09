@@ -18,6 +18,9 @@ import Tabs from './Tabs';
 import InitialParametersPanel from './components/InitialParametersPanel';
 import TestInitialCases from './TestInitialCases';
 import TestParameters from './TestParameters';
+import SetParametersDropdown from './SetParametersDropdown';
+import ChartSettings from './components/ChartSettings';
+import ChartParameters from './components/ChartParameters';
 
 const App = () => {
   const [showInitialCases, setShowInitialCases] = useState(true);
@@ -59,11 +62,7 @@ const App = () => {
       <Header />
       <TimelineSlider totalDays={totalDays} selectedDay={selectedDay} onDayChange={handleDayChange} />
       <div>
-        <button onClick={handleToggleInitialCases}>Show Initial Cases</button>
-        <button onClick={handleToggleParameters}>Show Parameters</button>
       </div>
-      {showInitialCases && <TestInitialCases data={data} />}
-      {showParameters && <TestParameters data={data} />}
     </div>
   );
 };

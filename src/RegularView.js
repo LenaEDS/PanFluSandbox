@@ -16,6 +16,7 @@ import InfectedChart from './components/InfectedChart';
 import './RegularView.css';
 import CountyPopulationTable from './components/CountyPopulationTable';
 import Interventions from './Interventions';
+import ChartParameters from './components/ChartParameters';
 
 const RegularView = () => {
   return (
