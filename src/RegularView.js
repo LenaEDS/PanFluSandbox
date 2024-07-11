@@ -22,6 +22,7 @@ import OUTPUT_2 from './components/OUTPUT_2.json';
 import OUTPUT_3 from './components/OUTPUT_3.json';
 import OUTPUT_9 from './components/OUTPUT_9.json';
 
+
 const RegularView = () => {
   return (
     <div className="regular-view-content">
@@ -31,7 +32,6 @@ const RegularView = () => {
       <div className="regular-view-collapsible-container">
         <div className="map-and-charts-container">
           <div className="map-and-table-container">
-            <CountyInfectedTable className="infected-table" outputData={OUTPUT_1}/>
             <CountyInfectedTable className="infected-table" outputData={OUTPUT_9}/>
             <MapView />
           </div>

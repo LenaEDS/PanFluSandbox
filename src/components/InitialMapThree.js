@@ -6,14 +6,14 @@ import texasOutline from './texasOutline.json';
 import './styles.css'; // Import your CSS file
 
 const getColor = (infectedCount) => {
-  return infectedCount > 5000 ? '#800026' :
-    infectedCount > 2000 ? '#BD0026' :
-      infectedCount > 1000 ? '#E31A1C' :
-        infectedCount > 500 ? '#FC4E2A' :
-          infectedCount > 200 ? '#FD8D3C' :
-            infectedCount > 100 ? '#FEB24C' :
-              infectedCount > 50 ? '#FED976' :
-                '#FFEDA0';
+  return infectedCount > 5000 ? '#611D6C' :
+    infectedCount > 2000 ? '#912969' :
+      infectedCount > 1000 ? '#B1395B' :
+        infectedCount > 500 ? '#CE5849' :
+          infectedCount > 200 ? '#E0845B' :
+            infectedCount > 100 ? '#EDBA76' :
+              infectedCount > 50 ? '#F7EE9F' :
+                '#FBFFE1';
 };
 
 const parseTexasOutline = (texasOutline) => {
@@ -74,7 +74,7 @@ const Legend = () => {
   return null;
 };
 
-const InitialMap = ({ outputData }) => {
+const InitialMapThree = ({ outputData }) => {
   const [countyData, setCountyData] = useState([]);
 
   useEffect(() => {
@@ -121,4 +121,4 @@ const InitialMap = ({ outputData }) => {
   );
 };
 
-export default InitialMap;
+export default InitialMapThree;

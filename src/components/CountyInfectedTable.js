@@ -33,7 +33,7 @@ const parseData = (jsonData, countyNameLookup) => {
     return {
       county: countyName,
       fips: node_id,
-      infected: totalInfected,
+      infected: Math.round(totalInfected),
     };
   });
 };
