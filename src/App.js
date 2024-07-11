@@ -10,7 +10,6 @@ import TexasChoropleth from './components/TexasChoropleth';
 import CountyInfectedTable from './components/CountyInfectedTable';
 import Header from './components/Header/Header'
 import "./index.css"
-import countyInfectedData from './components/countyInfectedData';
 import AddInitialCases from './components/AddInitialCases';
 import TimelineSlider from './components/TimelineSlider'; // Import the TimelineSlider component
 import Collapsible from './components/Collapsible';

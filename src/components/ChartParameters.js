@@ -15,7 +15,7 @@ const variableOptions = [
   { value: 'treatedIneffectiveDaily', label: 'Treated Ineffective Daily' },
   { value: 'vaccinatedDaily', label: 'Vaccinated Daily' },
   { value: 'allInfected', label: 'All Infected' },
-  { value: 'ilireports', label: 'ILIREports' },
+  { value: 'ilireports', label: 'ILI Reports' },
   { value: 'vaccinatedEffective', label: 'Vaccinated Effective' },
   { value: 'vaccinatedLagPeriod', label: 'Vaccinated Lag Period' },
 ];
@@ -58,7 +58,7 @@ function ChartParameters({ counties }) {
       <div>
         <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
           <Select
-            placeholder="Select Variable"
+            placeholder="Asymptomatic"
             options={variableOptions}
             value={selectedVariable}
             onChange={setSelectedVariable}
@@ -66,7 +66,7 @@ function ChartParameters({ counties }) {
           />
           <span> infections in </span>
           <Select
-            placeholder="Select County"
+            placeholder="Anderson"
             options={countyOptions}
             value={selectedCounty}
             onChange={setSelectedCounty}
@@ -77,7 +77,7 @@ function ChartParameters({ counties }) {
         <div style={{ marginTop: '10px' }}>
           <span>Stratified by:</span>
           <Select
-            placeholder="Select Stratify"
+            placeholder="None"
             options={stratifyOptions}
             value={selectedStratify}
             onChange={setSelectedStratify}
@@ -85,7 +85,7 @@ function ChartParameters({ counties }) {
           />
           <span> Filter by: </span>
           <Select
-            placeholder="Select Age Filter"
+            placeholder="Age Group"
             options={ageFilterOptions}
             value={selectedAgeFilter}
             onChange={setSelectedAgeFilter}
@@ -93,7 +93,7 @@ function ChartParameters({ counties }) {
           />
           <span> </span>
           <Select
-            placeholder="Select Risk Filter"
+            placeholder="Risk Group"
             options={riskFilterOptions}
             value={selectedRiskFilter}
             onChange={setSelectedRiskFilter}

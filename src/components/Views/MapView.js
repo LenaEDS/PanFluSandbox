@@ -5,9 +5,10 @@ import ILIView from './ILIView';
 import InfectedView from './InfectedView';
 import AntiviralsView from './AntiviralsView';
 import VaccineView from './VaccineView';
-import countyInfectedData from '../countyInfectedData';
 import TexasChoropleth from '../TexasChoropleth';
 import './MapView.css';
+import OUTPUT_1 from '../OUTPUT_1.json';
+import InitialMap from '../InitialMap';
 
 const MapView = () => {
     const [view, setView] = useState('ili');
@@ -25,7 +26,7 @@ const MapView = () => {
           <button className={`view-button ${view === 'vaccines' ? 'active' : ''}`} onClick={() => handleButtonClick('vaccines')}>Vaccines Stockpile</button>
         </div>
         {/* Render the corresponding view based on the selected state */}
-        {view === 'ili' && <ILIView />}
+        {view === 'ili' && <InitialMap outputData={OUTPUT_1} />}
         {view === 'infected' && <InfectedView />}
         {view === 'antivirals' && <AntiviralsView />}
         {view === 'vaccines' && <VaccineView />}

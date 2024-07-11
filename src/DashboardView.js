@@ -2,7 +2,6 @@ import React, { useState, useRef } from 'react';
 import CountyDropdown from './components/CountyDropdown';
 import texasCounties from './components/counties'; // Import the counties data
 import TexasChoropleth from './components/TexasChoropleth';
-import countyInfectedData from './components/countyInfectedData';
 import html2canvas from 'html2canvas';
 import ScreenshotView from './components/ScreenshotView';
 
