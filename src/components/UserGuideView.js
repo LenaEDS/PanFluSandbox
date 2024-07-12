@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import InitialMapFive from './InitialMapFive';
 import InitialMap from './InitialMap';
 import OUTPUT_1 from './OUTPUT_1.json';
 import OUTPUT_2 from './OUTPUT_2.json';
@@ -29,6 +28,7 @@ import OUTPUT_25 from './OUTPUT_25.json';
 import OUTPUT_26 from './OUTPUT_26.json';
 import OUTPUT_27 from './OUTPUT_27.json';
 import OUTPUT_28 from './OUTPUT_28.json';
+
 
 const UserGuideView = () => {
   const [currentIndex, setCurrentIndex] = useState(1); // Initialize currentIndex state
