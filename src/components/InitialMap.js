@@ -1,9 +1,8 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, GeoJSON, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import texasOutline from './texasOutline.json';
-import './styles.css'; // Import your CSS file
 
 const getColor = (infectedCount) => {
   return infectedCount > 5000 ? '#800026' :
@@ -24,6 +23,11 @@ const parseTexasOutline = (texasOutline) => {
 };
 
 const parseData = (jsonData, texasCounties) => {
+  if (!jsonData || !jsonData.data) {
+    console.error('No data or invalid data format:', jsonData);
+    return [];
+  }
+
   return jsonData.data.map((county) => {
     const { fips_id, compartments } = county;
     const { I } = compartments;
@@ -79,8 +83,10 @@ const InitialMap = ({ outputData }) => {
 
   useEffect(() => {
     const texasCounties = parseTexasOutline(texasOutline);
-    const data = parseData(outputData, texasCounties);
-    setCountyData(data);
+    if (outputData) {
+      const data = parseData(outputData, texasCounties);
+      setCountyData(data);
+    }
   }, [outputData]);
 
   const onEachCounty = (feature, layer) => {

@@ -24,9 +24,10 @@ import ChartParameters from './components/ChartParameters';
 const App = () => {
   const [showInitialCases, setShowInitialCases] = useState(true);
   const [showParameters, setShowParameters] = useState(false);
-  const [selectedDay, setSelectedDay] = useState(0); // Start from day 0
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [data, setData] = useState([]); // State to store fetched data
   const totalDays = 30; // Total number of days
+  const [isRunning, setIsRunning] = useState(false);
 
   const handleToggleInitialCases = () => {
     setShowInitialCases(true);
@@ -38,28 +39,16 @@ const App = () => {
     setShowParameters(true);
   };
 
-  const handleDayChange = (newDay) => {
-    setSelectedDay(newDay);
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`/data?day=${selectedDay}`);
-        console.log('Fetched data:', response.data); // Log fetched data
-        setData(response.data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, [selectedDay]);
 
   return (
     <div className="App">
-      <Header />
-      <TimelineSlider totalDays={totalDays} selectedDay={selectedDay} onDayChange={handleDayChange} />
+      <Header currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} />
+      <TimelineSlider
+        totalDays={30}
+        selectedDay={currentIndex}
+        onDayChange={setCurrentIndex}
+        setIsRunning={setIsRunning}
+      />
       <div>
       </div>
     </div>

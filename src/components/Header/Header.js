@@ -8,15 +8,13 @@ import UserGuideView from '../UserGuideView';
 import ScreenshotView from '../ScreenshotView';
 import TestView from '../TestView';
 
-const Header = () => {
+const Header = ({ currentIndex, setCurrentIndex }) => {
   const [activeTab, setActiveTab] = useState('regular');
 
   const renderTabContent = () => {
     switch (activeTab) {
-      case'test':
-        return <TestView />;
       case 'regular':
-        return <RegularView />;
+        return <RegularView currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}/>;
       case 'dashboard':
         return <DashboardView />;
       case 'gallery':
@@ -26,7 +24,7 @@ const Header = () => {
       case 'screenshot':
         return <ScreenshotView />;
       default:
-        return <RegularView />;
+        return <RegularView currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}/>;
     }
   };
 
@@ -40,12 +38,6 @@ const Header = () => {
           <h1>epiENGAGE</h1>
         </div>
         <div className="tabs">
-          <button
-            className={`tab-button ${activeTab === 'test' ? 'active' : ''}`}
-            onClick={() => setActiveTab('test')}
-          >
-            Test View
-          </button>
           <button
             className={`tab-button ${activeTab === 'regular' ? 'active' : ''}`}
             onClick={() => setActiveTab('regular')}

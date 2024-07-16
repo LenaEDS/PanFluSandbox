@@ -5,7 +5,7 @@ import './TimelineSlider.css';
 import play_button from './play_button.png';
 import pause from './pause.png';
 
-const TimelineSlider = ({ totalDays, selectedDay, onDayChange }) => {
+const TimelineSlider = ({ totalDays, selectedDay, onDayChange, onScenarioRun }) => {
   const [isRunning, setIsRunning] = useState(false);
   const intervalRef = useRef(null);
 
@@ -37,6 +37,10 @@ const TimelineSlider = ({ totalDays, selectedDay, onDayChange }) => {
           }
         });
       }, 1000); // Increment day every second
+    } else {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
     }
 
     return () => {
@@ -45,6 +49,12 @@ const TimelineSlider = ({ totalDays, selectedDay, onDayChange }) => {
       }
     };
   }, [isRunning, onDayChange, totalDays]);
+
+  useEffect(() => {
+    if (isRunning && selectedDay === totalDays - 1) {
+      handlePause(); // Stop running scenario if reached end of days
+    }
+  }, [selectedDay, totalDays, isRunning]);
 
   const railStyle = {
     backgroundColor: '#ccc',
