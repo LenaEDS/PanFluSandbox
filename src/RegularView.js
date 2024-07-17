@@ -18,6 +18,7 @@ import CountyPopulationTable from './components/CountyPopulationTable';
 import Interventions from './Interventions';
 import ChartParameters from './components/ChartParameters';
 import OUTPUT_9 from './components/OUTPUT_9.json'
+import TimelineSlider from './components/TimelineSlider';
 
 
 const RegularView = ({ currentIndex, setCurrentIndex }) => {

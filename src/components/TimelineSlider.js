@@ -5,77 +5,31 @@ import './TimelineSlider.css';
 import play_button from './play_button.png';
 import pause from './pause.png';
 
-const TimelineSlider = ({ totalDays, selectedDay, onDayChange }) => {
+const TimelineSlider = ({ totalDays, selectedDay, onDayChange, onScenarioRun, onScenarioPause }) => {
   const [isRunning, setIsRunning] = useState(false);
-  const intervalRef = useRef(null);
-
-  const handleChange = value => {
-    onDayChange(value);
-  };
 
   const handleRunScenario = () => {
     setIsRunning(true);
+    onScenarioRun();
   };
 
-  const handlePause = () => {
+  const handlePauseScenario = () => {
     setIsRunning(false);
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-    }
+    onScenarioPause();
   };
 
-  useEffect(() => {
-    if (isRunning) {
-      intervalRef.current = setInterval(() => {
-        onDayChange(prevDay => {
-          if (prevDay < totalDays - 1) {
-            return prevDay + 1;
-          } else {
-            clearInterval(intervalRef.current);
-            setIsRunning(false);
-            return prevDay;
-          }
-        });
-      }, 1000); // Increment day every second
-    } else {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-    }
-
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-    };
-  }, [isRunning, onDayChange, totalDays]);
-
-  useEffect(() => {
-    if (isRunning && selectedDay === totalDays - 1) {
-      handlePause(); // Stop running scenario if reached end of days
-    }
-  }, [selectedDay, totalDays, isRunning]);
-
-  const railStyle = {
-    backgroundColor: '#ccc',
-  };
-
-  const trackStyle = {
-    backgroundColor: '#007bff',
-  };
-
-  const handleStyle = {
-    borderColor: '#007bff',
+  const handleChange = (value) => {
+    onDayChange(value);
   };
 
   return (
     <div className="timeline-slider-wrapper">
       <div className="button-container">
-        <button className="scenario-button" onClick={handleRunScenario}>
+        <button className="scenario-button" onClick={handleRunScenario} disabled={isRunning}>
           <img src={play_button} alt="Play" className="icon" />
           Run Scenario
         </button>
-        <button className="pause-button" onClick={handlePause}>
+        <button className="pause-button" onClick={handlePauseScenario} disabled={!isRunning}>
           <img src={pause} alt="Pause" className="icon" />
           Pause
         </button>
@@ -86,9 +40,9 @@ const TimelineSlider = ({ totalDays, selectedDay, onDayChange }) => {
           max={totalDays - 1}
           value={selectedDay}
           onChange={handleChange}
-          railStyle={railStyle}
-          trackStyle={trackStyle}
-          handleStyle={handleStyle}
+          railStyle={{ backgroundColor: '#ccc' }}
+          trackStyle={{ backgroundColor: '#007bff' }}
+          handleStyle={{ borderColor: '#007bff' }}
         />
         <div className="timeline-slider">
           {Array.from({ length: totalDays }).map((_, index) => (

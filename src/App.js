@@ -43,12 +43,6 @@ const App = () => {
   return (
     <div className="App">
       <Header currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} />
-      <TimelineSlider
-        totalDays={30}
-        selectedDay={currentIndex}
-        onDayChange={setCurrentIndex}
-        setIsRunning={setIsRunning}
-      />
       <div>
       </div>
     </div>
