@@ -7,7 +7,7 @@ import AddInitialCases from './components/AddInitialCases';
 import Collapsible from './components/Collapsible';
 import Antivirals from './components/Antivirals';
 import Vaccine from './components/Vaccine';
-import MapView from './components/Views/MapView';
+import ToggleMapView from './components/Views/ToggleMapView';
 import ChartSettings from './components/ChartSettings';
 import InitialParametersPanel from './components/InitialParametersPanel';
 import SetParametersDropdown from './SetParametersDropdown';
@@ -30,7 +30,7 @@ const RegularView = ({ currentIndex, setCurrentIndex }) => {
         <div className="map-and-charts-container">
           <div className="map-and-table-container">
           <CountyInfectedTable className="infected-table" outputData={OUTPUT_9}/>
-            <MapView currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}/>
+            <ToggleMapView currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}/>
           </div>
           <div className="charts-container">
             <div className="chart-wrapper">

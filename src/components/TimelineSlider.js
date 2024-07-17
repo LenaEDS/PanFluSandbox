@@ -5,7 +5,7 @@ import './TimelineSlider.css';
 import play_button from './play_button.png';
 import pause from './pause.png';
 
-const TimelineSlider = ({ totalDays, selectedDay, onDayChange, onScenarioRun }) => {
+const TimelineSlider = ({ totalDays, selectedDay, onDayChange }) => {
   const [isRunning, setIsRunning] = useState(false);
   const intervalRef = useRef(null);
 

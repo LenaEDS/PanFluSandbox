@@ -5,9 +5,9 @@ import InfectedView from './InfectedView';
 import AntiviralsView from './AntiviralsView';
 import VaccineView from './VaccineView';
 import TexasChoropleth from '../TexasChoropleth';
-import './MapView.css';
+import './ToggleMapView.css';
 import InitialMap from '../InitialMap';
-const MapView = () => {
+const ToggleMapView = () => {
   const [view, setView] = useState('ili');
   const [selectedDay, setSelectedDay] = useState(1); // Example: Start from day 1
   const [outputData, setOutputData] = useState(null); // State to hold output data
@@ -54,4 +54,4 @@ const MapView = () => {
   );
 };
 
-export default MapView;
+export default ToggleMapView;
