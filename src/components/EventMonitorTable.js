@@ -1,60 +1,43 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import './EventMonitorTable.css'; // Ensure the CSS file has correct rules
 
-const EventMonitorTable = ({ outputFiles, currentIndex }) => {
-  const [eventData, setEventData] = useState([]);
-
-  // Function to parse data and calculate deceased counts for a specific day
-  const parseEventData = (jsonData, day) => {
-    let totalDeceased = 0;
-
-    if (jsonData) {
-      totalDeceased = jsonData.data.reduce((sum, county) => {
-        const { D } = county.compartments;
-        const countyDeceased = [
-          ...D.U.L,
-          ...D.U.H,
-          ...D.V.L,
-          ...D.V.H
-        ].reduce((countySum, value) => countySum + value, 0);
-        return sum + countyDeceased;
-      }, 0);
-    }
-
-    return { day, deceased: Math.round(totalDeceased) };
-  };
-
-  useEffect(() => {
-    if (currentIndex >= 0 && currentIndex < outputFiles.length) {
-      const newEvent = parseEventData(outputFiles[currentIndex], currentIndex);
-      setEventData((prevEventData) => [...prevEventData, newEvent]);
-    }
-  }, [currentIndex, outputFiles]);
-
-  // Function to render table rows based on event data
-  const renderRows = () => {
-    return eventData.map((event, index) => (
-      <tr key={index} className={index % 2 === 0 ? 'even-row' : 'odd-row'}>
-        <td>{event.day}</td>
-        <td>{event.deceased}</td>
-      </tr>
-    ));
-  };
-
+const EventMonitorTable = ({ outputFiles, currentIndex, highlightedIndex }) => {
   return (
-    <div className="table-container">
-      <div className="table-scroll">
-        <table>
-          <thead>
-            <tr>
-              <th>Day</th>
-              <th>Deceased</th>
-            </tr>
-          </thead>
-          <tbody>
-            {renderRows()}
-          </tbody>
-        </table>
-      </div>
+    <div className="event-monitor-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>Deceased</th>
+          </tr>
+        </thead>
+        <tbody>
+          {outputFiles.map((output, index) => {
+            // Determine if this row should be highlighted
+            const isHighlighted = index === highlightedIndex;
+            return (
+              <tr
+                key={index}
+                className={isHighlighted ? 'highlighted' : ''}
+              >
+                <td>{index}</td>
+                <td>
+                  {output.data.reduce((acc, county) => {
+                    const { D } = county.compartments;
+                    const totalDeceased = [
+                      ...D.U.L,
+                      ...D.U.H,
+                      ...D.V.L,
+                      ...D.V.H,
+                    ].reduce((sum, value) => sum + value, 0);
+                    return acc + totalDeceased;
+                  }, 0).toFixed(0)} {/* Ensure rounding to whole numbers */}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 };

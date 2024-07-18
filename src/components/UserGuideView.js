@@ -21,6 +21,7 @@ import OUTPUT_10 from './OUTPUT_10.json';
 const UserGuideView = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [eventData, setEventData] = useState([]);
+  const [processedIndices, setProcessedIndices] = useState(new Set());
   const [outputFiles] = useState([
     OUTPUT_0, OUTPUT_1, OUTPUT_2, OUTPUT_3, OUTPUT_4, OUTPUT_5,
     OUTPUT_6, OUTPUT_7, OUTPUT_8, OUTPUT_9, OUTPUT_10,
@@ -55,7 +56,7 @@ const UserGuideView = () => {
   };
 
   useEffect(() => {
-    if (outputFiles[currentIndex]) {
+    if (outputFiles[currentIndex] && !processedIndices.has(currentIndex)) {
       console.log('Output Data:', outputFiles[currentIndex]);
       const deceasedCount = outputFiles[currentIndex].data.reduce((acc, county) => {
         const { D } = county.compartments;
@@ -72,8 +73,10 @@ const UserGuideView = () => {
         ...prevData,
         { day: currentIndex, deceased: Math.round(deceasedCount) },
       ]);
+
+      setProcessedIndices((prevIndices) => new Set(prevIndices).add(currentIndex));
     }
-  }, [currentIndex, outputFiles]);
+  }, [currentIndex, outputFiles, processedIndices]);
 
   useEffect(() => {
     const delay = 500; // Delay in milliseconds
@@ -94,7 +97,11 @@ const UserGuideView = () => {
         <DeceasedLineChart eventData={eventData} /> {/* Add the DeceasedLineChart below the map */}
       </div>
       <div className="right-panel">
-        <EventMonitorTable outputFiles={outputFiles} currentIndex={currentIndex} />
+        <EventMonitorTable
+          outputFiles={outputFiles}
+          currentIndex={currentIndex}
+          highlightedIndex={currentIndex} // Pass the currentIndex as highlightedIndex
+        />
       </div>
       <div className="bottom-panel">
         <TimelineSlider
