@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import InitialMap from './InitialMap';
-import InitialMapFive from './InitialMapFive';
-import TimelineSlider from './TimelineSlider';
+import './UserGuideView.css'; // Adjust CSS as needed
+import InitialMap from './InitialMap'; // Assuming these components are correctly imported
 import CountyInfectedTable from './CountyInfectedTable';
-import CountyDeceasedTable from './CountyDeceasedTable';
-import './UserGuideView.css';
+import EventMonitorTable from './EventMonitorTable';
+import TimelineSlider from './TimelineSlider';
 
-import OUTPUT_0 from './OUTPUT_0.json';
+import OUTPUT_0 from './OUTPUT_0.json'; // Assuming these JSON files are correctly imported
 import OUTPUT_1 from './OUTPUT_1.json';
 import OUTPUT_2 from './OUTPUT_2.json';
 import OUTPUT_3 from './OUTPUT_3.json';
@@ -17,7 +16,6 @@ import OUTPUT_7 from './OUTPUT_7.json';
 import OUTPUT_8 from './OUTPUT_8.json';
 import OUTPUT_9 from './OUTPUT_9.json';
 import OUTPUT_10 from './OUTPUT_10.json';
-
 
 const UserGuideView = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -36,6 +34,7 @@ const UserGuideView = () => {
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
     }
+    setCurrentIndex(0); // Start from day 0 when running the scenario
     intervalRef.current = setInterval(() => {
       setCurrentIndex((prevIndex) => {
         if (prevIndex < outputFiles.length - 1) {
@@ -78,7 +77,7 @@ const UserGuideView = () => {
         <InitialMap outputData={outputFiles[currentIndex]} />
       </div>
       <div className="right-panel">
-        <CountyDeceasedTable className="infected-table" outputData={outputFiles[currentIndex]} />
+        <EventMonitorTable outputFiles={outputFiles} currentIndex={currentIndex} />
       </div>
       <div className="bottom-panel">
         <TimelineSlider
