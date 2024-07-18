@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './UserGuideView.css'; // Adjust CSS as needed
-import InitialMap from './InitialMap'; // Assuming these components are correctly imported
+import InitialMap from './InitialMap';
+import TimelineSlider from './TimelineSlider';
 import CountyInfectedTable from './CountyInfectedTable';
 import EventMonitorTable from './EventMonitorTable';
-import TimelineSlider from './TimelineSlider';
+import DeceasedLineChart from './DeceasedLineChart';
+import './UserGuideView.css';
 
-import OUTPUT_0 from './OUTPUT_0.json'; // Assuming these JSON files are correctly imported
+import OUTPUT_0 from './OUTPUT_0.json';
 import OUTPUT_1 from './OUTPUT_1.json';
 import OUTPUT_2 from './OUTPUT_2.json';
 import OUTPUT_3 from './OUTPUT_3.json';
@@ -19,9 +20,10 @@ import OUTPUT_10 from './OUTPUT_10.json';
 
 const UserGuideView = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [eventData, setEventData] = useState([]);
   const [outputFiles] = useState([
     OUTPUT_0, OUTPUT_1, OUTPUT_2, OUTPUT_3, OUTPUT_4, OUTPUT_5,
-    OUTPUT_6, OUTPUT_7, OUTPUT_8, OUTPUT_9, OUTPUT_10
+    OUTPUT_6, OUTPUT_7, OUTPUT_8, OUTPUT_9, OUTPUT_10,
   ]);
   const intervalRef = useRef(null);
 
@@ -34,7 +36,6 @@ const UserGuideView = () => {
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
     }
-    setCurrentIndex(0); // Start from day 0 when running the scenario
     intervalRef.current = setInterval(() => {
       setCurrentIndex((prevIndex) => {
         if (prevIndex < outputFiles.length - 1) {
@@ -56,6 +57,21 @@ const UserGuideView = () => {
   useEffect(() => {
     if (outputFiles[currentIndex]) {
       console.log('Output Data:', outputFiles[currentIndex]);
+      const deceasedCount = outputFiles[currentIndex].data.reduce((acc, county) => {
+        const { D } = county.compartments;
+        const totalDeceased = [
+          ...D.U.L,
+          ...D.U.H,
+          ...D.V.L,
+          ...D.V.H,
+        ].reduce((sum, value) => sum + value, 0);
+        return acc + totalDeceased;
+      }, 0);
+
+      setEventData((prevData) => [
+        ...prevData,
+        { day: currentIndex, deceased: Math.round(deceasedCount) },
+      ]);
     }
   }, [currentIndex, outputFiles]);
 
@@ -75,6 +91,7 @@ const UserGuideView = () => {
       </div>
       <div className="middle-panel">
         <InitialMap outputData={outputFiles[currentIndex]} />
+        <DeceasedLineChart eventData={eventData} /> {/* Add the DeceasedLineChart below the map */}
       </div>
       <div className="right-panel">
         <EventMonitorTable outputFiles={outputFiles} currentIndex={currentIndex} />
