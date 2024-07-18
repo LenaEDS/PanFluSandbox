@@ -15,16 +15,16 @@ const loadCountyNames = async () => {
   return lookup;
 };
 
-// Function to parse data and calculate infected counts
+// Function to parse data and calculate deceased counts
 const parseData = (jsonData, countyNameLookup) => {
   return jsonData.data.map((county) => {
     const { node_id, compartments } = county;
-    const { I } = compartments;
-    const totalInfected = [
-      ...I.U.L,
-      ...I.U.H,
-      ...I.V.L,
-      ...I.V.H
+    const { D } = compartments;
+    const totalDeceased = [
+      ...D.U.L,
+      ...D.U.H,
+      ...D.V.L,
+      ...D.V.H
     ].reduce((sum, value) => sum + value, 0);
 
     const countyName = countyNameLookup[node_id] || 'Unknown';
@@ -32,17 +32,17 @@ const parseData = (jsonData, countyNameLookup) => {
     return {
       county: countyName,
       fips: node_id,
-      infected: Math.round(totalInfected),
+      deceased: Math.round(totalDeceased),
     };
   });
 };
 
-function CountyInfectedTable({ outputData }) {
+function CountyDeceasedTable({ outputData }) {
   const [sortedData, setSortedData] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortDirection, setSortDirection] = useState({
     county: 'asc',
-    infected: 'desc', // Set default sort direction for infected to descending
+    deceased: 'desc', // Set default sort direction for deceased to descending
   });
 
   useEffect(() => {
@@ -50,15 +50,15 @@ function CountyInfectedTable({ outputData }) {
       const countyNameLookup = await loadCountyNames();
       const parsedData = parseData(outputData, countyNameLookup);
 
-      // Sort data by infected count in descending order by default
-      const sortedByInfected = parsedData.sort((a, b) => b.infected - a.infected);
-      setSortedData(sortedByInfected);
+      // Sort data by deceased count in descending order by default
+      const sortedByDeceased = parsedData.sort((a, b) => b.deceased - a.deceased);
+      setSortedData(sortedByDeceased);
     };
 
     fetchAndParseData();
   }, [outputData]);
 
-  // Function to handle sorting by county name or infected count
+  // Function to handle sorting by county name or deceased count
   const sortData = (key) => {
     const sorted = [...sortedData];
     sorted.sort((a, b) => {
@@ -107,9 +107,9 @@ function CountyInfectedTable({ outputData }) {
                 </button>
               </th>
               <th>
-                Infected
-                <button className="sort-button" onClick={() => sortData('infected')}>
-                  {sortDirection.infected === 'asc' ? '↓' : '↑'}
+                Deceased
+                <button className="sort-button" onClick={() => sortData('deceased')}>
+                  {sortDirection.deceased === 'asc' ? '↓' : '↑'}
                 </button>
               </th>
             </tr>
@@ -118,7 +118,7 @@ function CountyInfectedTable({ outputData }) {
             {filteredData.map((county, index) => (
               <tr key={index} className={index % 2 === 0 ? 'even-row' : 'odd-row'}>
                 <td>{county.county}</td>
-                <td>{county.infected}</td>
+                <td>{county.deceased}</td>
               </tr>
             ))}
           </tbody>
@@ -128,4 +128,4 @@ function CountyInfectedTable({ outputData }) {
   );
 }
 
-export default CountyInfectedTable;
+export default CountyDeceasedTable;

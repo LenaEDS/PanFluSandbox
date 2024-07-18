@@ -11,24 +11,6 @@ import OUTPUT_7 from './OUTPUT_7.json';
 import OUTPUT_8 from './OUTPUT_8.json';
 import OUTPUT_9 from './OUTPUT_9.json';
 import OUTPUT_10 from './OUTPUT_10.json';
-import OUTPUT_11 from './OUTPUT_11.json';
-import OUTPUT_12 from './OUTPUT_12.json';
-import OUTPUT_13 from './OUTPUT_13.json';
-import OUTPUT_14 from './OUTPUT_14.json';
-import OUTPUT_15 from './OUTPUT_15.json';
-import OUTPUT_16 from './OUTPUT_16.json';
-import OUTPUT_17 from './OUTPUT_17.json';
-import OUTPUT_18 from './OUTPUT_18.json';
-import OUTPUT_19 from './OUTPUT_19.json';
-import OUTPUT_20 from './OUTPUT_20.json';
-import OUTPUT_21 from './OUTPUT_21.json';
-import OUTPUT_22 from './OUTPUT_22.json';
-import OUTPUT_23 from './OUTPUT_23.json';
-import OUTPUT_24 from './OUTPUT_24.json';
-import OUTPUT_25 from './OUTPUT_25.json';
-import OUTPUT_26 from './OUTPUT_26.json';
-import OUTPUT_27 from './OUTPUT_27.json';
-import OUTPUT_28 from './OUTPUT_28.json';
 
 const TestView = () => {
   const [currentIndex, setCurrentIndex] = useState(1); // Initialize currentIndex state
