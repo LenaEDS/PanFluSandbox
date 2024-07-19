@@ -118,7 +118,7 @@ const Disease = () => {
 
       {/* Add other input fields here */}
 
-      <button type="submit">Save Parameters</button>
+      <button type="submit">+ Add Disease</button>
     </form>
   );
 };

@@ -90,7 +90,7 @@ const AddInitialCases = ({ counties, onSubmit }) => {
         />
       </div>
 
-      <button type="submit">Add Cases</button>
+      <button type="submit">+ Add Cases</button>
     </form>
   );
 };
