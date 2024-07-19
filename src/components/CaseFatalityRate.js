@@ -83,7 +83,7 @@ const CaseFatalityRate = ({ onSubmit }) => {
         />
       </div>
 
-      <button type="submit">Submit Case Fatality Rates</button>
+      <button type="submit">+ Add Case Fatality Rate</button>
     </form>
   );
 };

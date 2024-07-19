@@ -1,5 +1,10 @@
 /* TimelineSlider.css */
 
+.timeline-slider-container {
+  width: 100%;
+  height: 50px; /* Adjust as needed */
+}
+
 .timeline-slider-wrapper {
   display: flex;
   justify-content: space-between;

@@ -21,7 +21,6 @@ import OUTPUT_10 from './OUTPUT_10.json';
 const UserGuideView = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [eventData, setEventData] = useState([]);
-  const [processedIndices, setProcessedIndices] = useState(new Set());
   const [outputFiles] = useState([
     OUTPUT_0, OUTPUT_1, OUTPUT_2, OUTPUT_3, OUTPUT_4, OUTPUT_5,
     OUTPUT_6, OUTPUT_7, OUTPUT_8, OUTPUT_9, OUTPUT_10,
@@ -56,8 +55,10 @@ const UserGuideView = () => {
   };
 
   useEffect(() => {
-    if (outputFiles[currentIndex] && !processedIndices.has(currentIndex)) {
+    if (outputFiles[currentIndex]) {
       console.log('Output Data:', outputFiles[currentIndex]);
+
+      // Calculate deceased count for the current day
       const deceasedCount = outputFiles[currentIndex].data.reduce((acc, county) => {
         const { D } = county.compartments;
         const totalDeceased = [
@@ -69,14 +70,19 @@ const UserGuideView = () => {
         return acc + totalDeceased;
       }, 0);
 
-      setEventData((prevData) => [
-        ...prevData,
-        { day: currentIndex, deceased: Math.round(deceasedCount) },
-      ]);
-
-      setProcessedIndices((prevIndices) => new Set(prevIndices).add(currentIndex));
+      // Update eventData to include only data up to the current day
+      setEventData((prevData) => {
+        const newData = [...prevData];
+        // Ensure we're only adding data for the current day and not duplicating
+        if (!newData[currentIndex]) {
+          newData[currentIndex] = { day: currentIndex, deceased: Math.round(deceasedCount) };
+        } else {
+          newData[currentIndex].deceased = Math.round(deceasedCount);
+        }
+        return newData.slice(0, currentIndex + 1); // Keep only up to currentIndex
+      });
     }
-  }, [currentIndex, outputFiles, processedIndices]);
+  }, [currentIndex, outputFiles]);
 
   useEffect(() => {
     const delay = 500; // Delay in milliseconds
@@ -94,14 +100,10 @@ const UserGuideView = () => {
       </div>
       <div className="middle-panel">
         <InitialMap outputData={outputFiles[currentIndex]} />
-        <DeceasedLineChart eventData={eventData} /> {/* Add the DeceasedLineChart below the map */}
+        <DeceasedLineChart eventData={eventData} />
       </div>
       <div className="right-panel">
-        <EventMonitorTable
-          outputFiles={outputFiles}
-          currentIndex={currentIndex}
-          highlightedIndex={currentIndex} // Pass the currentIndex as highlightedIndex
-        />
+        <EventMonitorTable outputFiles={outputFiles} currentIndex={currentIndex} />
       </div>
       <div className="bottom-panel">
         <TimelineSlider

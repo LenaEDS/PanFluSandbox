@@ -47,7 +47,7 @@ const DeceasedLineChart = ({ eventData }) => {
       y: {
         title: {
           display: true,
-          text: 'Number of Deceased',
+          text: 'Number of Deceased Individuals',
         },
         beginAtZero: true,
       },
