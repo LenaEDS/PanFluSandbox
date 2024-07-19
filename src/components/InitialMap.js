@@ -86,30 +86,56 @@ const InitialMap = ({ outputData }) => {
     if (outputData) {
       const data = parseData(outputData, texasCounties);
       setCountyData(data);
+      console.log('County data loaded:', data); // Debug log
     }
   }, [outputData]);
 
   const onEachCounty = (feature, layer) => {
-    const name = feature.properties.name;
-    const countyInfo = countyData.find(item => item.county === name);
+    const geoid = feature.properties.geoid;
+    const countyInfo = countyData.find(item => item.fips === geoid);
 
     if (countyInfo) {
-      layer.bindTooltip(`${name}: ${countyInfo.infected} infected`, {
+      const tooltipContent = `${countyInfo.county}: ${countyInfo.infected} infected`;
+      layer.bindTooltip(tooltipContent, {
         permanent: false,
         direction: 'auto',
         className: 'county-tooltip'
       });
+      layer.on('mouseover', function () {
+        this.openTooltip();
+      });
+      layer.on('mouseout', function () {
+        this.closeTooltip();
+      });
+      console.log(`Tooltip bound for ${countyInfo.county}: ${countyInfo.infected} infected`); // Debug log
     } else {
-      console.log(`No data found for county: ${name}`); // Debug log
+      const tooltipContent = `${feature.properties.name}: No data`;
+      layer.bindTooltip(tooltipContent, {
+        permanent: false,
+        direction: 'auto',
+        className: 'county-tooltip'
+      });
+      layer.on('mouseover', function () {
+        this.openTooltip();
+      });
+      layer.on('mouseout', function () {
+        this.closeTooltip();
+      });
+      console.log(`No data found for county: ${feature.properties.name}`); // Debug log
     }
   };
 
-  const geoJsonStyle = (feature) => ({
-    fillColor: getColor(countyData.find(item => item.county === feature.properties.name)?.infected || 0),
-    weight: 1,
-    color: 'white',
-    fillOpacity: 0.7
-  });
+  const geoJsonStyle = (feature) => {
+    const countyInfo = countyData.find(item => item.fips === feature.properties.geoid);
+    const infectedCount = countyInfo ? countyInfo.infected : 0;
+    console.log(`County: ${feature.properties.name}, Infected: ${infectedCount}`); // Debug log
+    return {
+      fillColor: getColor(infectedCount),
+      weight: 1,
+      color: 'white',
+      fillOpacity: 0.7
+    };
+  };
 
   return (
     <MapContainer center={[31.0, -100.0]} zoom={6} style={{ height: '500px', width: '800px' }}>
@@ -117,11 +143,13 @@ const InitialMap = ({ outputData }) => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
-      <GeoJSON
-        data={texasOutline}
-        style={geoJsonStyle}
-        onEachFeature={onEachCounty}
-      />
+      {countyData.length > 0 && (
+        <GeoJSON
+          data={texasOutline}
+          style={geoJsonStyle}
+          onEachFeature={onEachCounty}
+        />
+      )}
       <Legend />
     </MapContainer>
   );

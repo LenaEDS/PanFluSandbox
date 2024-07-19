@@ -4,6 +4,7 @@ import TimelineSlider from './TimelineSlider';
 import CountyInfectedTable from './CountyInfectedTable';
 import EventMonitorTable from './EventMonitorTable';
 import DeceasedLineChart from './DeceasedLineChart';
+import StateCountyDropdowns from './StateCountyDropdown';
 import './UserGuideView.css';
 
 import OUTPUT_0 from './OUTPUT_0.json';
@@ -17,13 +18,14 @@ import OUTPUT_7 from './OUTPUT_7.json';
 import OUTPUT_8 from './OUTPUT_8.json';
 import OUTPUT_9 from './OUTPUT_9.json';
 import OUTPUT_10 from './OUTPUT_10.json';
+import OUTPUT_11 from './OUTPUT_11.json';
 
 const UserGuideView = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [eventData, setEventData] = useState([]);
   const [outputFiles] = useState([
     OUTPUT_0, OUTPUT_1, OUTPUT_2, OUTPUT_3, OUTPUT_4, OUTPUT_5,
-    OUTPUT_6, OUTPUT_7, OUTPUT_8, OUTPUT_9, OUTPUT_10,
+    OUTPUT_6, OUTPUT_7, OUTPUT_8, OUTPUT_9, OUTPUT_10, OUTPUT_11
   ]);
   const intervalRef = useRef(null);
 
@@ -96,6 +98,7 @@ const UserGuideView = () => {
   return (
     <div className="user-guide-view">
       <div className="left-panel">
+        <StateCountyDropdowns />
         <CountyInfectedTable className="infected-table" outputData={outputFiles[currentIndex]} />
       </div>
       <div className="middle-panel">
