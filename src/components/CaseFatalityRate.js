@@ -25,62 +25,77 @@ const CaseFatalityRate = ({ onSubmit }) => {
     <form className="parameters-form" onSubmit={handleSubmit}>
       <div className="form-group">
         <label htmlFor="age0-4">0-4 years:</label>
-        <input
-          type="number"
-          id="age0-4"
-          value={caseFatalityRates['0-4 years']}
-          onChange={e => handleCaseFatalityRateChange('0-4 years', parseInt(e.target.value, 10))}
-          min="0"
-          required
-        />
+        <div className="input-group">
+          <input
+            type="number"
+            id="age0-4"
+            value={caseFatalityRates['0-4 years']}
+            onChange={e => handleCaseFatalityRateChange('0-4 years', parseInt(e.target.value, 10))}
+            min="0"
+            required
+          />
+          <span className="input-suffix">%</span>
+        </div>
       </div>
 
       <div className="form-group">
         <label htmlFor="age5-24">5-24 years:</label>
-        <input
-          type="number"
-          id="age5-24"
-          value={caseFatalityRates['5-24 years']}
-          onChange={e => handleCaseFatalityRateChange('5-24 years', parseInt(e.target.value, 10))}
-          min="0"
-          required
-        />
+        <div className="input-group">
+          <input
+            type="number"
+            id="age5-24"
+            value={caseFatalityRates['5-24 years']}
+            onChange={e => handleCaseFatalityRateChange('5-24 years', parseInt(e.target.value, 10))}
+            min="0"
+            required
+          />
+          <span className="input-suffix">%</span>
+        </div>
       </div>
 
       <div className="form-group">
         <label htmlFor="age25-49">25-49 years:</label>
-        <input
-          type="number"
-          id="age25-49"
-          value={caseFatalityRates['25-49 years']}
-          onChange={e => handleCaseFatalityRateChange('25-49 years', parseInt(e.target.value, 10))}
-          min="0"
-          required
-        />
+        <div className="input-group">
+          <input
+            type="number"
+            id="age25-49"
+            value={caseFatalityRates['25-49 years']}
+            onChange={e => handleCaseFatalityRateChange('25-49 years', parseInt(e.target.value, 10))}
+            min="0"
+            required
+          />
+          <span className="input-suffix">%</span>
+        </div>
       </div>
 
       <div className="form-group">
         <label htmlFor="age50-64">50-64 years:</label>
-        <input
-          type="number"
-          id="age50-64"
-          value={caseFatalityRates['50-64 years']}
-          onChange={e => handleCaseFatalityRateChange('50-64 years', parseInt(e.target.value, 10))}
-          min="0"
-          required
-        />
+        <div className="input-group">
+          <input
+            type="number"
+            id="age50-64"
+            value={caseFatalityRates['50-64 years']}
+            onChange={e => handleCaseFatalityRateChange('50-64 years', parseInt(e.target.value, 10))}
+            min="0"
+            required
+          />
+          <span className="input-suffix">%</span>
+        </div>
       </div>
 
       <div className="form-group">
         <label htmlFor="age65+">65+ years:</label>
-        <input
-          type="number"
-          id="age65+"
-          value={caseFatalityRates['65+ years']}
-          onChange={e => handleCaseFatalityRateChange('65+ years', parseInt(e.target.value, 10))}
-          min="0"
-          required
-        />
+        <div className="input-group">
+          <input
+            type="number"
+            id="age65+"
+            value={caseFatalityRates['65+ years']}
+            onChange={e => handleCaseFatalityRateChange('65+ years', parseInt(e.target.value, 10))}
+            min="0"
+            required
+          />
+          <span className="input-suffix">%</span>
+        </div>
       </div>
 
       <button type="submit">+ Add Case Fatality Rate</button>
