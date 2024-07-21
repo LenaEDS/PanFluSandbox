@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import Select from 'react-select';
+import './StateCountyDropdown.css'; // Import the CSS file for styling
 
 // Define the County class
 class County {
@@ -3163,33 +3165,61 @@ const StateCountyDropdowns = () => {
     const [filteredCounties, setFilteredCounties] = useState(counties.filter(county => county.state === states[0]));
     const [selectedCounty, setSelectedCounty] = useState(filteredCounties[0]?.countyName || '');
   
-    const handleStateChange = (e) => {
-      const state = e.target.value;
+    const stateOptions = states.map(state => ({ value: state, label: state }));
+    const countyOptions = filteredCounties.map(county => ({ value: county.countyName, label: county.countyName }));
+  
+    useEffect(() => {
+      if (states.length > 0) {
+        const initialState = states[0];
+        setSelectedState(initialState);
+        const newFilteredCounties = counties.filter(county => county.state === initialState);
+        setFilteredCounties(newFilteredCounties);
+        setSelectedCounty(newFilteredCounties[0]?.countyName || '');
+      }
+    }, [states, counties]);
+  
+    const handleStateChange = (selectedOption) => {
+      const state = selectedOption?.value || '';
       setSelectedState(state);
       const newFilteredCounties = counties.filter(county => county.state === state);
       setFilteredCounties(newFilteredCounties);
       setSelectedCounty(newFilteredCounties[0]?.countyName || '');
     };
   
-    const handleCountyChange = (e) => {
-      setSelectedCounty(e.target.value);
+    const handleCountyChange = (selectedOption) => {
+      setSelectedCounty(selectedOption?.value || '');
     };
   
     return (
-      <div style={{ display: 'flex', gap: '1rem' }}>
-        <select value={selectedState} onChange={handleStateChange}>
-          {states.map(state => (
-            <option key={state} value={state}>{state}</option>
-          ))}
-        </select>
-  
-        <select value={selectedCounty} onChange={handleCountyChange}>
-          {filteredCounties.map(county => (
-            <option key={county.countyName} value={county.countyName}>{county.countyName}</option>
-          ))}
-        </select>
-      </div>
-    );
-  };
+        <div className="dropdown-container">
+          <div className="dropdown">
+            <label htmlFor="state">State:</label>
+            <Select
+              id="state"
+              value={stateOptions.find(option => option.value === selectedState)}
+              onChange={handleStateChange}
+              options={stateOptions}
+              placeholder="Select a State"
+              isClearable
+              isSearchable
+            />
+          </div>
+    
+          <div className="dropdown">
+            <label htmlFor="county">County:</label>
+            <Select
+              id="county"
+              value={countyOptions.find(option => option.value === selectedCounty)}
+              onChange={handleCountyChange}
+              options={countyOptions}
+              placeholder="Select a County"
+              isClearable
+              isSearchable
+            />
+          </div>
+        </div>
+      );
+    };
+    
   
   export default StateCountyDropdowns;

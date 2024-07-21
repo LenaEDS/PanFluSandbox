@@ -97,18 +97,13 @@ const UserGuideView = () => {
 
   return (
     <div className="user-guide-view">
-      <div className="left-panel">
+      <div className="top-panel">
         <StateCountyDropdowns />
-        <CountyInfectedTable className="infected-table" outputData={outputFiles[currentIndex]} />
       </div>
       <div className="middle-panel">
         <InitialMap outputData={outputFiles[currentIndex]} />
-        <DeceasedLineChart eventData={eventData} />
       </div>
-      <div className="right-panel">
-        <EventMonitorTable outputFiles={outputFiles} currentIndex={currentIndex} />
-      </div>
-      <div className="bottom-panel">
+      <div className="timeline-panel">
         <TimelineSlider
           totalDays={outputFiles.length}
           selectedDay={currentIndex}
@@ -117,8 +112,19 @@ const UserGuideView = () => {
           onScenarioPause={handlePauseScenario}
         />
       </div>
+      <div className="chart-panel">
+        <DeceasedLineChart eventData={eventData} />
+      </div>
+      <div className="bottom-panel">
+        <CountyInfectedTable className="infected-table" outputData={outputFiles[currentIndex]} />
+      </div>
     </div>
   );
+  
+  
+  
+  
+  
 };
 
 export default UserGuideView;
