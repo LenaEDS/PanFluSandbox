@@ -56,13 +56,13 @@ const Legend = () => {
 
     legend.onAdd = function () {
       const div = L.DomUtil.create('div', 'info legend');
-      const grades = [0, 50, 100, 200, 500, 1000, 2000, 5000];
+      const grades = [5000, 2000, 1000, 500, 200, 100, 50, 0]; // Descending order
       let labels = [];
 
       for (let i = 0; i < grades.length; i++) {
         div.innerHTML +=
-          '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-          grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+          '<i style="background:' + getColor(grades[i]) + '"></i> ' +
+          (grades[i] === 5000 ? '5000+' : grades[i] + '&ndash;' + grades[i - 1]) + '<br>';
       }
 
       return div;
