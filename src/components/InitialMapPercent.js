@@ -84,7 +84,7 @@ const Legend = () => {
   return null;
 };
 
-const InitialMap = ({ outputData }) => {
+const InitialMapPercent = ({ outputData }) => {
   const [countyData, setCountyData] = useState([]);
 
   useEffect(() => {
@@ -163,4 +163,4 @@ const InitialMap = ({ outputData }) => {
   );
 };
 
-export default InitialMap;
+export default InitialMapPercent;

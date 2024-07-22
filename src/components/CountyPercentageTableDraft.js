@@ -39,8 +39,8 @@ const parseInfectionData = (jsonData, countyNameLookup) => {
     return {
       county: countyName,
       fips: fips_id,
-      infected: totalInfected,
-      deceased: totalDeceased,
+      infected: Math.round(totalInfected),
+      deceased: Math.round(totalDeceased),
     };
   });
 };
@@ -55,7 +55,7 @@ const loadPopulationData = async () => {
     header: true,
     complete: (result) => {
       result.data.forEach(row => {
-        populationData[row.FIPS] = parseInt(row.E_TOTPOP, 10);
+        populationData[row.FIPS] = row.E_TOTPOP;
       });
     },
   });
@@ -63,14 +63,14 @@ const loadPopulationData = async () => {
   return populationData;
 };
 
-function CountyPercentageTable({ outputData }) {
+function CountyPercentageTableDraft({ outputData }) {
   const [mergedData, setMergedData] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortDirection, setSortDirection] = useState({
     county: 'asc',
-    infectedPercentage: 'desc',
-    deceasedPercentage: 'desc',
     population: 'asc',
+    infected: 'desc',
+    deceased: 'desc',
   });
 
   useEffect(() => {
@@ -79,18 +79,10 @@ function CountyPercentageTable({ outputData }) {
       const parsedInfectionData = parseInfectionData(outputData, countyNameLookup);
       const populationData = await loadPopulationData();
 
-      const merged = parsedInfectionData.map(data => {
-        const population = populationData[data.fips] || 0;
-        const infectedPercentage = population > 0 ? (data.infected / population) * 100 : 0;
-        const deceasedPercentage = population > 0 ? (data.deceased / population) * 100 : 0;
-
-        return {
-          ...data,
-          population: population,
-          infectedPercentage: infectedPercentage.toFixed(2),
-          deceasedPercentage: deceasedPercentage.toFixed(2),
-        };
-      });
+      const merged = parsedInfectionData.map(data => ({
+        ...data,
+        population: populationData[data.fips] || 0,
+      }));
 
       setMergedData(merged);
     };
@@ -147,21 +139,21 @@ function CountyPercentageTable({ outputData }) {
                 </button>
               </th>
               <th>
-                Infected (%)
-                <button className="sort-button" onClick={() => sortData('infectedPercentage')}>
-                  {sortDirection.infectedPercentage === 'asc' ? '↓' : '↑'}
-                </button>
-              </th>
-              <th>
-                Deceased (%)
-                <button className="sort-button" onClick={() => sortData('deceasedPercentage')}>
-                  {sortDirection.deceasedPercentage === 'asc' ? '↓' : '↑'}
-                </button>
-              </th>
-              <th>
                 Population
                 <button className="sort-button" onClick={() => sortData('population')}>
                   {sortDirection.population === 'asc' ? '↓' : '↑'}
+                </button>
+              </th>
+              <th>
+                Infected
+                <button className="sort-button" onClick={() => sortData('infected')}>
+                  {sortDirection.infected === 'asc' ? '↓' : '↑'}
+                </button>
+              </th>
+              <th>
+                Deceased
+                <button className="sort-button" onClick={() => sortData('deceased')}>
+                  {sortDirection.deceased === 'asc' ? '↓' : '↑'}
                 </button>
               </th>
             </tr>
@@ -170,9 +162,9 @@ function CountyPercentageTable({ outputData }) {
             {filteredData.map((county, index) => (
               <tr key={index} className={index % 2 === 0 ? 'even-row' : 'odd-row'}>
                 <td>{county.county}</td>
-                <td>{county.infectedPercentage}</td>
-                <td>{county.deceasedPercentage}</td>
                 <td>{county.population}</td>
+                <td>{county.infected}</td>
+                <td>{county.deceased}</td>
               </tr>
             ))}
           </tbody>
@@ -182,4 +174,4 @@ function CountyPercentageTable({ outputData }) {
   );
 }
 
-export default CountyPercentageTable;
+export default CountyPercentageTableDraft;
