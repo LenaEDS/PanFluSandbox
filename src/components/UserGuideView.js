@@ -5,6 +5,7 @@ import CountyInfectedTable from './CountyInfectedTable';
 import EventMonitorTable from './EventMonitorTable';
 import DeceasedLineChart from './DeceasedLineChart';
 import StateCountyDropdowns from './StateCountyDropdown';
+import CountyInfectedDeceasedTable from './CountyInfectedDeceasedTable';
 import './UserGuideView.css';
 
 import OUTPUT_0 from './OUTPUT_0.json';
@@ -116,7 +117,7 @@ const UserGuideView = () => {
         <DeceasedLineChart eventData={eventData} />
       </div>
       <div className="bottom-panel">
-        <CountyInfectedTable className="infected-table" outputData={outputFiles[currentIndex]} />
+        <CountyInfectedDeceasedTable className="infected-table" outputData={outputFiles[currentIndex]} />
       </div>
     </div>
   );
