@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Header.css';
 import epiengage_logo_darkblue from './epiengage_logo_darkblue.jpg';
 import RegularView from '../../RegularView';
-import DashboardView from '../../DashboardView';
+import DashboardView from '../DashboardView';
 import GalleryView from '../GalleryView';
 import UserGuideView from '../UserGuideView';
 import ScreenshotView from '../ScreenshotView';

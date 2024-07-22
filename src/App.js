@@ -13,7 +13,6 @@ import "./index.css"
 import AddInitialCases from './components/AddInitialCases';
 import TimelineSlider from './components/TimelineSlider'; // Import the TimelineSlider component
 import Collapsible from './components/Collapsible';
-import Tabs from './Tabs';
 import InitialParametersPanel from './components/InitialParametersPanel';
 import TestInitialCases from './TestInitialCases';
 import TestParameters from './TestParameters';
