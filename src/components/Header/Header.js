@@ -6,7 +6,8 @@ import DashboardView from '../DashboardView';
 import GalleryView from '../GalleryView';
 import UserGuideView from '../UserGuideView';
 import ScreenshotView from '../ScreenshotView';
-import TestView from '../TestView';
+import MapView from '../MapView';
+
 
 const Header = ({ currentIndex, setCurrentIndex }) => {
   const [activeTab, setActiveTab] = useState('regular');
@@ -14,7 +15,7 @@ const Header = ({ currentIndex, setCurrentIndex }) => {
   const renderTabContent = () => {
     switch (activeTab) {
       case 'regular':
-        return <RegularView currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}/>;
+        return <MapView currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}/>;
       case 'dashboard':
         return <DashboardView />;
       case 'gallery':
