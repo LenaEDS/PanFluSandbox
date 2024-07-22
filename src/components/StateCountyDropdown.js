@@ -23,6 +23,8 @@ const stateCodeToName = {
   "WA": "Washington", "WI": "Wisconsin", "WV": "West Virginia", "WY": "Wyoming"
 };
 
+const states = Object.keys(stateCodeToName);
+
 const counties = [
     new County("AL","Autauga County"),
     new County("AL","Baldwin County"),
