@@ -6,6 +6,8 @@ import EventMonitorTable from './EventMonitorTable';
 import DeceasedLineChart from './DeceasedLineChart';
 import StateCountyDropdowns from './StateCountyDropdown';
 import CountyInfectedDeceasedTable from './CountyInfectedDeceasedTable';
+import CountyPopulationTable from './CountyPopulationTable';
+import CountyPercentageTable from './CountyPercentageTable';
 import './UserGuideView.css';
 
 import OUTPUT_0 from './OUTPUT_0.json';
@@ -118,6 +120,9 @@ const UserGuideView = () => {
       </div>
       <div className="bottom-panel">
         <CountyInfectedDeceasedTable className="infected-table" outputData={outputFiles[currentIndex]} />
+        <CountyPopulationTable className="population-table" outputData={outputFiles[currentIndex]} />
+        <CountyPercentageTable className="percentage-table" outputData={outputFiles[currentIndex]} />
+        <CountyInfectedTable className="infected-table" outputData={outputFiles[currentIndex]} />
       </div>
     </div>
   );

@@ -18,7 +18,7 @@ const loadCountyNames = async () => {
 // Function to parse data and calculate deceased counts
 const parseData = (jsonData, countyNameLookup) => {
   return jsonData.data.map((county) => {
-    const { node_id, compartments } = county;
+    const { fips_id, compartments } = county;
     const { D } = compartments;
     const totalDeceased = [
       ...D.U.L,
@@ -27,11 +27,11 @@ const parseData = (jsonData, countyNameLookup) => {
       ...D.V.H
     ].reduce((sum, value) => sum + value, 0);
 
-    const countyName = countyNameLookup[node_id] || 'Unknown';
+    const countyName = countyNameLookup[fips_id] || 'Unknown';
 
     return {
       county: countyName,
-      fips: node_id,
+      fips: fips_id,
       deceased: Math.round(totalDeceased),
     };
   });
