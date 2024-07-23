@@ -20,7 +20,7 @@ import OUTPUT_9 from './OUTPUT_9.json'
 import TimelineSlider from './TimelineSlider';
 
 
-const RegularView = ({ currentIndex, setCurrentIndex }) => {
+const MapView = ({ currentIndex, setCurrentIndex }) => {
   return (
     <div className="regular-view-content">
       <SetParametersDropdown counties={texasCounties} />
@@ -46,4 +46,4 @@ const RegularView = ({ currentIndex, setCurrentIndex }) => {
   );
 };
 
-export default RegularView;
+export default MapView;
