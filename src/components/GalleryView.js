@@ -5,7 +5,7 @@ import './GalleryView.css'; // Import custom CSS for styling
 const GalleryView = () => {
   return (
     <div className="galleryViewContainer">
-      <h1>------------------------------- Screenshot View --------------------------------</h1>
+      <h1>---------------------------------------------------------------------------------- Screenshot View ---------------------------------------------------------------------------</h1>
     <ExampleLayout />
     </div>
   );

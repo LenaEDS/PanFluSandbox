@@ -98,9 +98,6 @@ const ChartView = () => {
 
   return (
     <div className="user-guide-view">
-      <div className="top-panel">
-        <StateCountyDropdowns />
-      </div>
       <div className="middle-panel">
         <InitialMap outputData={outputFiles[currentIndex]} />
       </div>
@@ -118,9 +115,6 @@ const ChartView = () => {
       </div>
       <div className="bottom-panel">
         <CountyInfectedDeceasedTable className="infected-table" outputData={outputFiles[currentIndex]} />
-        <CountyPopulationTable className="population-table" outputData={outputFiles[currentIndex]} />
-        <CountyPercentageTable className="percentage-table" outputData={outputFiles[currentIndex]} />
-        <CountyInfectedTable className="infected-table" outputData={outputFiles[currentIndex]} />
       </div>
     </div>
   );

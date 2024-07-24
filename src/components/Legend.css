@@ -25,4 +25,20 @@
   .legend i:last-child {
     background: #800026; /* Adjust color for the last legend item if needed */
   }
+ 
+  /* Legend.css or any other CSS file for your map tooltips */
+.county-tooltip {
+    background-color: #fff; /* Background color of the tooltip */
+    border: 1px solid #333; /* Border color and width */
+    border-radius: 4px; /* Rounded corners */
+    padding: 5px; /* Padding inside the tooltip */
+    font-size: 12px; /* Font size for the text */
+    color: #333; /* Text color */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Shadow for a subtle 3D effect */
+  }
+  
+  .county-tooltip strong {
+    display: block; /* Makes the strong text display on a new line */
+    color: #000; /* Color for strong text */
+  }
   
