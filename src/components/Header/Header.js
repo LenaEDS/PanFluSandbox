@@ -7,17 +7,19 @@ import GalleryView from '../GalleryView';
 import UserGuideView from '../UserGuideView';
 import ScreenshotView from '../ScreenshotView';
 import MapView from '../MapView';
+import HomeView from '../HomeView';
+import ChartView from '../ChartView';
 
 
 const Header = ({ currentIndex, setCurrentIndex }) => {
-  const [activeTab, setActiveTab] = useState('regular');
+  const [activeTab, setActiveTab] = useState('home');
 
   const renderTabContent = () => {
     switch (activeTab) {
-      case 'regular':
-        return <MapView currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}/>;
-      case 'dashboard':
-        return <DashboardView />;
+      case 'home':
+        return <HomeView currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}/>;
+      case 'chart':
+        return <ChartView />;
       case 'gallery':
         return <GalleryView />;
       case 'userguide':
@@ -25,7 +27,7 @@ const Header = ({ currentIndex, setCurrentIndex }) => {
       case 'screenshot':
         return <ScreenshotView />;
       default:
-        return <RegularView currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}/>;
+        return <HomeView currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}/>;
     }
   };
 
@@ -40,16 +42,16 @@ const Header = ({ currentIndex, setCurrentIndex }) => {
         </div>
         <div className="tabs">
           <button
-            className={`tab-button ${activeTab === 'regular' ? 'active' : ''}`}
-            onClick={() => setActiveTab('regular')}
+            className={`tab-button ${activeTab === 'home' ? 'active' : ''}`}
+            onClick={() => setActiveTab('home')}
           >
-            Map View
+            Home
           </button>
           <button
-            className={`tab-button ${activeTab === 'dashboard' ? 'active' : ''}`}
-            onClick={() => setActiveTab('dashboard')}
+            className={`tab-button ${activeTab === 'chart' ? 'active' : ''}`}
+            onClick={() => setActiveTab('chart')}
           >
-            Dashboard
+            Chart View
           </button>
           <button
             className={`tab-button ${activeTab === 'gallery' ? 'active' : ''}`}
