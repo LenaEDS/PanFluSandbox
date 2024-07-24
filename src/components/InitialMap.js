@@ -44,7 +44,7 @@ const parseData = (jsonData, texasCounties) => {
     return {
       county: countyName,
       fips: fips_id,
-      infected: totalInfected
+      infected: Math.round(totalInfected) // Round the infected count
     };
   });
 };
