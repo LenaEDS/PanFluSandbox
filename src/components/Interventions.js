@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Antivirals from './components/Antivirals';
-import Vaccine from './components/Vaccine';
-import NonPharmaceutical from './components/NonPharmaceutical';
+import Antivirals from './Antivirals';
+import Vaccine from './Vaccine';
+import NonPharmaceutical from './NonPharmaceutical';
 import './Interventions.css';
 
 const Interventions = () => {

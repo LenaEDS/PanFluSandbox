@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../App.css'; // Adjust CSS as needed
-import search from './search.png'; // Assuming you have this image
+import search from './images/search.png'; // Assuming you have this image
 import { csv } from 'd3-fetch'; // Assuming you use d3-fetch for CSV parsing
 
 // Function to load county names from CSV (Example, adjust as per your actual CSV loading mechanism)

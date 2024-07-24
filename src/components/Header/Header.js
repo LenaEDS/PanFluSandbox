@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
 import './Header.css';
 import epiengage_logo_darkblue from './epiengage_logo_darkblue.jpg';
-import RegularView from '../../RegularView';
-import DashboardView from '../DashboardView';
 import GalleryView from '../GalleryView';
 import UserGuideView from '../UserGuideView';
-import ScreenshotView from '../ScreenshotView';
-import MapView from '../MapView';
 import HomeView from '../HomeView';
 import ChartView from '../ChartView';
 
@@ -24,8 +20,6 @@ const Header = ({ currentIndex, setCurrentIndex }) => {
         return <GalleryView />;
       case 'userguide':
         return <UserGuideView />;
-      case 'screenshot':
-        return <ScreenshotView />;
       default:
         return <HomeView currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}/>;
     }

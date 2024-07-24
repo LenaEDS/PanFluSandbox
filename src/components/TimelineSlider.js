@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import './TimelineSlider.css';
-import play_button from './play_button.png';
-import pause from './pause.png';
+import play_button from './images/play_button.png';
+import pause from './images/pause.png';
 
 const TimelineSlider = ({ totalDays, selectedDay, onDayChange, onScenarioRun, onScenarioPause }) => {
   const [isRunning, setIsRunning] = useState(false);

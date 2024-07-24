@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { ButtonGroup, Button } from 'react-bootstrap';
 import ILIView from './ILIView';
 import InfectedView from './InfectedView';
 import AntiviralsView from './AntiviralsView';

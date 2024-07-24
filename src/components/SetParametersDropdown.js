@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import AddInitialCases from './components/AddInitialCases';
-import CaseFatalityRate from './components/CaseFatalityRate';
-import Disease from './components/Disease';
+import AddInitialCases from './AddInitialCases';
+import CaseFatalityRate from './CaseFatalityRate';
+import Disease from './Disease';
 import './SetParametersDropdown.css';
 
 const SetParametersDropdown = ({ counties }) => {

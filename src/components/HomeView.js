@@ -10,14 +10,15 @@ import Vaccine from './Vaccine';
 import ToggleMapView from './Views/ToggleMapView';
 import ChartSettings from './ChartSettings';
 import InitialParametersPanel from './InitialParametersPanel';
-import SetParametersDropdown from '../SetParametersDropdown';
+import SetParametersDropdown from './SetParametersDropdown';
 import EventMonitor from './EventMonitor';
 import InfectedChart from './InfectedChart';
 import CountyPopulationTable from './CountyPopulationTable';
-import Interventions from '../Interventions';
+import Interventions from './Interventions';
 import ChartParameters from './ChartParameters';
 import OUTPUT_9 from './OUTPUT_9.json'
 import TimelineSlider from './TimelineSlider';
+import './HomeView.css';
 
 
 const HomeView = ({ currentIndex, setCurrentIndex }) => {
