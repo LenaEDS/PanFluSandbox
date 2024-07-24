@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { MapContainer, TileLayer, GeoJSON, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import texasOutline from './texasOutline.json';
 import './Legend.css'; // Ensure you have a CSS file for styling
 
-const getColor = (infectedCount) => {
-  return infectedCount > 5000 ? '#800026' :
-    infectedCount > 2000 ? '#BD0026' :
-      infectedCount > 1000 ? '#E31A1C' :
-        infectedCount > 500 ? '#FC4E2A' :
-          infectedCount > 200 ? '#FD8D3C' :
-            infectedCount > 100 ? '#FEB24C' :
-              infectedCount > 50 ? '#FED976' :
+const getColor = (normalizedValue) => {
+  return normalizedValue > 0.8 ? '#800026' :
+    normalizedValue > 0.6 ? '#BD0026' :
+      normalizedValue > 0.4 ? '#E31A1C' :
+        normalizedValue > 0.2 ? '#FC4E2A' :
+          normalizedValue > 0.1 ? '#FD8D3C' :
+            normalizedValue > 0.05 ? '#FEB24C' :
+              normalizedValue > 0.01 ? '#FED976' :
                 '#FFEDA0';
 };
 
@@ -29,7 +29,7 @@ const parseData = (jsonData, texasCounties) => {
     return [];
   }
 
-  return jsonData.data.map((county) => {
+  const rawData = jsonData.data.map((county) => {
     const { fips_id, compartments } = county;
     const { I } = compartments;
     const totalInfected = [
@@ -47,6 +47,22 @@ const parseData = (jsonData, texasCounties) => {
       infected: totalInfected
     };
   });
+
+  // Calculate min and max infected counts
+  const infectedCounts = rawData.map(data => data.infected);
+  const minInfected = Math.min(...infectedCounts);
+  const maxInfected = Math.max(...infectedCounts);
+
+  // Normalize the infected counts
+  const normalizedData = rawData.map(data => {
+    const normalizedInfected = maxInfected === minInfected ? 0 : (data.infected - minInfected) / (maxInfected - minInfected);
+    return {
+      ...data,
+      normalizedInfected: normalizedInfected
+    };
+  });
+
+  return normalizedData;
 };
 
 const Legend = () => {
@@ -57,7 +73,7 @@ const Legend = () => {
 
     legend.onAdd = function () {
       const div = L.DomUtil.create('div', 'info legend');
-      const grades = [5000, 2000, 1000, 500, 200, 100, 50, 0];
+      const grades = [0.8, 0.6, 0.4, 0.2, 0.1, 0.05, 0.01, 0];
       let labels = [];
 
       for (let i = 0; i < grades.length; i++) {
@@ -65,12 +81,12 @@ const Legend = () => {
         const nextGrade = grades[i - 1];
         labels.push(
           `<i style="background:${getColor(grade)}"></i> ${
-            grade === 5000 ? '5000+' : `${grade}&ndash;${nextGrade || 0}`
+            grade === 0.8 ? '80%+' : `${(grade * 100).toFixed(0)}%&ndash;${(nextGrade * 100).toFixed(0) || 0}%`
           }`
         );
       }
 
-      div.innerHTML = `<strong>Infected Count</strong><br>${labels.join('<br>')}`;
+      div.innerHTML = `<strong>Normalized Infected (%)</strong><br>${labels.join('<br>')}`;
       return div;
     };
 
@@ -86,12 +102,14 @@ const Legend = () => {
 
 const InitialMapPercent = ({ outputData }) => {
   const [countyData, setCountyData] = useState([]);
+  const previousDataRef = useRef(null);
 
   useEffect(() => {
     const texasCounties = parseTexasOutline(texasOutline);
-    if (outputData) {
+    if (outputData && outputData !== previousDataRef.current) {
       const data = parseData(outputData, texasCounties);
       setCountyData(data);
+      previousDataRef.current = outputData;
       console.log('County data loaded:', data); // Debug log
     }
   }, [outputData]);
@@ -101,7 +119,7 @@ const InitialMapPercent = ({ outputData }) => {
     const countyInfo = countyData.find(item => item.fips === geoid);
 
     if (countyInfo) {
-      const tooltipContent = `${countyInfo.county}: ${countyInfo.infected} infected`;
+      const tooltipContent = `${countyInfo.county}: ${countyInfo.infected} infected (${(countyInfo.normalizedInfected * 100).toFixed(2)}%)`;
       layer.bindTooltip(tooltipContent, {
         permanent: false,
         direction: 'auto',
@@ -133,10 +151,10 @@ const InitialMapPercent = ({ outputData }) => {
 
   const geoJsonStyle = (feature) => {
     const countyInfo = countyData.find(item => item.fips === feature.properties.geoid);
-    const infectedCount = countyInfo ? countyInfo.infected : 0;
-    console.log(`County: ${feature.properties.name}, Infected: ${infectedCount}`); // Debug log
+    const normalizedInfected = countyInfo ? countyInfo.normalizedInfected : 0;
+    console.log(`County: ${feature.properties.name}, Normalized Infected: ${normalizedInfected}`); // Debug log
     return {
-      fillColor: getColor(infectedCount),
+      fillColor: getColor(normalizedInfected),
       weight: 1,
       color: 'white',
       fillOpacity: 0.7

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import texasOutline from './texasOutline.json';
 import Papa from 'papaparse';
+import DeceasedLineChart from './DeceasedLineChart';
 import '../App.css'; // Import the CSS file
 
 function EventMonitor() {

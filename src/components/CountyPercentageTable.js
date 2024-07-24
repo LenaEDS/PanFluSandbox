@@ -71,6 +71,7 @@ function CountyPercentageTable({ outputData }) {
     infectedPercentage: 'desc',
     deceasedPercentage: 'desc',
     population: 'asc',
+    normalizedInfectedPercentage: 'asc', // Add sort direction for normalized percentage
   });
 
   useEffect(() => {
@@ -87,12 +88,27 @@ function CountyPercentageTable({ outputData }) {
         return {
           ...data,
           population: population,
-          infectedPercentage: infectedPercentage.toFixed(2),
+          infectedPercentage: infectedPercentage,
           deceasedPercentage: deceasedPercentage.toFixed(2),
         };
       });
 
-      setMergedData(merged);
+      // Calculate min and max infected percentages
+      const infectedPercentages = merged.map(data => data.infectedPercentage);
+      const minInfected = Math.min(...infectedPercentages);
+      const maxInfected = Math.max(...infectedPercentages);
+
+      // Normalize the infected percentages
+      const normalizedData = merged.map(data => {
+        const normalizedInfectedPercentage = (data.infectedPercentage - minInfected) / (maxInfected - minInfected);
+        return {
+          ...data,
+          infectedPercentage: data.infectedPercentage.toFixed(2),
+          normalizedInfectedPercentage: normalizedInfectedPercentage.toFixed(2),
+        };
+      });
+
+      setMergedData(normalizedData);
     };
 
     fetchData();
@@ -102,8 +118,8 @@ function CountyPercentageTable({ outputData }) {
   const sortData = (key) => {
     const sorted = [...mergedData];
     sorted.sort((a, b) => {
-      const valueA = a[key];
-      const valueB = b[key];
+      const valueA = parseFloat(a[key]);
+      const valueB = parseFloat(b[key]);
       if (valueA < valueB) {
         return sortDirection[key] === 'asc' ? -1 : 1;
       }
@@ -153,6 +169,12 @@ function CountyPercentageTable({ outputData }) {
                 </button>
               </th>
               <th>
+                Normalized Infected (%)
+                <button className="sort-button" onClick={() => sortData('normalizedInfectedPercentage')}>
+                  {sortDirection.normalizedInfectedPercentage === 'asc' ? '↓' : '↑'}
+                </button>
+              </th>
+              <th>
                 Deceased (%)
                 <button className="sort-button" onClick={() => sortData('deceasedPercentage')}>
                   {sortDirection.deceasedPercentage === 'asc' ? '↓' : '↑'}
@@ -171,6 +193,7 @@ function CountyPercentageTable({ outputData }) {
               <tr key={index} className={index % 2 === 0 ? 'even-row' : 'odd-row'}>
                 <td>{county.county}</td>
                 <td>{county.infectedPercentage}</td>
+                <td>{county.normalizedInfectedPercentage}</td>
                 <td>{county.deceasedPercentage}</td>
                 <td>{county.population}</td>
               </tr>
