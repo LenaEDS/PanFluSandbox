@@ -12,6 +12,7 @@ class County {
 
 // Sample data for states and counties
 const stateCodeToName = {
+  "ALL": "All States",
   "AK": "Alaska", "AL": "Alabama", "AR": "Arkansas", "AZ": "Arizona", "CA": "California", "CO": "Colorado",
   "CT": "Connecticut", "DE": "Delaware", "FL": "Florida", "GA": "Georgia", "HI": "Hawaii", "IA": "Iowa",
   "ID": "Idaho", "IL": "Illinois", "IN": "Indiana", "KS": "Kansas", "KY": "Kentucky", "LA": "Louisiana",
@@ -3170,7 +3171,7 @@ const counties = [
     new County("WY","Weston County")
 ];
 
-const StateCountyDropdowns = () => {
+const StateCountyDropdown = () => {
   // Default to Texas
   const defaultState = "TX";
   const defaultCounty = "Harris County"; // Replace with a default county for Texas if needed
@@ -3178,55 +3179,45 @@ const StateCountyDropdowns = () => {
   const [selectedState, setSelectedState] = useState(defaultState);
   const [filteredCounties, setFilteredCounties] = useState(counties.filter(county => county.state === defaultState));
   const [selectedCounty, setSelectedCounty] = useState(defaultCounty);
+  const [countyOptions, setCountyOptions] = useState(filteredCounties.map(county => ({ value: county.countyName, label: county.countyName })));
 
-  const stateOptions = states.map(state => ({ value: state, label: stateCodeToName[state] }));
-  const countyOptions = filteredCounties.map(county => ({ value: county.countyName, label: county.countyName }));
+  const stateOptions = Object.keys(stateCodeToName).map(stateCode => ({
+    value: stateCode,
+    label: stateCodeToName[stateCode]
+  }));
 
   useEffect(() => {
-    // Filter counties based on the selected state
-    const newFilteredCounties = counties.filter(county => county.state === selectedState);
-    setFilteredCounties(newFilteredCounties);
-    setSelectedCounty(newFilteredCounties[0]?.countyName || '');
+    if (selectedState === "ALL") {
+      // If "All States" is selected, show all counties
+      setCountyOptions(counties.map(county => ({
+        value: county.countyName,
+        label: `${county.countyName}, ${stateCodeToName[county.state]}`
+      })));
+    } else if (selectedState) {
+      setCountyOptions(counties.filter(county => county.state === selectedState).map(county => ({
+        value: county.countyName,
+        label: county.countyName
+      })));
+    } else {
+      setCountyOptions([]);
+    }
   }, [selectedState]);
 
-  const handleStateChange = (selectedOption) => {
-    const state = selectedOption?.value || '';
-    setSelectedState(state);
-  };
-
-  const handleCountyChange = (selectedOption) => {
-    setSelectedCounty(selectedOption?.value || '');
-  };
-
   return (
-    <div className="dropdown-container">
-      <div className="dropdown">
-        <label htmlFor="state">State:</label>
-        <Select
-          id="state"
-          value={stateOptions.find(option => option.value === selectedState)}
-          onChange={handleStateChange}
-          options={stateOptions}
-          placeholder="Select a State"
-          isClearable
-          isSearchable
-        />
-      </div>
-
-      <div className="dropdown">
-        <label htmlFor="county">County:</label>
-        <Select
-          id="county"
-          value={countyOptions.find(option => option.value === selectedCounty)}
-          onChange={handleCountyChange}
-          options={countyOptions}
-          placeholder="Select a County"
-          isClearable
-          isSearchable
-        />
-      </div>
+    <div className="state-county-dropdown">
+      <Select
+        options={stateOptions}
+        onChange={option => setSelectedState(option.value)}
+        placeholder="Select a state"
+      />
+      
+      <Select
+        options={countyOptions}
+        placeholder="Select a county"
+        isDisabled={!selectedState || selectedState === "ALL"}
+      />
     </div>
   );
 };
 
-export default StateCountyDropdowns;
+export default StateCountyDropdown;
