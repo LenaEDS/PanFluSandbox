@@ -63,15 +63,15 @@ const loadPopulationData = async () => {
   return populationData;
 };
 
-function CountyPercentageTable({ outputData }) {
+function CountyPercentageTable({ outputData, onNormalizedInfectedUpdate }) {
   const [mergedData, setMergedData] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortDirection, setSortDirection] = useState({
     county: 'asc',
     infectedPercentage: 'desc',
+    normalizedInfectedPercentage: 'asc',
     deceasedPercentage: 'desc',
     population: 'asc',
-    normalizedInfectedPercentage: 'asc', // Add sort direction for normalized percentage
   });
 
   useEffect(() => {
@@ -88,31 +88,35 @@ function CountyPercentageTable({ outputData }) {
         return {
           ...data,
           population: population,
-          infectedPercentage: infectedPercentage,
+          infectedPercentage: infectedPercentage.toFixed(2),
           deceasedPercentage: deceasedPercentage.toFixed(2),
         };
       });
 
-      // Calculate min and max infected percentages
-      const infectedPercentages = merged.map(data => data.infectedPercentage);
-      const minInfected = Math.min(...infectedPercentages);
-      const maxInfected = Math.max(...infectedPercentages);
+      // Calculate min and max infected counts
+      const infectedCounts = merged.map(data => data.infected);
+      const minInfected = Math.min(...infectedCounts);
+      const maxInfected = Math.max(...infectedCounts);
 
-      // Normalize the infected percentages
+      // Normalize the infected counts
       const normalizedData = merged.map(data => {
-        const normalizedInfectedPercentage = (data.infectedPercentage - minInfected) / (maxInfected - minInfected);
+        const normalizedInfectedPercentage = (data.infected - minInfected) / (maxInfected - minInfected) * 100;
         return {
           ...data,
-          infectedPercentage: data.infectedPercentage.toFixed(2),
           normalizedInfectedPercentage: normalizedInfectedPercentage.toFixed(2),
         };
       });
 
       setMergedData(normalizedData);
+
+      // Notify parent component about updated normalized data
+      if (onNormalizedInfectedUpdate) {
+        onNormalizedInfectedUpdate(normalizedData);
+      }
     };
 
     fetchData();
-  }, [outputData]);
+  }, [outputData, onNormalizedInfectedUpdate]);
 
   // Function to handle sorting
   const sortData = (key) => {

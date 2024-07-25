@@ -5,6 +5,7 @@ import 'leaflet/dist/leaflet.css';
 import texasOutline from './texasOutline.json';
 import './Legend.css'; // Ensure you have a CSS file for styling
 
+// Color mapping function
 const getColor = (normalizedValue) => {
   return normalizedValue > 0.8 ? '#800026' :
     normalizedValue > 0.6 ? '#BD0026' :
@@ -16,6 +17,7 @@ const getColor = (normalizedValue) => {
                 '#FFEDA0';
 };
 
+// Parsing Texas outline data
 const parseTexasOutline = (texasOutline) => {
   return texasOutline.features.map((feature) => ({
     name: feature.properties.name,
@@ -23,6 +25,7 @@ const parseTexasOutline = (texasOutline) => {
   }));
 };
 
+// Parsing and normalizing data
 const parseData = (jsonData, texasCounties) => {
   if (!jsonData || !jsonData.data) {
     console.error('No data or invalid data format:', jsonData);
