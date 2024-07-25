@@ -1,9 +1,12 @@
+import texasCounties from './counties';
 import React, { useState, useEffect, useRef } from 'react';
 import InitialMap from './InitialMap';
 import TimelineSlider from './TimelineSlider';
 import DeceasedLineChart from './DeceasedLineChart';
 import CountyInfectedDeceasedTable from './CountyInfectedDeceasedTable';
-import './UserGuideView.css';
+import SetParametersDropdown from './SetParametersDropdown'; // Assuming this is your component
+import Interventions from './Interventions'; // Assuming this is your component
+import './ChartView.css';
 
 import OUTPUT_0 from './OUTPUT_0.json';
 import OUTPUT_1 from './OUTPUT_1.json';
@@ -26,7 +29,7 @@ const ChartView = () => {
   const intervalRef = useRef(null);
 
   const handleDayChange = (index) => {
-    setCurrentIndex(index); // Update currentIndex immediately
+    setCurrentIndex(index);
   };
 
   const handleRunScenario = () => {
@@ -77,24 +80,38 @@ const ChartView = () => {
   }, [currentIndex, outputFiles]);
 
   return (
-    <div className="user-guide-view">
-      <div className="middle-panel">
-        <InitialMap outputData={outputFiles[currentIndex]} />
+    <div className="chart-view-container">
+      <div className="left-panel">
+        <SetParametersDropdown counties={texasCounties} />
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <Interventions />
       </div>
-      <div className="timeline-panel">
-        <TimelineSlider
-          totalDays={outputFiles.length}
-          selectedDay={currentIndex}
-          onDayChange={handleDayChange}
-          onScenarioRun={handleRunScenario}
-          onScenarioPause={handlePauseScenario}
-        />
-      </div>
-      <div className="chart-panel">
-        <DeceasedLineChart eventData={eventData} />
-      </div>
-      <div className="bottom-panel">
-        <CountyInfectedDeceasedTable className="infected-table" outputData={outputFiles[currentIndex]} />
+      <div className="main-panel">
+        <div className="map-section">
+          <InitialMap outputData={outputFiles[currentIndex]} />
+        </div>
+        <div className="timeline-section">
+          <TimelineSlider
+            totalDays={outputFiles.length}
+            selectedDay={currentIndex}
+            onDayChange={handleDayChange}
+            onScenarioRun={handleRunScenario}
+            onScenarioPause={handlePauseScenario}
+          />
+        </div>
+        <div className="chart-section">
+          <DeceasedLineChart eventData={eventData} />
+        </div>
+        <div className="table-section">
+          <CountyInfectedDeceasedTable className="infected-table" outputData={outputFiles[currentIndex]} />
+        </div>
       </div>
     </div>
   );

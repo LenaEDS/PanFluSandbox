@@ -1,45 +1,59 @@
-.user-guide-view {
-    display: flex;
-    height: 100vh; /* Adjust the height as needed */
-    padding: 10px;
-  }
-  
-  .section-1 {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-right: 1px solid #ccc;
-    padding: 10px;
-  }
-  
-  .section-2 {
-    flex: 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-right: 1px solid #ccc;
-    padding: 10px;
-  }
-  
-  .section-3 {
-    flex: 3;
-    display: flex;
+.chart-view-container {
+  display: flex;
+  height: 100vh; /* Full viewport height */
+  overflow: hidden; /* Prevent scrolling on the container */
+}
+
+.left-panel {
+  width: 300px; /* Width of the left panel */
+  background-color: #fff; /* Background color */
+  padding: 10px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  position: fixed; /* Fixes the panel to the left side */
+  top: 112px; /* Adjust this value slightly if needed */
+  left: 0;
+  height: calc(100% - 80px); /* Adjust to fit the remaining height of the viewport */
+  overflow-y: auto; /* Scroll if content overflows */
+  z-index: 1000; /* Ensure it is on top */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Align items to the top */
+}
+
+.main-panel {
+  margin-left: 300px; /* Offset to accommodate the left panel */
+  flex: 1; /* Take up remaining space */
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  height: 100%;
+  overflow-y: auto; /* Scroll if content overflows */
+}
+
+.map-section, .timeline-section, .chart-section, .table-section {
+  margin-bottom: 20px; /* Spacing between sections */
+}
+
+.map-section {
+  height: 500px; /* Ensure this height matches the top margin of the left panel */
+  margin-bottom: 20px; /* Spacing below the map */
+}
+
+/* Adjust the height for smaller screens */
+@media (max-width: 768px) {
+  .chart-view-container {
     flex-direction: column;
-    padding: 10px;
   }
-  
-  .map-panel {
-    flex: 1;
-    margin-bottom: 10px;
+
+  .left-panel {
+    width: 100%;
+    position: relative; /* Adjust for smaller screens */
+    margin-bottom: 20px;
+    top: 0; /* Reset for mobile view */
+    height: auto; /* Auto height for mobile view */
   }
-  
-  .timeline-panel {
-    flex: 1;
-    margin-bottom: 10px;
+
+  .main-panel {
+    margin-left: 0;
   }
-  
-  .chart-panel {
-    flex: 1;
-  }
-  
+}

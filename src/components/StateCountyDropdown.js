@@ -3208,12 +3208,12 @@ const StateCountyDropdown = () => {
       <Select
         options={stateOptions}
         onChange={option => setSelectedState(option.value)}
-        placeholder="Select a state"
+        placeholder="Select State"
       />
       
       <Select
         options={countyOptions}
-        placeholder="Select a county"
+        placeholder="Select County"
         isDisabled={!selectedState || selectedState === "ALL"}
       />
     </div>

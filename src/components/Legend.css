@@ -1,22 +1,25 @@
 /* Legend.css */
 .info.legend {
-    background-color: white;
-    line-height: 1.5;
-    padding: 6px 8px;
-    font-size: 12px;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0,0,0,0.3);
-  }
-  
-  .info.legend i {
-    width: 20px;
-    height: 20px;
-    display: inline-block;
-    border-radius: 4px;
-    margin-right: 5px;
-  }
-  
-  .info.legend span {
-    margin-left: 5px;
-  }
-  
+  background-color: white;
+  line-height: 1.5;
+  padding: 6px 8px;
+  font-size: 12px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+  position: absolute; /* Ensure it's positioned correctly */
+  bottom: 10px; /* Adjust as needed to move it from the bottom */
+  right: 10px; /* Adjust as needed to move it from the right */
+  z-index: 999; /* Ensure it's below the modal, but above other content if needed */
+}
+
+.info.legend i {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  border-radius: 4px;
+  margin-right: 5px;
+}
+
+.info.legend span {
+  margin-left: 5px;
+}
