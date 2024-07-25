@@ -1,13 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import InitialMap from './InitialMap';
 import TimelineSlider from './TimelineSlider';
-import CountyInfectedTable from './CountyInfectedTable';
-import EventMonitorTable from './EventMonitorTable';
 import DeceasedLineChart from './DeceasedLineChart';
-import StateCountyDropdowns from './StateCountyDropdown';
 import CountyInfectedDeceasedTable from './CountyInfectedDeceasedTable';
-import CountyPopulationTable from './CountyPopulationTable';
-import CountyPercentageTable from './CountyPercentageTable';
 import './UserGuideView.css';
 
 import OUTPUT_0 from './OUTPUT_0.json';
@@ -31,8 +26,7 @@ const ChartView = () => {
   const intervalRef = useRef(null);
 
   const handleDayChange = (index) => {
-    console.log(`Day changed to: ${index}`);
-    setCurrentIndex(index);
+    setCurrentIndex(index); // Update currentIndex immediately
   };
 
   const handleRunScenario = () => {
@@ -59,9 +53,6 @@ const ChartView = () => {
 
   useEffect(() => {
     if (outputFiles[currentIndex]) {
-      console.log('Output Data:', outputFiles[currentIndex]);
-
-      // Calculate deceased count for the current day
       const deceasedCount = outputFiles[currentIndex].data.reduce((acc, county) => {
         const { D } = county.compartments;
         const totalDeceased = [
@@ -73,28 +64,17 @@ const ChartView = () => {
         return acc + totalDeceased;
       }, 0);
 
-      // Update eventData to include only data up to the current day
       setEventData((prevData) => {
         const newData = [...prevData];
-        // Ensure we're only adding data for the current day and not duplicating
         if (!newData[currentIndex]) {
           newData[currentIndex] = { day: currentIndex, deceased: Math.round(deceasedCount) };
         } else {
           newData[currentIndex].deceased = Math.round(deceasedCount);
         }
-        return newData.slice(0, currentIndex + 1); // Keep only up to currentIndex
+        return newData.slice(0, currentIndex + 1);
       });
     }
   }, [currentIndex, outputFiles]);
-
-  useEffect(() => {
-    const delay = 500; // Delay in milliseconds
-    const timer = setTimeout(() => {
-      console.log('Data processed for day:', currentIndex);
-    }, delay);
-
-    return () => clearTimeout(timer);
-  }, [currentIndex]);
 
   return (
     <div className="user-guide-view">
@@ -114,11 +94,10 @@ const ChartView = () => {
         <DeceasedLineChart eventData={eventData} />
       </div>
       <div className="bottom-panel">
-        <CountyInfectedDeceasedTable className="infected-table" outputData={outputFiles[currentIndex]} />
+        <CountyInfectedDeceasedTable outputData={outputFiles[currentIndex]} />
       </div>
     </div>
   );
-  
 };
 
 export default ChartView;

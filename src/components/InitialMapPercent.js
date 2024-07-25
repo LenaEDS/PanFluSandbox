@@ -44,7 +44,7 @@ const parseData = (jsonData, texasCounties) => {
     return {
       county: countyName,
       fips: fips_id,
-      infected: totalInfected
+      infected: Math.ceil(totalInfected) // Round up the infected count
     };
   });
 
@@ -102,14 +102,13 @@ const Legend = () => {
 
 const InitialMapPercent = ({ outputData }) => {
   const [countyData, setCountyData] = useState([]);
-  const previousDataRef = useRef(null);
+  const mapRef = useRef();
 
   useEffect(() => {
     const texasCounties = parseTexasOutline(texasOutline);
-    if (outputData && outputData !== previousDataRef.current) {
+    if (outputData) {
       const data = parseData(outputData, texasCounties);
       setCountyData(data);
-      previousDataRef.current = outputData;
       console.log('County data loaded:', data); // Debug log
     }
   }, [outputData]);
@@ -125,13 +124,6 @@ const InitialMapPercent = ({ outputData }) => {
         direction: 'auto',
         className: 'county-tooltip'
       });
-      layer.on('mouseover', function () {
-        this.openTooltip();
-      });
-      layer.on('mouseout', function () {
-        this.closeTooltip();
-      });
-      console.log(`Tooltip bound for ${countyInfo.county}: ${countyInfo.infected} infected`); // Debug log
     } else {
       const tooltipContent = `${feature.properties.name}: No data`;
       layer.bindTooltip(tooltipContent, {
@@ -139,14 +131,13 @@ const InitialMapPercent = ({ outputData }) => {
         direction: 'auto',
         className: 'county-tooltip'
       });
-      layer.on('mouseover', function () {
-        this.openTooltip();
-      });
-      layer.on('mouseout', function () {
-        this.closeTooltip();
-      });
-      console.log(`No data found for county: ${feature.properties.name}`); // Debug log
     }
+    layer.on('mouseover', function () {
+      this.openTooltip();
+    });
+    layer.on('mouseout', function () {
+      this.closeTooltip();
+    });
   };
 
   const geoJsonStyle = (feature) => {
@@ -161,15 +152,33 @@ const InitialMapPercent = ({ outputData }) => {
     };
   };
 
+  // Clean up layers on outputData change
+  useEffect(() => {
+    if (mapRef.current) {
+      mapRef.current.eachLayer(layer => {
+        if (layer instanceof L.GeoJSON) {
+          layer.clearLayers();
+        }
+      });
+    }
+  }, [outputData]);
+
   return (
     <div>
-      <MapContainer id="map" center={[31.0, -100.0]} zoom={6} style={{ height: '500px', width: '800px' }}>
+      <MapContainer
+        id="map"
+        center={[31.0, -100.0]}
+        zoom={6}
+        style={{ height: '500px', width: '800px' }}
+        whenCreated={mapInstance => { mapRef.current = mapInstance; }}
+      >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
         {countyData.length > 0 && (
           <GeoJSON
+            key={JSON.stringify(outputData)}
             data={texasOutline}
             style={geoJsonStyle}
             onEachFeature={onEachCounty}

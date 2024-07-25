@@ -1,25 +1,25 @@
-/* GalleryView.css */
-html, body, #root {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .galleryViewContainer {
-    width: 100%;
-    height: 100vh;
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    display: flex;
+.galleryViewContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Space between rows */
+}
+
+.galleryRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px; /* Space between columns */
+}
+
+.mapColumn, .percentColumn, .tableColumn {
+  flex: 1;
+}
+
+@media (max-width: 1200px) {
+  .galleryRow {
     flex-direction: column;
   }
-  
-  h1 {
-    margin: 0;
-    padding: 20px;
-    text-align: center;
-    color: white;
+
+  .galleryRow > div {
+    margin-bottom: 20px;
   }
-  
+}
