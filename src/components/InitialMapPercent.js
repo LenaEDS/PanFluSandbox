@@ -1,3 +1,4 @@
+// InitialMapPercent Component
 import React, { useEffect, useState, useRef } from 'react';
 import { MapContainer, TileLayer, GeoJSON, useMap } from 'react-leaflet';
 import L from 'leaflet';
@@ -68,23 +69,24 @@ const parseData = (jsonData, texasCounties) => {
   return normalizedData;
 };
 
+// Legend component
 const Legend = () => {
   const map = useMap();
 
   useEffect(() => {
-    const legend = L.control({ position: 'bottomright' });
+    const legend = L.control({ position: 'bottomleft' });
 
     legend.onAdd = function () {
       const div = L.DomUtil.create('div', 'info legend');
       const grades = [0.8, 0.6, 0.4, 0.2, 0.1, 0.05, 0.01, 0];
-      let labels = [];
+      const labels = [];
 
       for (let i = 0; i < grades.length; i++) {
         const grade = grades[i];
         const nextGrade = grades[i - 1];
         labels.push(
           `<i style="background:${getColor(grade)}"></i> ${
-            grade === 0.8 ? '80%+' : `${(grade * 100).toFixed(0)}%&ndash;${(nextGrade * 100).toFixed(0) || 0}%`
+            grade === 0.8 ? '80+%' : `${(grade * 100).toFixed(0)} - ${nextGrade ? (nextGrade * 100).toFixed(0) : '0'}%`
           }`
         );
       }

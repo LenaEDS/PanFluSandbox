@@ -53,24 +53,33 @@ const Legend = () => {
   const map = useMap();
 
   useEffect(() => {
-    const legend = L.control({ position: 'bottomright' });
+    const legend = L.control({ position: 'bottomleft' });
 
     legend.onAdd = function () {
       const div = L.DomUtil.create('div', 'info legend');
       const grades = [5000, 2000, 1000, 500, 200, 100, 50, 0];
-      let labels = [];
+      const labels = [];
 
-      for (let i = 0; i < grades.length; i++) {
+      for (let i = 0; i < grades.length - 1; i++) {
         const grade = grades[i];
-        const nextGrade = grades[i - 1];
+        const nextGrade = grades[i + 1];
         labels.push(
-          `<i style="background:${getColor(grade)}"></i> ${
-            grade === 5000 ? '5000+' : `${grade}&ndash;${nextGrade || 0}`
-          }`
+          `<div class="legend-item">
+            <i style="background:${getColor(grade)}"></i>
+            <span>${grade} &ndash; ${nextGrade}</span>
+          </div>`
         );
       }
+      // Add the last range separately
+      const lastGrade = grades[grades.length - 1];
+      labels.push(
+        `<div class="legend-item">
+          <i style="background:${getColor(lastGrade)}"></i>
+          <span>${lastGrade}+</span>
+        </div>`
+      );
 
-      div.innerHTML = `<strong>Infected Count</strong><br>${labels.join('<br>')}`;
+      div.innerHTML = `<strong>Infected Count</strong><br>${labels.join('')}`;
       return div;
     };
 

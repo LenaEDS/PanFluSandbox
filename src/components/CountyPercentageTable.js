@@ -63,7 +63,7 @@ const loadPopulationData = async () => {
   return populationData;
 };
 
-function CountyPercentageTable({ outputData, onNormalizedInfectedUpdate }) {
+function CountyPercentageTable({ outputData }) {
   const [mergedData, setMergedData] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortDirection, setSortDirection] = useState({
@@ -93,7 +93,7 @@ function CountyPercentageTable({ outputData, onNormalizedInfectedUpdate }) {
         };
       });
 
-      // Calculate min and max infected counts
+      // Calculate min and max infected counts for normalization
       const infectedCounts = merged.map(data => data.infected);
       const minInfected = Math.min(...infectedCounts);
       const maxInfected = Math.max(...infectedCounts);
@@ -108,15 +108,10 @@ function CountyPercentageTable({ outputData, onNormalizedInfectedUpdate }) {
       });
 
       setMergedData(normalizedData);
-
-      // Notify parent component about updated normalized data
-      if (onNormalizedInfectedUpdate) {
-        onNormalizedInfectedUpdate(normalizedData);
-      }
     };
 
     fetchData();
-  }, [outputData, onNormalizedInfectedUpdate]);
+  }, [outputData]);
 
   // Function to handle sorting
   const sortData = (key) => {

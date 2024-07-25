@@ -94,7 +94,7 @@ const ChartView = () => {
         <DeceasedLineChart eventData={eventData} />
       </div>
       <div className="bottom-panel">
-        <CountyInfectedDeceasedTable outputData={outputFiles[currentIndex]} />
+        <CountyInfectedDeceasedTable className="infected-table" outputData={outputFiles[currentIndex]} />
       </div>
     </div>
   );
