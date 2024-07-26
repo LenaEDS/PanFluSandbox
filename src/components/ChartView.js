@@ -113,8 +113,6 @@ const ChartView = () => {
         </div>
         <div className="chart-section">
           <DeceasedLineChart eventData={eventData} />
-        </div>
-        <div className="table-section">
           <CountyInfectedDeceasedTable className="infected-table" outputData={outputFiles[currentIndex]} />
         </div>
       </div>

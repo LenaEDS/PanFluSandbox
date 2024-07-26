@@ -1,56 +1,18 @@
-
-/* ChartView.css */
-.chart-view-container .map-section {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+.chart-view-container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh; /* Full viewport height */
 }
-
-.chart-view-container .map-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.chart-view-container .map-container .previous-map {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 1;
-  transition: opacity 0.5s ease-in-out;
-}
-
-.chart-view-container .map-container .current-map {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 1;
-  transition: opacity 0.5s ease-in-out;
-}
-
-.chart-view-container .map-container.transitioning .previous-map {
-  opacity: 0;
-}
-
-.chart-view-container .map-container.transitioning .current-map {
-  opacity: 1;
-}
-
 
 .left-panel {
-  width: 300px; /* Width of the left panel */
+  width: 300px; /* Fixed width for the left panel */
   background-color: #fff; /* Background color */
   padding: 10px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   position: fixed; /* Fixes the panel to the left side */
   top: 112px; /* Adjust this value slightly if needed */
   left: 0;
-  height: calc(100% - 80px); /* Adjust to fit the remaining height of the viewport */
+  height: calc(100% - 112px); /* Full height minus top margin */
   overflow-y: auto; /* Scroll if content overflows */
   z-index: 1000; /* Ensure it is on top */
   display: flex;
@@ -64,17 +26,30 @@
   display: flex;
   flex-direction: column;
   padding: 10px;
-  height: 100%;
-  overflow-y: auto; /* Scroll if content overflows */
+  height: 100vh; /* Full viewport height */
+  overflow-y: hidden; /* Prevent scrollbars in the main panel */
 }
 
 .map-section, .timeline-section, .chart-section, .table-section {
-  margin-bottom: 20px; /* Spacing between sections */
+  margin: 0; /* Remove margin between sections */
+  padding: 0; /* Remove padding if any */
 }
 
 .map-section {
-  height: 500px; /* Ensure this height matches the top margin of the left panel */
-  margin-bottom: 20px; /* Spacing below the map */
+  height: 40%; /* Adjust height to fit the viewport */
+}
+
+.timeline-section {
+  height: 10%; /* Smaller height for timeline slider */
+}
+
+.chart-section {
+  height: 30%; /* Adjust height to fit the viewport */
+  margin-bottom: 0; /* Ensure no gap below the chart */
+}
+
+.table-section {
+  height: 20%; /* Remaining space for the table */
 }
 
 /* Adjust the height for smaller screens */
@@ -93,5 +68,11 @@
 
   .main-panel {
     margin-left: 0;
+    flex: 1;
+    overflow-y: auto; /* Allow scrolling if necessary */
+  }
+
+  .map-section, .timeline-section, .chart-section, .table-section {
+    height: auto; /* Auto height for mobile view */
   }
 }

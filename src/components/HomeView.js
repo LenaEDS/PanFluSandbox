@@ -43,6 +43,7 @@ const HomeView = ({ currentIndex, setCurrentIndex }) => {
           </div>
         </div>
       </div>
+      <TimelineSlider totalDays={OUTPUT_9.length} selectedDay={currentIndex} onDayChange={setCurrentIndex} />
     </div>
   );
 };
