@@ -26,6 +26,7 @@ const ChartView = () => {
     OUTPUT_0, OUTPUT_1, OUTPUT_2, OUTPUT_3, OUTPUT_4, OUTPUT_5,
     OUTPUT_6, OUTPUT_7, OUTPUT_8, OUTPUT_9
   ]);
+  const [loading, setLoading] = useState(true); // Add loading state
   const intervalRef = useRef(null);
 
   const handleDayChange = (index) => {
@@ -56,26 +57,33 @@ const ChartView = () => {
 
   useEffect(() => {
     if (outputFiles[currentIndex]) {
-      const deceasedCount = outputFiles[currentIndex].data.reduce((acc, county) => {
-        const { D } = county.compartments;
-        const totalDeceased = [
-          ...D.U.L,
-          ...D.U.H,
-          ...D.V.L,
-          ...D.V.H,
-        ].reduce((sum, value) => sum + value, 0);
-        return acc + totalDeceased;
-      }, 0);
+      setLoading(true); // Start loading
 
-      setEventData((prevData) => {
-        const newData = [...prevData];
-        if (!newData[currentIndex]) {
-          newData[currentIndex] = { day: currentIndex, deceased: Math.round(deceasedCount) };
-        } else {
-          newData[currentIndex].deceased = Math.round(deceasedCount);
-        }
-        return newData.slice(0, currentIndex + 1);
-      });
+      // Simulate data processing delay
+      setTimeout(() => {
+        const deceasedCount = outputFiles[currentIndex].data.reduce((acc, county) => {
+          const { D } = county.compartments;
+          const totalDeceased = [
+            ...D.U.L,
+            ...D.U.H,
+            ...D.V.L,
+            ...D.V.H,
+          ].reduce((sum, value) => sum + value, 0);
+          return acc + totalDeceased;
+        }, 0);
+
+        setEventData((prevData) => {
+          const newData = [...prevData];
+          if (!newData[currentIndex]) {
+            newData[currentIndex] = { day: currentIndex, deceased: Math.round(deceasedCount) };
+          } else {
+            newData[currentIndex].deceased = Math.round(deceasedCount);
+          }
+          return newData.slice(0, currentIndex + 1);
+        });
+
+        setLoading(false); // Data is loaded
+      }, 500); // Adjust the delay if needed
     }
   }, [currentIndex, outputFiles]);
 
@@ -83,19 +91,16 @@ const ChartView = () => {
     <div className="chart-view-container">
       <div className="left-panel">
         <SetParametersDropdown counties={texasCounties} />
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
+        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
         <Interventions />
       </div>
       <div className="main-panel">
         <div className="map-section">
-          <InitialMap outputData={outputFiles[currentIndex]} />
+          {loading ? (
+            <div>Loading map data...</div>
+          ) : (
+            <InitialMap outputData={outputFiles[currentIndex]} />
+          )}
         </div>
         <div className="timeline-section">
           <TimelineSlider

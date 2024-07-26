@@ -1,8 +1,46 @@
-.chart-view-container {
-  display: flex;
-  height: 100vh; /* Full viewport height */
-  overflow: hidden; /* Prevent scrolling on the container */
+
+/* ChartView.css */
+.chart-view-container .map-section {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
+
+.chart-view-container .map-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.chart-view-container .map-container .previous-map {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.chart-view-container .map-container .current-map {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.chart-view-container .map-container.transitioning .previous-map {
+  opacity: 0;
+}
+
+.chart-view-container .map-container.transitioning .current-map {
+  opacity: 1;
+}
+
 
 .left-panel {
   width: 300px; /* Width of the left panel */
