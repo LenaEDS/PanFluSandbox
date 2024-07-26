@@ -97,7 +97,7 @@ const ChartView = () => {
       <div className="main-panel">
         <div className="map-section">
           {loading ? (
-            <div>Loading map data...</div>
+            <div></div>
           ) : (
             <InitialMap outputData={outputFiles[currentIndex]} />
           )}
