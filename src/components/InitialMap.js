@@ -79,7 +79,7 @@ const Legend = () => {
         </div>`
       );
 
-      div.innerHTML = `<strong>Infected Count</strong><br>${labels.join('')}`;
+      div.innerHTML = `<strong>Infected Count</strong>${labels.join('')}`;
       return div;
     };
 

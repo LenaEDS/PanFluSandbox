@@ -1,21 +1,38 @@
-// InitialMapPercent Component
 import React, { useEffect, useState, useRef } from 'react';
 import { MapContainer, TileLayer, GeoJSON, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import texasOutline from './texasOutline.json';
+import Papa from 'papaparse';
 import './Legend.css'; // Ensure you have a CSS file for styling
 
+// Load population data from CSV
+const loadPopulationData = async () => {
+  const response = await fetch('/data/SVI_2020_US_County.csv');
+  const csvData = await response.text();
+  const populationData = {};
+
+  Papa.parse(csvData, {
+    header: true,
+    complete: (result) => {
+      result.data.forEach(row => {
+        populationData[row.FIPS] = parseInt(row.E_TOTPOP, 10);
+      });
+    },
+  });
+
+  return populationData;
+};
+
 // Color mapping function
-const getColor = (normalizedValue) => {
-  return normalizedValue > 0.8 ? '#800026' :
-    normalizedValue > 0.6 ? '#BD0026' :
-      normalizedValue > 0.4 ? '#E31A1C' :
-        normalizedValue > 0.2 ? '#FC4E2A' :
-          normalizedValue > 0.1 ? '#FD8D3C' :
-            normalizedValue > 0.05 ? '#FEB24C' :
-              normalizedValue > 0.01 ? '#FED976' :
-                '#FFEDA0';
+const getColor = (infectedPercent) => {
+  return infectedPercent > 1 ? '#800026' :
+         infectedPercent > 0.75 ? '#BD0026' :
+         infectedPercent > 0.5 ? '#E31A1C' :
+         infectedPercent > 0.25 ? '#FC4E2A' :
+         infectedPercent > 0.1 ? '#FD8D3C' :
+         infectedPercent > 0.05 ? '#FEB24C' :
+                                   '#FED976';
 };
 
 // Parsing Texas outline data
@@ -26,8 +43,8 @@ const parseTexasOutline = (texasOutline) => {
   }));
 };
 
-// Parsing and normalizing data
-const parseData = (jsonData, texasCounties) => {
+// Parsing and calculating infected percentage
+const parseData = async (jsonData, texasCounties, populationData) => {
   if (!jsonData || !jsonData.data) {
     console.error('No data or invalid data format:', jsonData);
     return [];
@@ -43,79 +60,40 @@ const parseData = (jsonData, texasCounties) => {
       ...I.V.H
     ].reduce((sum, value) => sum + value, 0);
 
+    const population = populationData[fips_id] || 0;
+    const infectedPercent = population > 0 ? (totalInfected / population) * 100 : 0;
+
     const countyName = texasCounties.find(tc => tc.geoid === fips_id)?.name || 'Unknown';
 
     return {
       county: countyName,
       fips: fips_id,
-      infected: Math.ceil(totalInfected) // Round up the infected count
+      infected: Math.ceil(totalInfected), // Round up the infected count
+      infectedPercent: infectedPercent.toFixed(2)
     };
   });
 
-  // Calculate min and max infected counts
-  const infectedCounts = rawData.map(data => data.infected);
-  const minInfected = Math.min(...infectedCounts);
-  const maxInfected = Math.max(...infectedCounts);
-
-  // Normalize the infected counts
-  const normalizedData = rawData.map(data => {
-    const normalizedInfected = maxInfected === minInfected ? 0 : (data.infected - minInfected) / (maxInfected - minInfected);
-    return {
-      ...data,
-      normalizedInfected: normalizedInfected
-    };
-  });
-
-  return normalizedData;
+  return rawData;
 };
 
-// Legend component
-const Legend = () => {
-  const map = useMap();
-
-  useEffect(() => {
-    const legend = L.control({ position: 'bottomleft' });
-
-    legend.onAdd = function () {
-      const div = L.DomUtil.create('div', 'info legend');
-      const grades = [0.8, 0.6, 0.4, 0.2, 0.1, 0.05, 0.01, 0];
-      const labels = [];
-
-      for (let i = 0; i < grades.length; i++) {
-        const grade = grades[i];
-        const nextGrade = grades[i - 1];
-        labels.push(
-          `<i style="background:${getColor(grade)}"></i> ${
-            grade === 0.8 ? '80+%' : `${(grade * 100).toFixed(0)} - ${nextGrade ? (nextGrade * 100).toFixed(0) : '0'}%`
-          }`
-        );
-      }
-
-      div.innerHTML = `<strong>Normalized Infected (%)</strong><br>${labels.join('<br>')}`;
-      return div;
-    };
-
-    legend.addTo(map);
-
-    return () => {
-      legend.remove();
-    };
-  }, [map]);
-
-  return null;
-};
-
+// Legend component integrated into InitialMapPercent
 const InitialMapPercent = ({ outputData }) => {
   const [countyData, setCountyData] = useState([]);
   const mapRef = useRef();
 
   useEffect(() => {
-    const texasCounties = parseTexasOutline(texasOutline);
-    if (outputData) {
-      const data = parseData(outputData, texasCounties);
-      setCountyData(data);
-      console.log('County data loaded:', data); // Debug log
-    }
+    const fetchData = async () => {
+      const texasCounties = parseTexasOutline(texasOutline);
+      const populationData = await loadPopulationData();
+
+      if (outputData) {
+        const data = await parseData(outputData, texasCounties, populationData);
+        setCountyData(data);
+        console.log('County data loaded:', data); // Debug log
+      }
+    };
+
+    fetchData();
   }, [outputData]);
 
   const onEachCounty = (feature, layer) => {
@@ -123,7 +101,7 @@ const InitialMapPercent = ({ outputData }) => {
     const countyInfo = countyData.find(item => item.fips === geoid);
 
     if (countyInfo) {
-      const tooltipContent = `${countyInfo.county}: ${countyInfo.infected} infected (${(countyInfo.normalizedInfected * 100).toFixed(2)}%)`;
+      const tooltipContent = `${countyInfo.county}: ${countyInfo.infected} infected (${countyInfo.infectedPercent}%)`;
       layer.bindTooltip(tooltipContent, {
         permanent: false,
         direction: 'auto',
@@ -147,10 +125,10 @@ const InitialMapPercent = ({ outputData }) => {
 
   const geoJsonStyle = (feature) => {
     const countyInfo = countyData.find(item => item.fips === feature.properties.geoid);
-    const normalizedInfected = countyInfo ? countyInfo.normalizedInfected : 0;
-    console.log(`County: ${feature.properties.name}, Normalized Infected: ${normalizedInfected}`); // Debug log
+    const infectedPercent = countyInfo ? parseFloat(countyInfo.infectedPercent) : 0;
+    console.log(`County: ${feature.properties.name}, Infected %: ${infectedPercent}`); // Debug log
     return {
-      fillColor: getColor(normalizedInfected),
+      fillColor: getColor(infectedPercent),
       weight: 1,
       color: 'white',
       fillOpacity: 0.7
@@ -167,6 +145,41 @@ const InitialMapPercent = ({ outputData }) => {
       });
     }
   }, [outputData]);
+
+  // Legend component
+  const Legend = () => {
+    const map = useMap();
+
+    useEffect(() => {
+      const legend = L.control({ position: 'bottomleft' });
+
+      legend.onAdd = function () {
+        const div = L.DomUtil.create('div', 'info legend');
+        const grades = [1, 0.75, 0.5, 0.25, 0.1, 0.05, 0];
+        const labels = [];
+
+        for (let i = 0; i < grades.length; i++) {
+          const grade = grades[i];
+          const nextGrade = grades[i - 1];
+          labels.push(
+            `<i style="background:${getColor(grade)}"></i> ${
+              grade === 1 ? '> 1%' : `${(grade).toFixed(2)} - ${nextGrade ? (nextGrade).toFixed(2) : '0%'}`
+            }`
+          );
+        }
+        div.innerHTML = `<strong>Infected (%)</strong>${labels.join('<br>')}`;
+        return div;
+      };
+
+      legend.addTo(map);
+
+      return () => {
+        legend.remove();
+      };
+    }, [map]);
+
+    return null;
+  };
 
   return (
     <div>
