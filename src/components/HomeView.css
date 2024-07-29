@@ -24,7 +24,6 @@
     color: white;
     border: none;
     padding: 10px 20px;
-    margin: 10px 0;
     cursor: pointer;
     font-size: 16px;
   }
@@ -97,6 +96,7 @@
     flex: 1;
   }
   
+
   .infected-table {
     flex: 0 0 400px; /* Adjust width as needed */
     height: calc(100vh - 100px); /* Adjust height as needed */

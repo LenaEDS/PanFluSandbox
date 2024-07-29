@@ -28,7 +28,7 @@ const Interventions = () => {
   const closeNonPharmaceutical = () => setIsNonPharmaceuticalOpen(false);
 
   return (
-    <div className="dropdown-container">
+    <div className="dropdown-container" id="second-drop">
       <button className="grey-button" onClick={toggleDropdown}>
         <span className="dropdown-text"> + Add Interventions</span>
         <span className={`dropdown-arrow ${showDropdown ? 'open' : ''}`}>&#x25BE;</span>

@@ -28,7 +28,7 @@ const SetParametersDropdown = ({ counties }) => {
   const closeDisease = () => setIsDiseaseOpen(false);
 
   return (
-    <div className="dropdown-container">
+    <div className="dropdown-container" id="first-drop">
       <button className="orange-button" onClick={toggleDropdown}>
         <span className="dropdown-text">Set Parameters</span>
         <span className={`dropdown-arrow ${showDropdown ? 'open' : ''}`}>&#x25BE;</span>

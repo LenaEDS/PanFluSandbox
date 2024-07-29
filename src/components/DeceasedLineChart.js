@@ -25,6 +25,7 @@ const DeceasedLineChart = ({ eventData }) => {
   // Chart options
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: 'top',
