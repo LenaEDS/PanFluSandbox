@@ -57,27 +57,29 @@ const Legend = () => {
 
     legend.onAdd = function () {
       const div = L.DomUtil.create('div', 'info legend');
-      const grades = [5000, 2000, 1000, 500, 200, 100, 50, 0];
+      const ranges = [
+        { min: 0, max: 50 },
+        { min: 50, max: 100 },
+        { min: 100, max: 200 },
+        { min: 200, max: 500 },
+        { min: 500, max: 1000 },
+        { min: 1000, max: 2000 },
+        { min: 2000, max: 5000 },
+        { min: 5000, max: Infinity }
+      ];
       const labels = [];
 
-      for (let i = 0; i < grades.length - 1; i++) {
-        const grade = grades[i];
-        const nextGrade = grades[i + 1];
+      ranges.forEach(range => {
         labels.push(
           `<div class="legend-item">
-            <i style="background:${getColor(grade)}"></i>
-            <span>${grade} &ndash; ${nextGrade}</span>
+            <i style="background:${getColor(range.min)}"></i>
+            <span>${range.min} &ndash; ${range.max === Infinity ? '5000+' : range.max}</span>
           </div>`
         );
-      }
-      // Add the last range separately
-      const lastGrade = grades[grades.length - 1];
-      labels.push(
-        `<div class="legend-item">
-          <i style="background:${getColor(lastGrade)}"></i>
-          <span>${lastGrade}+</span>
-        </div>`
-      );
+      });
+
+      // Reverse the labels array to display colors from bottom to top
+      labels.reverse();
 
       div.innerHTML = `<strong>Infected Count</strong>${labels.join('')}`;
       return div;
@@ -161,7 +163,7 @@ const InitialMap = ({ outputData }) => {
         id="map"
         center={[31.0, -100.0]}
         zoom={6}
-        style={{ height: '500px', width: '800px',}}
+        style={{ height: '500px', width: '800px' }}
         whenCreated={mapInstance => { mapRef.current = mapInstance; }}
       >
         <TileLayer

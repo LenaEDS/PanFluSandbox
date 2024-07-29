@@ -93,21 +93,6 @@ function CountyPercentageTable({ outputData }) {
         };
       });
 
-      // Calculate min and max infected counts for normalization
-      const infectedCounts = merged.map(data => data.infected);
-      const minInfected = Math.min(...infectedCounts);
-      const maxInfected = Math.max(...infectedCounts);
-
-      // Normalize the infected counts
-      const normalizedData = merged.map(data => {
-        const normalizedInfectedPercentage = (data.infected - minInfected) / (maxInfected - minInfected) * 100;
-        return {
-          ...data,
-          normalizedInfectedPercentage: normalizedInfectedPercentage.toFixed(2),
-        };
-      });
-
-      setMergedData(normalizedData);
     };
 
     fetchData();
@@ -168,12 +153,6 @@ function CountyPercentageTable({ outputData }) {
                 </button>
               </th>
               <th>
-                Normalized Infected (%)
-                <button className="sort-button" onClick={() => sortData('normalizedInfectedPercentage')}>
-                  {sortDirection.normalizedInfectedPercentage === 'asc' ? '↓' : '↑'}
-                </button>
-              </th>
-              <th>
                 Deceased (%)
                 <button className="sort-button" onClick={() => sortData('deceasedPercentage')}>
                   {sortDirection.deceasedPercentage === 'asc' ? '↓' : '↑'}
@@ -192,7 +171,6 @@ function CountyPercentageTable({ outputData }) {
               <tr key={index} className={index % 2 === 0 ? 'even-row' : 'odd-row'}>
                 <td>{county.county}</td>
                 <td>{county.infectedPercentage}</td>
-                <td>{county.normalizedInfectedPercentage}</td>
                 <td>{county.deceasedPercentage}</td>
                 <td>{county.population}</td>
               </tr>
