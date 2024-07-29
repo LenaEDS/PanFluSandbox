@@ -17,6 +17,7 @@
   }
 
   .grey-button {
+    position: relative;
     background-color: #f1f1;
     border: none;
     color: black;
@@ -114,5 +115,11 @@
     padding: 10px 20px;
     cursor: pointer;
     font-size: 16px;
+  }
+
+  #second-drop {
+    position: relative;
+    z-index: 10;
+    margin-top: 1rem;
   }
   
