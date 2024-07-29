@@ -9,6 +9,8 @@ import CountyInfectedDeceasedTable from './CountyInfectedDeceasedTable';
 import CountyPopulationTable from './CountyPopulationTable';
 import CountyPercentageTable from './CountyPercentageTable';
 import InitialMapPercent from './InitialMapPercent';
+import InitialMapPercentTwo from './InitialMapPercentTwo';
+import InitialMapPercentThree from './InitialMapPercentThree';
 import './UserGuideView.css';
 
 import OUTPUT_0 from './OUTPUT_0.json';
@@ -103,7 +105,7 @@ const UserGuideView = () => {
         <StateCountyDropdowns />
       </div>
       <div className="middle-panel">
-        <InitialMapPercent outputData={outputFiles[currentIndex]} />
+        <InitialMapPercentThree outputData={outputFiles[currentIndex]} />
       </div>
       <div className="timeline-panel">
         <TimelineSlider
