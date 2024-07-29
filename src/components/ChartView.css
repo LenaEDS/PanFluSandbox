@@ -19,7 +19,13 @@
   flex-direction: column;
   justify-content: flex-start; /* Align items to the top */
 }
-
+ 
+  /* Top panel containing the dropdowns */
+.top-panel {
+  position: relative; /* Ensure dropdowns are correctly positioned within this panel */
+  z-index: 10; /* Higher z-index to ensure it appears above the map */
+  margin-bottom: 1rem; /* Space between top panel and the map */
+}
 .main-panel {
   margin-left: 300px; /* Offset to accommodate the left panel */
   flex: 1; /* Take up remaining space */

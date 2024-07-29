@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import InitialMap from './InitialMap';
 import TimelineSlider from './TimelineSlider';
 import DeceasedLineChart from './DeceasedLineChart';
+import StateCountyDropdowns from './StateCountyDropdown';
 import CountyInfectedDeceasedTable from './CountyInfectedDeceasedTable';
 import SetParametersDropdown from './SetParametersDropdown'; // Assuming this is your component
 import Interventions from './Interventions'; // Assuming this is your component
@@ -93,6 +94,7 @@ const ChartView = () => {
         <SetParametersDropdown counties={texasCounties} />
         <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
         <Interventions />
+        <StateCountyDropdowns />
       </div>
       <div className="main-panel">
         <div className="map-section">
