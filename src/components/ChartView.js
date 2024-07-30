@@ -1,12 +1,19 @@
-import texasCounties from './counties';
 import React, { useState, useEffect, useRef } from 'react';
+import texasCounties from './counties';
 import InitialMap from './InitialMap';
 import TimelineSlider from './TimelineSlider';
+import CountyInfectedTable from './CountyInfectedTable';
+import EventMonitorTable from './EventMonitorTable';
 import DeceasedLineChart from './DeceasedLineChart';
 import StateCountyDropdowns from './StateCountyDropdown';
 import CountyInfectedDeceasedTable from './CountyInfectedDeceasedTable';
-import SetParametersDropdown from './SetParametersDropdown'; // Assuming this is your component
-import Interventions from './Interventions'; // Assuming this is your component
+import CountyPopulationTable from './CountyPopulationTable';
+import CountyPercentageTable from './CountyPercentageTable';
+import InitialMapPercent from './InitialMapPercent';
+import InitialMapPercentTwo from './InitialMapPercentTwo';
+import InitialMapPercentThree from './InitialMapPercentThree';
+import SetParametersDropdown from './SetParametersDropdown';
+import Interventions from './Interventions';
 import './ChartView.css';
 
 import OUTPUT_0 from './OUTPUT_0.json';
@@ -18,7 +25,7 @@ import OUTPUT_5 from './OUTPUT_5.json';
 import OUTPUT_6 from './OUTPUT_6.json';
 import OUTPUT_7 from './OUTPUT_7.json';
 import OUTPUT_8 from './OUTPUT_8.json';
-import OUTPUT_9 from './OUTPUT_9.json'; 
+import OUTPUT_9 from './OUTPUT_9.json';
 
 const ChartView = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -27,10 +34,10 @@ const ChartView = () => {
     OUTPUT_0, OUTPUT_1, OUTPUT_2, OUTPUT_3, OUTPUT_4, OUTPUT_5,
     OUTPUT_6, OUTPUT_7, OUTPUT_8, OUTPUT_9
   ]);
-  const [loading, setLoading] = useState(true); // Add loading state
   const intervalRef = useRef(null);
 
   const handleDayChange = (index) => {
+    console.log(`Day changed to: ${index}`);
     setCurrentIndex(index);
   };
 
@@ -58,68 +65,73 @@ const ChartView = () => {
 
   useEffect(() => {
     if (outputFiles[currentIndex]) {
-      setLoading(true); // Start loading
+      console.log('Output Data:', outputFiles[currentIndex]);
 
-      // Simulate data processing delay
-      setTimeout(() => {
-        const deceasedCount = outputFiles[currentIndex].data.reduce((acc, county) => {
-          const { D } = county.compartments;
-          const totalDeceased = [
-            ...D.U.L,
-            ...D.U.H,
-            ...D.V.L,
-            ...D.V.H,
-          ].reduce((sum, value) => sum + value, 0);
-          return acc + totalDeceased;
-        }, 0);
+      // Calculate deceased count for the current day
+      const deceasedCount = outputFiles[currentIndex].data.reduce((acc, county) => {
+        const { D } = county.compartments;
+        const totalDeceased = [
+          ...D.U.L,
+          ...D.U.H,
+          ...D.V.L,
+          ...D.V.H,
+        ].reduce((sum, value) => sum + value, 0);
+        return acc + totalDeceased;
+      }, 0);
 
-        setEventData((prevData) => {
-          const newData = [...prevData];
-          if (!newData[currentIndex]) {
-            newData[currentIndex] = { day: currentIndex, deceased: Math.round(deceasedCount) };
-          } else {
-            newData[currentIndex].deceased = Math.round(deceasedCount);
-          }
-          return newData.slice(0, currentIndex + 1);
-        });
-
-        setLoading(false); // Data is loaded
-      }, 500); // Adjust the delay if needed
+      // Update eventData to include only data up to the current day
+      setEventData((prevData) => {
+        const newData = [...prevData];
+        // Ensure we're only adding data for the current day and not duplicating
+        if (!newData[currentIndex]) {
+          newData[currentIndex] = { day: currentIndex, deceased: Math.round(deceasedCount) };
+        } else {
+          newData[currentIndex].deceased = Math.round(deceasedCount);
+        }
+        return newData.slice(0, currentIndex + 1); // Keep only up to currentIndex
+      });
     }
   }, [currentIndex, outputFiles]);
 
+  useEffect(() => {
+    const delay = 500; // Delay in milliseconds
+    const timer = setTimeout(() => {
+      console.log('Data processed for day:', currentIndex);
+    }, delay);
+
+    return () => clearTimeout(timer);
+  }, [currentIndex]);
+
   return (
-    <div className="chart-view-container">
+    <div className="user-guide-view">
       <div className="left-panel">
         <SetParametersDropdown counties={texasCounties} />
         <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
         <Interventions />
+        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
         <StateCountyDropdowns />
       </div>
-      <div className="main-panel">
-        <div className="map-section">
-          {loading ? (
-            <div></div>
-          ) : (
-            <InitialMap outputData={outputFiles[currentIndex]} />
-          )}
-        </div>
-        <div className="timeline-section">
-          <TimelineSlider
-            totalDays={outputFiles.length}
-            selectedDay={currentIndex}
-            onDayChange={handleDayChange}
-            onScenarioRun={handleRunScenario}
-            onScenarioPause={handlePauseScenario}
-          />
-        </div>
-        <div className="chart-section">
-          <DeceasedLineChart eventData={eventData} />
-          <CountyInfectedDeceasedTable className="infected-table" outputData={outputFiles[currentIndex]} />
-        </div>
+      <div className="middle-panel">
+        <InitialMapPercentThree outputData={outputFiles[currentIndex]} />
+      </div>
+      <div className="timeline-panel">
+        <TimelineSlider
+          totalDays={outputFiles.length}
+          selectedDay={currentIndex}
+          onDayChange={handleDayChange}
+          onScenarioRun={handleRunScenario}
+          onScenarioPause={handlePauseScenario}
+        />
+      </div>
+      <div className="chart-panel">
+        <DeceasedLineChart eventData={eventData} />
+      </div>
+      <div className="bottom-panel">
+        <CountyPercentageTable className="percentage-table" outputData={outputFiles[currentIndex]} />
       </div>
     </div>
   );
+  
 };
 
 export default ChartView;

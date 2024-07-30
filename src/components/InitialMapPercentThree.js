@@ -126,7 +126,7 @@ const InitialMapPercentThree = ({ outputData }) => {
   const geoJsonStyle = (feature) => {
     const countyInfo = countyData.find(item => item.fips === feature.properties.geoid);
     const infectedPercent = countyInfo ? parseFloat(countyInfo.infectedPercent) : 0;
-    console.log(`County: ${feature.properties.name}, Infected %: ${infectedPercent}`); // Debug log
+    console.log(`County: ${feature.properties.name}, Infected: ${infectedPercent}%`); // Debug log
     return {
       fillColor: getColor(infectedPercent),
       weight: 1,
@@ -151,7 +151,7 @@ const InitialMapPercentThree = ({ outputData }) => {
     const map = useMap();
 
     useEffect(() => {
-      const legend = L.control({ position: 'bottomleft' });
+      const legend = L.control({ position: 'bottomright' });
 
       legend.onAdd = function () {
         const div = L.DomUtil.create('div', 'info legend');
@@ -163,7 +163,7 @@ const InitialMapPercentThree = ({ outputData }) => {
           const nextGrade = grades[i - 1];
           labels.push(
             `<i style="background:${getColor(grade)}"></i> ${
-              grade === 0.3 ? '0.3%+' : `${(grade).toFixed(2)}% - ${nextGrade ? (nextGrade).toFixed(2) : '0%'}`
+              grade === 0.3 ? '0.3+' : `${(grade).toFixed(2)} - ${nextGrade ? (nextGrade).toFixed(2) : '0%'}`
             }`
           );
         }

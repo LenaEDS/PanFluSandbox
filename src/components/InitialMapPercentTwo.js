@@ -151,7 +151,7 @@ const InitialMapPercentTwo = ({ outputData }) => {
     const map = useMap();
 
     useEffect(() => {
-      const legend = L.control({ position: 'bottomleft' });
+      const legend = L.control({ position: 'bottomright' });
 
       legend.onAdd = function () {
         const div = L.DomUtil.create('div', 'info legend');

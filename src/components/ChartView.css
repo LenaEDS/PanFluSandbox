@@ -19,13 +19,13 @@
   flex-direction: column;
   justify-content: flex-start; /* Align items to the top */
 }
- 
-  /* Top panel containing the dropdowns */
+
 .top-panel {
   position: relative; /* Ensure dropdowns are correctly positioned within this panel */
   z-index: 10; /* Higher z-index to ensure it appears above the map */
   margin-bottom: 1rem; /* Space between top panel and the map */
 }
+
 .main-panel {
   margin-left: 300px; /* Offset to accommodate the left panel */
   flex: 1; /* Take up remaining space */
@@ -36,13 +36,8 @@
   overflow-y: hidden; /* Prevent scrollbars in the main panel */
 }
 
-.map-section, .timeline-section, .chart-section, .table-section {
-  margin: 0; /* Remove margin between sections */
-  padding: 0; /* Remove padding if any */
-}
-
 .map-section {
-  height: 40%; /* Adjust height to fit the viewport */
+  height: 35%; /* Adjust height to fit the viewport */
 }
 
 .timeline-section {
@@ -50,12 +45,11 @@
 }
 
 .chart-section {
-  height: 30%; /* Adjust height to fit the viewport */
-  margin-bottom: 0; /* Ensure no gap below the chart */
+  margin-top: 1rem; /* Space between timeline and chart */
 }
 
 .table-section {
-  height: 20%; /* Remaining space for the table */
+  height: 5%; /* Remaining space for the table */
 }
 
 /* Adjust the height for smaller screens */

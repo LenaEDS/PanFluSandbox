@@ -65,12 +65,13 @@ const loadPopulationData = async () => {
 
 function CountyPercentageTable({ outputData }) {
   const [mergedData, setMergedData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortDirection, setSortDirection] = useState({
     county: 'asc',
     infectedPercentage: 'desc',
-    normalizedInfectedPercentage: 'asc',
     deceasedPercentage: 'desc',
+    infected: 'desc',
     population: 'asc',
   });
 
@@ -93,6 +94,8 @@ function CountyPercentageTable({ outputData }) {
         };
       });
 
+      setMergedData(merged);
+      setFilteredData(merged); // Initialize filtered data
     };
 
     fetchData();
@@ -100,10 +103,11 @@ function CountyPercentageTable({ outputData }) {
 
   // Function to handle sorting
   const sortData = (key) => {
-    const sorted = [...mergedData];
+    const sorted = [...filteredData];
     sorted.sort((a, b) => {
-      const valueA = parseFloat(a[key]);
-      const valueB = parseFloat(b[key]);
+      const valueA = key === 'county' ? a[key].toLowerCase() : parseFloat(a[key]);
+      const valueB = key === 'county' ? b[key].toLowerCase() : parseFloat(b[key]);
+
       if (valueA < valueB) {
         return sortDirection[key] === 'asc' ? -1 : 1;
       }
@@ -112,7 +116,8 @@ function CountyPercentageTable({ outputData }) {
       }
       return 0;
     });
-    setMergedData(sorted);
+
+    setFilteredData(sorted);
     setSortDirection({
       ...sortDirection,
       [key]: sortDirection[key] === 'asc' ? 'desc' : 'asc',
@@ -120,9 +125,13 @@ function CountyPercentageTable({ outputData }) {
   };
 
   // Function to filter data based on search term
-  const filteredData = mergedData.filter((county) =>
-    county.county.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  useEffect(() => {
+    const lowerCaseSearchTerm = searchTerm.toLowerCase();
+    const filtered = mergedData.filter(county =>
+      county.county.toLowerCase().includes(lowerCaseSearchTerm)
+    );
+    setFilteredData(filtered);
+  }, [searchTerm, mergedData]);
 
   return (
     <div className="table-container">
@@ -159,6 +168,12 @@ function CountyPercentageTable({ outputData }) {
                 </button>
               </th>
               <th>
+                Infected
+                <button className="sort-button" onClick={() => sortData('infected')}>
+                  {sortDirection.infected === 'asc' ? '↓' : '↑'}
+                </button>
+              </th>
+              <th>
                 Population
                 <button className="sort-button" onClick={() => sortData('population')}>
                   {sortDirection.population === 'asc' ? '↓' : '↑'}
@@ -172,6 +187,7 @@ function CountyPercentageTable({ outputData }) {
                 <td>{county.county}</td>
                 <td>{county.infectedPercentage}</td>
                 <td>{county.deceasedPercentage}</td>
+                <td>{county.infected}</td>
                 <td>{county.population}</td>
               </tr>
             ))}
