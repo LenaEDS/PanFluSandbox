@@ -107,9 +107,12 @@ const ChartView = () => {
       <div className="left-panel">
         <SetParametersDropdown counties={texasCounties} />
         <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+        <div className="interventions-container">
         <Interventions />
-        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+      </div>
+      <div className="state-county-dropdowns-container">
         <StateCountyDropdowns />
+      </div>
       </div>
       <div className="middle-panel">
         <InitialMapPercentThree outputData={outputFiles[currentIndex]} />
@@ -130,6 +133,7 @@ const ChartView = () => {
         <CountyPercentageTable className="percentage-table" outputData={outputFiles[currentIndex]} />
       </div>
     </div>
+    
   );
   
 };

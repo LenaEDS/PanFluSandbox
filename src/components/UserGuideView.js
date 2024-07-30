@@ -96,9 +96,12 @@ const UserGuideView = () => {
       <div className="left-panel">
         <SetParametersDropdown counties={texasCounties} />
         <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+        <div className="interventions-container">
         <Interventions />
-        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+      </div>
+      <div className="state-county-dropdowns-container">
         <StateCountyDropdowns />
+      </div>
       </div>
       <div className="main-panel">
         <div className="map-section">

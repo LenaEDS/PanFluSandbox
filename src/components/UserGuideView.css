@@ -16,6 +16,14 @@
     margin-bottom: 1rem; /* Space between top panel and the map */
   }
   
+  .interventions-container {
+    padding-bottom: 10px; /* Adjust the value as needed */
+  }
+  
+  .state-county-dropdowns-container {
+    padding-top: 10px; /* Adjust the value as needed */
+  }
+
   /* Map container */
   .middle-panel {
     position: relative; /* Positioning context for z-index */
