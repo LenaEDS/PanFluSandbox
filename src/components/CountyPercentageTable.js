@@ -39,7 +39,7 @@ const parseInfectionData = (jsonData, countyNameLookup) => {
     return {
       county: countyName,
       fips: fips_id,
-      infected: totalInfected,
+      infected: Math.round(totalInfected),
       deceased: totalDeceased,
     };
   });
