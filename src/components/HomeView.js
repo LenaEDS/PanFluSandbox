@@ -19,7 +19,9 @@ const HomeView = ({ currentIndex, setCurrentIndex }) => {
       <div className="regular-view-collapsible-container">
         <div className="map-and-charts-container">
           <div className="map-and-table-container">
-          <CountyInfectedTable className="infected-table" outputData={OUTPUT_9}/>
+          <div className="medium-chart-wrapper">
+            <CountyInfectedTable outputData={OUTPUT_9}/>
+            </div>
             <ToggleMapView currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}/>
           </div>
           <div className="charts-container">

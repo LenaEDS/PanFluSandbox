@@ -99,7 +99,7 @@
 
 .infected-table {
   flex: 0 0 400px; /* Adjust width as needed */
-  height: calc(100vh - 100px); /* Adjust height as needed */
+  max-height:400px;
   overflow-y: auto; /* Enable vertical scrolling if necessary */
   margin-right: 20px; /* Adjust margin as needed */
 }
@@ -125,5 +125,11 @@
 
 .short-chart-wrapper {
   max-height: 300px; /* Adjust the height as needed to show approximately 10 rows */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+
+.medium-chart-wrapper {
+  max-height: 1000px; /* Adjust the height as needed to show approximately 10 rows */
   overflow-y: auto; /* Enable vertical scrolling */
 }
