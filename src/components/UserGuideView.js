@@ -8,9 +8,6 @@ import CountyInfectedDeceasedTable from './CountyInfectedDeceasedTable';
 import SetParametersDropdown from './SetParametersDropdown'; 
 import Interventions from './Interventions'; 
 import './ChartView.css';
-import InitialMapPercent from './InitialMapPercent';
-import InitialMapPercentTwo from './InitialMapPercentTwo';
-import InitialMapPercentThree from './InitialMapPercentThree';
 
 import OUTPUT_0 from './OUTPUT_0.json';
 import OUTPUT_1 from './OUTPUT_1.json';

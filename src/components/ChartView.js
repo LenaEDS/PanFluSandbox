@@ -1,17 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import texasCounties from './counties';
-import InitialMap from './InitialMap';
 import TimelineSlider from './TimelineSlider';
-import CountyInfectedTable from './CountyInfectedTable';
-import EventMonitorTable from './EventMonitorTable';
 import DeceasedLineChart from './DeceasedLineChart';
 import StateCountyDropdowns from './StateCountyDropdown';
-import CountyInfectedDeceasedTable from './CountyInfectedDeceasedTable';
-import CountyPopulationTable from './CountyPopulationTable';
 import CountyPercentageTable from './CountyPercentageTable';
 import InitialMapPercent from './InitialMapPercent';
-import InitialMapPercentTwo from './InitialMapPercentTwo';
-import InitialMapPercentThree from './InitialMapPercentThree';
 import SetParametersDropdown from './SetParametersDropdown';
 import Interventions from './Interventions';
 import './ChartView.css';
@@ -109,7 +102,6 @@ const ChartView = () => {
         <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
         <div className="interventions-container">
         <Interventions />
-        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
       </div>
       <div className="state-county-dropdowns-container">
         <StateCountyDropdowns />

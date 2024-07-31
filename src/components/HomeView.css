@@ -115,6 +115,11 @@
     margin-bottom: 20px; /* Adjust margin as needed */
   }
   
+  .table-container {
+    max-height: 300px; /* Adjust the height as needed to show approximately 10 rows */
+    overflow-y: auto; /* Enable vertical scrolling */
+  }
+
   .divider {
     height: 2px; /* Adjust the height as needed */
     background-color: black;

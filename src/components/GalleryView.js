@@ -1,9 +1,6 @@
 import React from 'react';
 import ExampleLayout from './ExampleLayout'; // Adjust path as necessary
 import './GalleryView.css'; // Import custom CSS for styling
-import InitialMap from './InitialMap';
-import InitialMapPercent from './InitialMapPercent';
-import CountyPercentageTable from './CountyPercentageTable';
 import exampleGalleryImg from './images/example_gallery.png';
 
 import OUTPUT_0 from './OUTPUT_0.json';
