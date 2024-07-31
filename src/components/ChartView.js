@@ -109,13 +109,14 @@ const ChartView = () => {
         <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
         <div className="interventions-container">
         <Interventions />
+        <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
       </div>
       <div className="state-county-dropdowns-container">
         <StateCountyDropdowns />
       </div>
       </div>
       <div className="middle-panel">
-        <InitialMapPercentThree outputData={outputFiles[currentIndex]} />
+        <InitialMapPercent outputData={outputFiles[currentIndex]} />
       </div>
       <div className="timeline-panel">
         <TimelineSlider
