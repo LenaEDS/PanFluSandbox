@@ -89,7 +89,7 @@ const UserGuideView = () => {
   }, [currentIndex, outputFiles]);
 
   return (
-    <div className="chart-view-container">
+    <div className="user-guide-view">
       <div className="left-panel">
         <SetParametersDropdown counties={texasCounties} />
         <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
@@ -100,27 +100,23 @@ const UserGuideView = () => {
         <StateCountyDropdowns />
       </div>
       </div>
-      <div className="main-panel">
-        <div className="map-section">
-          {loading ? (
-            <div></div>
-          ) : (
-            <InitialMap outputData={outputFiles[currentIndex]} />
-          )}
-        </div>
-        <div className="timeline-section">
-          <TimelineSlider
-            totalDays={outputFiles.length}
-            selectedDay={currentIndex}
-            onDayChange={handleDayChange}
-            onScenarioRun={handleRunScenario}
-            onScenarioPause={handlePauseScenario}
-          />
-        </div>
-        <div className="chart-section">
-          <DeceasedLineChart eventData={eventData} />
-          <CountyInfectedDeceasedTable className="infected-table" outputData={outputFiles[currentIndex]} />
-        </div>
+      <div className="middle-panel">
+        <InitialMap outputData={outputFiles[currentIndex]} />
+      </div>
+      <div className="timeline-panel">
+        <TimelineSlider
+          totalDays={outputFiles.length}
+          selectedDay={currentIndex}
+          onDayChange={handleDayChange}
+          onScenarioRun={handleRunScenario}
+          onScenarioPause={handlePauseScenario}
+        />
+      </div>
+      <div className="chart-panel">
+        <DeceasedLineChart eventData={eventData} />
+      </div>
+      <div className="bottom-panel">
+        <CountyInfectedDeceasedTable className="percentage-table" outputData={outputFiles[currentIndex]} />
       </div>
     </div>
   );
