@@ -5,8 +5,8 @@ import TimelineSlider from './TimelineSlider';
 import DeceasedLineChart from './DeceasedLineChart';
 import StateCountyDropdowns from './StateCountyDropdown';
 import CountyInfectedDeceasedTable from './CountyInfectedDeceasedTable';
-import SetParametersDropdown from './SetParametersDropdown'; // Assuming this is your component
-import Interventions from './Interventions'; // Assuming this is your component
+import SetParametersDropdown from './SetParametersDropdown'; 
+import Interventions from './Interventions'; 
 import './ChartView.css';
 import InitialMapPercent from './InitialMapPercent';
 import InitialMapPercentTwo from './InitialMapPercentTwo';
