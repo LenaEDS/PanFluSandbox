@@ -27,7 +27,6 @@ const GalleryView = () => {
     <div className="imageContainer">
       <img src={exampleGalleryImg} alt="Gallery" className="galleryImage" />
     </div>
-    <ExampleLayout />
   </div>
     
   );
