@@ -36,6 +36,8 @@
 
 .main-panel {
   margin-left: 300px; /* Offset to accommodate the left panel */
+  margin-right: 400px; /* Offset to accommodate the left panel */
+  width: calc(100% - 700px); /* Adjust based on the width of the left and right panels */
   flex: 1; /* Take up remaining space */
   display: flex;
   flex-direction: column;
@@ -45,7 +47,7 @@
 }
 
 .right-panel {
-  width: 300px; /* Fixed width for the right panel */
+  width: 400px; /* Fixed width for the right panel */
   background-color: #fff; /* Background color */
   padding: 10px;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);

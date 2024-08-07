@@ -107,8 +107,6 @@ const HomeView = () => {
       </div>
       </div>
       <div className="middle-panel">
-        <InitialMapPercent outputData={outputFiles[currentIndex]} />
-      </div>
       <div className="timeline-panel">
         <TimelineSlider
           totalDays={outputFiles.length}
@@ -117,6 +115,8 @@ const HomeView = () => {
           onScenarioRun={handleRunScenario}
           onScenarioPause={handlePauseScenario}
         />
+      </div>
+        <InitialMapPercent outputData={outputFiles[currentIndex]} />
       </div>
       <div className="chart-panel">
         <DeceasedLineChart eventData={eventData} />
